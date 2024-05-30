@@ -1,4 +1,4 @@
-package com.capstone.mobilebdrssapp.controller.adapter
+package com.example.s11.ng.jan.capit01_mobdeve.adapter
 
 import androidx.appcompat.app.AppCompatActivity
 

@@ -1,4 +1,4 @@
-package com.capstone.mobilebdrssapp.controller.adapter
+package com.example.s11.ng.jan.capit01_mobdeve.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.RecyclerView
-import com.capstone.mobilebdrssapp.R
+import com.example.s11.ng.jan.capit01_mobdeve.R
 
 class AnnouncementAdapter(private val data: ArrayList<modelPost>?, private val viewPostLauncher: ActivityResultLauncher<Intent>) : RecyclerView.Adapter<AnnouncementViewHolder>() {
 

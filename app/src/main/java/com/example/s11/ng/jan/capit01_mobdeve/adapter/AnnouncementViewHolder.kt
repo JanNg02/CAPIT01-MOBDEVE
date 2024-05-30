@@ -1,4 +1,4 @@
-package com.capstone.mobilebdrssapp.controller.adapter
+package com.example.s11.ng.jan.capit01_mobdeve.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.capstone.mobilebdrssapp.R
+import com.example.s11.ng.jan.capit01_mobdeve.R
 
     class AnnouncementViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
 
