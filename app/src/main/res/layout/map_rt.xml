@@ -7,7 +7,9 @@
     android:layout_height="match_parent"
     android:background="#79FFFFFF"
     android:backgroundTint="#8E8D8D"
-    android:foregroundTint="#79FFFFFF">
+    android:foregroundTint="#79FFFFFF"
+    tools:context=".map.mapActivity_rt">
+
 
     <ImageView
         android:id="@+id/Rectangle"
@@ -33,7 +35,7 @@
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/username_RT"
+        android:id="@+id/usernameRT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"

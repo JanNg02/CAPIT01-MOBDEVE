@@ -8,7 +8,7 @@
     android:background="#79FFFFFF"
     android:backgroundTint="#8E8D8D"
     android:foregroundTint="#79FFFFFF"
-    tools:context=".">
+    tools:context=".home.homeActivity_bo">
 
     <ImageView
         android:id="@+id/Rectangle"

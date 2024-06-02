@@ -17,5 +17,4 @@ class modelPost {
         this.captionID = captionID
     }
 
-
 }
