@@ -15,7 +15,6 @@ import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.newsData
-import com.mongodb.reactivestreams.client.MongoClient
 
 data class Post(val username: String, val caption: String, val imagePost: Int)
 
@@ -23,11 +22,6 @@ data class Post(val username: String, val caption: String, val imagePost: Int)
 class homeActivity_rt : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    val url = "mongodb+srv://Root:<password>@bdrss.absaalg.mongodb.net/?retryWrites=true&w=majority&appName=BDRSS"
-    val mongoClient = MongoClient.create(url)
-    val database = mongoClient.getDatabase("post")
-    // Get a collection of documents of type Movie
-    val collection = database.getCollection<Post>("posts")
 
 //    private val viewHomeLauncher = registerForActivityResult(
 //        ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
