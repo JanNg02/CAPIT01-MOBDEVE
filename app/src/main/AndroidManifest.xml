@@ -16,7 +16,7 @@
         android:theme="@style/Theme.CAPIT01MOBDEVE"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".login.login_act"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +24,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".home.homeActivity_rt" />
+        <activity android:name=".map.mapActivity_rt" />
+        <activity android:name=".file.fileActivity_rt" />
+        <activity android:name=".help.helpActivity_rt" />
+        <activity android:name=".dashboard.dashboardActivity_rt" />
+        <activity android:name=".home.homeActivity_bo" />
+        <activity android:name=".rescue.rescueActivity_bo" />
+        <activity android:name=".missing.missingActivity_bo" />
+        <activity android:name=".file.fileActivity_bo" />
+        <activity android:name=".fingerprint.fingerprintActivity_bo" />
     </application>
 
 </manifest>
