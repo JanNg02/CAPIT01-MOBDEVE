@@ -2,40 +2,28 @@ package com.example.s11.ng.jan.capit01_mobdeve.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import android.widget.ImageButton
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.s11.ng.jan.capit01_mobdeve.OnDataFetchedListener
 import com.example.s11.ng.jan.capit01_mobdeve.R
+import com.example.s11.ng.jan.capit01_mobdeve.adapter.AnnouncementAdapter
 import com.example.s11.ng.jan.capit01_mobdeve.adapter.modelPost
 import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.newsData
+import com.example.s11.ng.jan.capit01_mobdeve.fetchPost
 
-data class Post(val username: String, val caption: String, val imagePost: Int)
-
-
-class homeActivity_rt : AppCompatActivity() {
+class homeActivity_rt : AppCompatActivity(), OnDataFetchedListener{
 
     private lateinit var recyclerView: RecyclerView
-
-//    private val viewHomeLauncher = registerForActivityResult(
-//        ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-//        if (result.resultCode == RESULT_OK) {
-//
-//        }
-//    }
+    private lateinit var adapter: AnnouncementAdapter
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_rt)
-
-        recyclerView = findViewById(R.id.rvHome_RT)
-
 
         val pnabutton: ImageButton = findViewById(R.id.pna_RT)
         pnabutton.setOnClickListener{
@@ -61,8 +49,19 @@ class homeActivity_rt : AppCompatActivity() {
         dashbutton.setOnClickListener{
             moveToDashboardRT()
         }
+
+        recyclerView = findViewById(R.id.rvHome_RT)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = AnnouncementAdapter(mutableListOf(), this)
+        recyclerView.adapter = adapter
+
+        val fetchPost = fetchPost(this)
+        fetchPost.execute()
     }
 
+    override fun onDataFetched(data: List<modelPost>) {
+        adapter.updateData(data)
+    }
     fun moveToPnaRT(){
         val intent = Intent(applicationContext, homeActivity_rt::class.java)
         startActivity(intent)

@@ -1,7 +1,7 @@
 //package com.example.s11.ng.jan.capit01_mobdeve
 //
 //import android.os.AsyncTask
-//import android.renderscript.ScriptGroup.Input
+//import com.example.s11.ng.jan.capit01_mobdeve.adapter.modelPost
 //import org.json.JSONArray
 //import java.io.BufferedReader
 //import java.io.InputStreamReader
@@ -9,7 +9,7 @@
 //import java.net.URL
 //
 //interface OnDataFetchedListener {
-//    fun onDataFetched(data: List<newsData>)
+//    fun onDataFetched(data: List<modelPost>)
 //}
 //class fetchNews (private val listener: OnDataFetchedListener): AsyncTask<Void, Void, List<newsData>>() {
 //

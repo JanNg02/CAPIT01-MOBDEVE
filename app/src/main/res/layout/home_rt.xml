@@ -143,15 +143,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHome_RT"
-        android:layout_width="348dp"
-        android:layout_height="488dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="22dp"
+        android:layout_width="334dp"
+        android:layout_height="497dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="58dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rectangle" />
+        app:layout_constraintTop_toBottomOf="@+id/Rectangle"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

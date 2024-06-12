@@ -1,43 +1,48 @@
 package com.example.s11.ng.jan.capit01_mobdeve.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s11.ng.jan.capit01_mobdeve.R
+import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
 
-class AnnouncementAdapter(private val data: ArrayList<modelPost>?, private val viewPostLauncher: ActivityResultLauncher<Intent>) : RecyclerView.Adapter<AnnouncementViewHolder>() {
+class AnnouncementAdapter(private var data: MutableList<modelPost>, homeactivityRt: homeActivity_rt) : RecyclerView.Adapter<AnnouncementAdapter.AnnouncementViewHolder>() {
 
-    companion object {
-        const val imageKey: String = "imageKey"
-        const val usernameKey: String = "nameKey"
-        const val captionKey: String = "captionKey"
-    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnnouncementViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnnouncementAdapter.AnnouncementViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.posthome_rt, parent, false)
 
-        return AnnouncementViewHolder(view)
+        return AnnouncementAdapter.AnnouncementViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: AnnouncementViewHolder, position: Int) {
-        holder.bindData(data!!.get(position))
 
-        holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.getContext(), postFull::class.java)
-            intent.putExtra(imageKey, data[position].imageID)
-            intent.putExtra(usernameKey, data[position].username)
-            intent.putExtra(captionKey, data[position].captionID)
+        val modelPost = data.getOrNull(position)
+        modelPost?.let { holder.bindData(it) }
+    }
 
-            viewPostLauncher.launch(intent)
+    class AnnouncementViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val username_RT: TextView = itemView.findViewById(R.id.username_RT)
+        val caption_post: TextView = itemView.findViewById(R.id.caption_post)
+
+        fun bindData(data: modelPost) {
+            username_RT.text = data.username
+            caption_post.text = data.captionID
         }
     }
 
+    fun updateData(newData: List<modelPost>) {
+        data.clear()
+        data.addAll(newData)
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
-        return data!!.size
+        return data.size
     }
 }
