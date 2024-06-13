@@ -9,6 +9,13 @@ appcompat = "1.6.1"
 material = "1.10.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
+mongodbDriverKotlinCoroutine = "5.1.0"
+bsonKotlinx = "5.1.0"
+multidex = "1.0.3"
+bsonRecordCodec = "5.1.0"
+mongodbDriverSync = "5.1.0"
+multidexVersion = "2.0.1"
+mongodbDriverSyncVersion = "5.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -19,6 +26,13 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+mongodb-driver-kotlin-coroutine = { group = "org.mongodb", name = "mongodb-driver-kotlin-coroutine", version.ref = "mongodbDriverKotlinCoroutine" }
+bson-kotlinx = { group = "org.mongodb", name = "bson-kotlinx", version.ref = "bsonKotlinx" }
+multidex = { group = "com.android.support", name = "multidex", version.ref = "multidex" }
+bson-record-codec = { group = "org.mongodb", name = "bson-record-codec", version.ref = "bsonRecordCodec" }
+mongodb-driver-sync = { group = "org.mongodb", name = "mongodb-driver-sync", version.ref = "mongodbDriverSync" }
+androidx-multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidexVersion" }
+mongodb-mongodb-driver-sync = { group = "org.mongodb", name = "mongodb-driver-sync", version.ref = "mongodbDriverSyncVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

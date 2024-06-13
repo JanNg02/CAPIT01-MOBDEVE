@@ -15,11 +15,19 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled=true
+
+    }
+
+
+
+    packaging {
+        resources.excludes.add("META-INF/native-image/org.mongodb/bson/native-image.properties")
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -44,10 +52,28 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation("dnsjava:dnsjava:3.5.0")
 //    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-//    implementation("org.mongodb:mongodb-driver-kotlin-coroutine:4.10.1")
-    implementation("org.mongodb:mongodb-driver:3.12.7")
+ //   implementation("org.mongodb:mongodb-driver-kotlin-coroutine:4.10.1")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation(libs.mongodb.driver.kotlin.coroutine){
+        exclude("org.mongodb","bson-record-codec")
+    }
+    implementation(libs.bson.kotlinx){
+        exclude("org.mongodb","bson-record-codec")
+    }
+    implementation(libs.mongodb.mongodb.driver.sync){
+        exclude("org.mongodb","bson-record-codec")
+    }
+     //implementation(libs.bson.record.codec)
+    implementation(libs.androidx.multidex)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("org.mongodb:bson-record-codec:5.1.1")
+    }
+
+
 }
