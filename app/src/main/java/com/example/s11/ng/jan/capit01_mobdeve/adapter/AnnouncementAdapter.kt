@@ -27,12 +27,12 @@ class AnnouncementAdapter(private var data: MutableList<modelPost>, homeactivity
 
     class AnnouncementViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val username_RT: TextView = itemView.findViewById(R.id.username_RT)
-        val caption_post: TextView = itemView.findViewById(R.id.caption_post)
+        val announcementAuthor: TextView = itemView.findViewById(R.id.username_RT)
+        val announcementContent: TextView = itemView.findViewById(R.id.caption_post)
 
         fun bindData(data: modelPost) {
-            username_RT.text = data.username
-            caption_post.text = data.captionID
+            announcementAuthor.text = data.announcementAuthor
+            announcementContent.text = data.announcementContent
         }
     }
 
