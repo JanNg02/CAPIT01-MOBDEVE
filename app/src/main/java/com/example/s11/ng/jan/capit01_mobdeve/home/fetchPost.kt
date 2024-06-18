@@ -18,7 +18,7 @@ interface OnDataFetchedListener {
 
 class fetchPost(private val listener: OnDataFetchedListener) : AsyncTask<Void, Void, List<modelPost>>() {
 
-    private val mongoDBApiURL = "https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/getPost"
+    private val mongoDBApiURL = "https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/getNews"
 
 
     override fun doInBackground(vararg params: Void?): List<modelPost> {
@@ -45,12 +45,12 @@ class fetchPost(private val listener: OnDataFetchedListener) : AsyncTask<Void, V
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
 
-                        val username = jsonObject.getString("username")
-                        val captionID = jsonObject.getString("captionID")
+                        val announcementAuthor = jsonObject.getString("announcementAuthor")
+                        val announcementContent = jsonObject.getString("announcementContent")
 
                         dataList.add(modelPost(
-                            username,
-                            captionID
+                            announcementAuthor,
+                            announcementContent
                         )
                         )
                     }
