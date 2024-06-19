@@ -16,6 +16,7 @@ bsonRecordCodec = "5.1.0"
 mongodbDriverSync = "5.1.0"
 multidexVersion = "2.0.1"
 mongodbDriverSyncVersion = "5.1.1"
+playServicesMaps = "18.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,6 +34,7 @@ bson-record-codec = { group = "org.mongodb", name = "bson-record-codec", version
 mongodb-driver-sync = { group = "org.mongodb", name = "mongodb-driver-sync", version.ref = "mongodbDriverSync" }
 androidx-multidex = { group = "androidx.multidex", name = "multidex", version.ref = "multidexVersion" }
 mongodb-mongodb-driver-sync = { group = "org.mongodb", name = "mongodb-driver-sync", version.ref = "mongodbDriverSyncVersion" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

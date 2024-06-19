@@ -9,14 +9,13 @@ android {
 
     defaultConfig {
         applicationId = "com.example.s11.ng.jan.capit01_mobdeve"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled=true
-
     }
 
 
@@ -65,9 +64,15 @@ dependencies {
     }
      //implementation(libs.bson.record.codec)
     implementation(libs.androidx.multidex)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Mapbox Dependencies
+    implementation("com.mapbox.maps:android:11.4.1")
+    // If you're using compose also add the compose extension
+    implementation("com.mapbox.extension:maps-compose:11.4.1")
 }
 
 configurations.all {

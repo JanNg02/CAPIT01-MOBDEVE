@@ -140,8 +140,9 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/map_rt"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
         android:layout_width="361dp"
         android:layout_height="493dp"
         android:layout_marginStart="25dp"
@@ -152,7 +153,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rectangle" />
+        app:layout_constraintTop_toBottomOf="@+id/Rectangle">
+
+        <com.mapbox.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:mapbox_locationComponentEnabled="true"
+            app:mapbox_locationComponentPuckBearing="heading"/>
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
