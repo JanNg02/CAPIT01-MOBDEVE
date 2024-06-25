@@ -2,44 +2,176 @@ package com.example.s11.ng.jan.capit01_mobdeve.file
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
+import com.google.gson.annotations.SerializedName
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
+import retrofit2.http.POST
+import org.json.JSONObject
+
+data class Missing(
+    @SerializedName("missingFullName") val missingFullName: String,
+    @SerializedName("description") val description: String,
+    @SerializedName("areaLastSeen") val areaLastSeen: String,
+    @SerializedName("timeLastSeen") val timeLastSeen: String,
+    @SerializedName("age") val age: Int
+)
 
 class fileActivity_rt : AppCompatActivity() {
+
+    private lateinit var fullNameEditText: EditText
+    private lateinit var descriptionEditText: EditText
+    private lateinit var areaLastSeenEditText: EditText
+    private lateinit var timeLastSeenEditText: EditText
+    private lateinit var ageEditText: EditText
+    private lateinit var submitButton: Button
+
+
+    interface MissingApi {
+        @POST("postMissing")
+        fun postMissing(@Body requestBody: RequestBody): Call<ResponseBody>
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.file_rt)
 
         val pnabutton: ImageButton = findViewById(R.id.pna_RT)
-        pnabutton.setOnClickListener{
+        pnabutton.setOnClickListener {
             moveToPnaRT()
         }
 
         val mapbutton: ImageButton = findViewById(R.id.map_RT)
-        mapbutton.setOnClickListener{
+        mapbutton.setOnClickListener {
             moveToMapRT()
         }
 
         val helpbutton: ImageButton = findViewById(R.id.help_RT)
-        helpbutton.setOnClickListener{
+        helpbutton.setOnClickListener {
             moveToHelpRT()
         }
 
         val filebutton: ImageButton = findViewById(R.id.file_RT)
-        filebutton.setOnClickListener{
+        filebutton.setOnClickListener {
             moveToFileRT()
         }
 
         val dashbutton: ImageButton = findViewById(R.id.dashboard_RT)
-        dashbutton.setOnClickListener{
+        dashbutton.setOnClickListener {
             moveToDashboardRT()
+        }
+
+
+        fullNameEditText = findViewById(R.id.missingFullName)
+        descriptionEditText = findViewById(R.id.description)
+        areaLastSeenEditText = findViewById(R.id.areaLastSeen)
+        timeLastSeenEditText = findViewById(R.id.timeLastSeen)
+        ageEditText = findViewById(R.id.age)
+        submitButton = findViewById(R.id.filesubmitRT)
+
+        submitButton.setOnClickListener {
+            val fullName = fullNameEditText.text.toString()
+            val description = descriptionEditText.text.toString()
+            val areaLastSeen = areaLastSeenEditText.text.toString()
+            val timeLastSeen = timeLastSeenEditText.text.toString()
+            val age = ageEditText.text.toString().toIntOrNull()
+
+            if (fullName.isEmpty() || description.isEmpty() || areaLastSeen.isEmpty() || timeLastSeen.isEmpty() || age == null) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val missing = Missing(fullName, description, areaLastSeen, timeLastSeen, age)
+
+            val gson = Gson()
+            val json = gson.toJson(missing)
+
+            val requestBody = RequestBody.create("application/json; charset=utf-8".toMediaType(), json)
+
+
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val missingApi = retrofit.create(MissingApi::class.java)
+
+            val call = missingApi.postMissing(requestBody)
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        val responseString = responseBody?.string()
+                        val gson = Gson()
+                        val missing: Missing
+
+                        try {
+                            missing = gson.fromJson(responseString, Missing::class.java)
+                        } catch (e: JsonSyntaxException) {
+                            Log.e("Error", "Failed to parse JSON response: ${e.message}")
+                            runOnUiThread {
+                                Toast.makeText(
+                                    this@fileActivity_rt,
+                                    "Failed to parse JSON response",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            return
+                        }
+
+                        Log.d("postMissing", "Data uploaded successfully")
+                        runOnUiThread {
+                            Toast.makeText(
+                                this@fileActivity_rt,
+                                "Data uploaded successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
+                        Log.e("Error", "Failed to upload data. Response code: ${response.code()}")
+                        runOnUiThread {
+                            Toast.makeText(
+                                this@fileActivity_rt,
+                                "Failed to upload data. Response code: ${response.code()}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.e("Error", "Error uploading data: ${t.message}")
+                    runOnUiThread {
+                        Toast.makeText(
+                            this@fileActivity_rt,
+                            "Error uploading data: ${t.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            })
         }
     }
     fun moveToPnaRT(){
@@ -72,3 +204,28 @@ class fileActivity_rt : AppCompatActivity() {
         finish()
     }
 }
+//
+//        val fileRTbutton: Button = findViewById(R.id.filesubmitRT)
+//        fileRTbutton.setOnClickListener{
+//            val missingFullName = editTextMissingFullName.text.toString()
+//            val description = editTextDescription.text.toString()
+//            val areaLastSeen = editTextAreaLastSeen.text.toString()
+//            val timeLastSeen = editTextTimeLastSeen.text.toString()
+//            var age: Int? = null
+//            val ageString = editTextAge.text.toString()
+//            if (ageString.isNotEmpty()) {
+//                try {
+//                    age = ageString.toInt()
+//                } catch (e: NumberFormatException) {
+//                    // Handle the case where the user enters a non-numeric value
+//                    Toast.makeText(this, "Please enter a valid age", Toast.LENGTH_SHORT).show()
+//                    return@setOnClickListener
+//                }
+//            } else {
+//                Toast.makeText(this, "Please enter an age", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
+//
+//            val uploadMissing = uploadMissing(missingFullName, description, areaLastSeen, timeLastSeen, age!!, this)
+//            uploadMissing.execute()
+//        }
