@@ -14,10 +14,13 @@ import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
 import com.google.gson.Gson
+import com.google.gson.JsonPrimitive
 import com.google.gson.JsonSyntaxException
 import com.google.gson.annotations.SerializedName
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,7 +47,6 @@ class fileActivity_rt : AppCompatActivity() {
     private lateinit var timeLastSeenEditText: EditText
     private lateinit var ageEditText: EditText
     private lateinit var submitButton: Button
-
 
     interface MissingApi {
         @POST("postMissing")
@@ -86,6 +88,7 @@ class fileActivity_rt : AppCompatActivity() {
         areaLastSeenEditText = findViewById(R.id.areaLastSeen)
         timeLastSeenEditText = findViewById(R.id.timeLastSeen)
         ageEditText = findViewById(R.id.age)
+
         submitButton = findViewById(R.id.filesubmitRT)
 
         submitButton.setOnClickListener {
@@ -101,11 +104,10 @@ class fileActivity_rt : AppCompatActivity() {
             }
 
             val missing = Missing(fullName, description, areaLastSeen, timeLastSeen, age)
-
             val gson = Gson()
             val json = gson.toJson(missing)
 
-            val requestBody = RequestBody.create("application/json; charset=utf-8".toMediaType(), json)
+            val requestBody = json.toRequestBody("application/json".toMediaType())
 
 
             val retrofit = Retrofit.Builder()
@@ -117,59 +119,31 @@ class fileActivity_rt : AppCompatActivity() {
 
             val call = missingApi.postMissing(requestBody)
             call.enqueue(object : Callback<ResponseBody> {
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    // handle failure
+                    Log.e("Error", t.message.toString())
+                }
+
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
-                        val responseString = responseBody?.string()
-                        val gson = Gson()
-                        val missing: Missing
-
-                        try {
-                            missing = gson.fromJson(responseString, Missing::class.java)
-                        } catch (e: JsonSyntaxException) {
-                            Log.e("Error", "Failed to parse JSON response: ${e.message}")
-                            runOnUiThread {
-                                Toast.makeText(
-                                    this@fileActivity_rt,
-                                    "Failed to parse JSON response",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                            return
-                        }
-
-                        Log.d("postMissing", "Data uploaded successfully")
-                        runOnUiThread {
-                            Toast.makeText(
-                                this@fileActivity_rt,
-                                "Data uploaded successfully",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                        if (responseBody!= null) {
+                            Log.d("Response", responseBody.toString())
+                        } else {
+                            Log.w("Response", "Response body is null")
                         }
                     } else {
-                        Log.e("Error", "Failed to upload data. Response code: ${response.code()}")
-                        runOnUiThread {
-                            Toast.makeText(
-                                this@fileActivity_rt,
-                                "Failed to upload data. Response code: ${response.code()}",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                        Log.e("Error", "Response code: ${response.code()}")
+                        Log.e("Error", "Response error message: ${response.message()}")
+                        if (response.errorBody()!= null) {
+                            Log.e("Error", "Response error body: ${response.errorBody()!!.string()}")
                         }
                     }
-                }
-
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Log.e("Error", "Error uploading data: ${t.message}")
-                    runOnUiThread {
-                        Toast.makeText(
-                            this@fileActivity_rt,
-                            "Error uploading data: ${t.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    Log.d("Request Headers", call.request().headers.toString())
+                    Log.d("Request Body", call.request().body.toString())
                 }
             })
         }
