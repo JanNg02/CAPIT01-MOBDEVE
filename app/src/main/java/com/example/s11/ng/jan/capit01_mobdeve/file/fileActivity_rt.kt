@@ -142,8 +142,6 @@ class fileActivity_rt : AppCompatActivity() {
                             Log.e("Error", "Response error body: ${response.errorBody()!!.string()}")
                         }
                     }
-                    Log.d("Request Headers", call.request().headers.toString())
-                    Log.d("Request Body", call.request().body.toString())
                 }
             })
         }

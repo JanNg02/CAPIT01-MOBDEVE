@@ -12,6 +12,7 @@ import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.file.Missing
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import okhttp3.MediaType.Companion.toMediaType
@@ -38,11 +39,13 @@ data class SOS(
     @SerializedName("timeLastSeen") val timeLastSeen: String,
     @SerializedName("age") val age: Int
 )
+
 class helpActivity_rt : AppCompatActivity() {
     interface sosAPI {
         @POST("sendSOS")
         fun postSOS(@Body requestBody: RequestBody): Call<ResponseBody>
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.help_rt)
@@ -50,7 +53,7 @@ class helpActivity_rt : AppCompatActivity() {
         var sosButton : ImageButton = findViewById(R.id.imageButton)
 
         sosButton.setOnClickListener{
-            val fullName = "Nigger"
+            val fullName = "TestName"
             val description = "Description"
             val areaLastSeen = "Never Seen"
             val timeLastSeen = "Last Time"
@@ -93,8 +96,6 @@ class helpActivity_rt : AppCompatActivity() {
                             Log.e("Error", "Response error body: ${response.errorBody()!!.string()}")
                         }
                     }
-                    Log.d("Request Headers", call.request().headers.toString())
-                    Log.d("Request Body", call.request().body.toString())
                 }
             })
         }

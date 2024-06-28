@@ -97,6 +97,22 @@ class mapActivity_rt : AppCompatActivity() {
         }
     }
 
+    private fun disableUserLocation() {
+        val mapView = findViewById<MapView>(R.id.mapView)
+
+        with(mapView) {
+            location.enabled = false
+        }
+    }
+
+    private fun resumeUserLocation() {
+        val mapView = findViewById<MapView>(R.id.mapView)
+
+        with(mapView) {
+            location.enabled = true
+        }
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -119,6 +135,16 @@ class mapActivity_rt : AppCompatActivity() {
         ) {
             enableUserLocation()
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        disableUserLocation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        resumeUserLocation()
     }
 
     fun moveToPnaRT(){
