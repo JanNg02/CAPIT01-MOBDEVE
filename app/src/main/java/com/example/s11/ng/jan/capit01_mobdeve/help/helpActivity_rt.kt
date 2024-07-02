@@ -46,6 +46,7 @@ import java.util.Locale
 
 data class SOS(
     @SerializedName("fullName") val fullName: String,
+    @SerializedName("email") val email: String,
     @SerializedName("currentAddress") val currentAddress: String,
     @SerializedName("dateLastSent") val dateLastSent: String,
     @SerializedName("age") val age: Int,
@@ -134,11 +135,12 @@ class helpActivity_rt : AppCompatActivity() {
                 val currentAddress = addresses[0].getAddressLine(0)
 
                 val fullName = "TestName"
+                val email = "TestMail1"
                 val dateLastSent = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
                 val age = 10
                 val teamID = "None"
 
-                val sos = SOS(fullName, currentAddress, dateLastSent, age, teamID)
+                val sos = SOS(fullName, email, currentAddress, dateLastSent, age, teamID)
                 val gson = Gson()
                 val json = gson.toJson(sos)
 
