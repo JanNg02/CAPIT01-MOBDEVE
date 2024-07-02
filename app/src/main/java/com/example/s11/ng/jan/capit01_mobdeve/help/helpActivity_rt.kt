@@ -165,7 +165,7 @@ class helpActivity_rt : AppCompatActivity() {
                     ) {
                         if (response.isSuccessful) {
                             val responseBody = response.body()
-                            if (responseBody!= null) {
+                            if (responseBody != null) {
                                 Log.d("Response", responseBody.toString())
                             } else {
                                 Log.w("Response", "Response body is null")
@@ -179,6 +179,7 @@ class helpActivity_rt : AppCompatActivity() {
                         }
                     }
                 })
+                Toast.makeText(this, "Location Sent", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Unable to get current location", Toast.LENGTH_SHORT).show()
             }
