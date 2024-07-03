@@ -3,7 +3,6 @@ package com.example.s11.ng.jan.capit01_mobdeve.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s11.ng.jan.capit01_mobdeve.R
@@ -29,11 +28,16 @@ class AnnouncementAdapter(private var data: MutableList<modelPost>, homeactivity
 
         val announcementAuthor: TextView = itemView.findViewById(R.id.username_RT)
         val announcementContent: TextView = itemView.findViewById(R.id.caption_post)
+        val announcementTitle: TextView = itemView.findViewById(R.id.title_RT)
+        val announcementUploadDate: TextView = itemView.findViewById(R.id.date_RT)
 
         fun bindData(data: modelPost) {
             announcementAuthor.text = data.announcementAuthor
             announcementContent.text = data.announcementContent
+            announcementTitle.text = data.announcementTitle
+            announcementUploadDate.text = data.announcementUploadDate
         }
+
     }
 
     fun updateData(newData: List<modelPost>) {

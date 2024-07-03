@@ -6,25 +6,89 @@
     android:layout_height="wrap_content">
 
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="317dp"
+        android:layout_height="3dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/username_RT"
+        app:srcCompat="@drawable/line" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="317dp"
+        android:layout_height="469dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="26dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/border" />
+
     <TextView
-        android:id="@+id/username_RT"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/title_RT"
+        android:layout_width="251dp"
+        android:layout_height="41dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="5dp"
+        android:textStyle="bold"
         android:text="TextView"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/caption_post"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="9dp"
-        android:layout_weight="1"
+        android:id="@+id/username_RT"
+        android:layout_width="169dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="21dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/date_RT"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_RT" />
+
+    <TextView
+        android:id="@+id/date_RT"
+        android:layout_width="106dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_RT" />
+
+    <TextView
+        android:id="@+id/caption_post"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="24dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+        android:text="TextView"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.588"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_RT" />
+
+<!--    android:autoSizeMaxTextSize="15sp"-->
+<!--    android:autoSizeMinTextSize="8sp"-->
+<!--    android:autoSizeStepGranularity="1sp"-->
+<!--    android:autoSizeTextType="uniform"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

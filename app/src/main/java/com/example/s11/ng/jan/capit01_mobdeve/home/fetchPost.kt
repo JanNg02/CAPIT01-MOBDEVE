@@ -47,10 +47,14 @@ class fetchPost(private val listener: OnDataFetchedListener) : AsyncTask<Void, V
 
                         val announcementAuthor = jsonObject.getString("announcementAuthor")
                         val announcementContent = jsonObject.getString("announcementContent")
+                        val announcementTitle = jsonObject.getString("announcementTitle")
+                        val announcementUploadDate = jsonObject.getString("announcementUploadDate")
 
                         dataList.add(modelPost(
                             announcementAuthor,
-                            announcementContent
+                            announcementContent,
+                            announcementTitle,
+                            announcementUploadDate
                         )
                         )
                     }
