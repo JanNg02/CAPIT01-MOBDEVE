@@ -30,13 +30,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 data class Missing(
     @SerializedName("missingFullName") val missingFullName: String,
     @SerializedName("description") val description: String,
     @SerializedName("areaLastSeen") val areaLastSeen: String,
     @SerializedName("timeLastSeen") val timeLastSeen: String,
-    @SerializedName("age") val age: Int
+    @SerializedName("age") val age: Int,
+    @SerializedName("sex") val sex: String,
+    @SerializedName("dateSubmitted") val dateSubmitted: String,
+    @SerializedName("filedBy") val filedBy: String,
+    @SerializedName("contactNum") val contactNum: String,
+    @SerializedName("teamID") val teamID: String
 )
 
 class fileActivity_rt : AppCompatActivity() {
@@ -46,6 +54,7 @@ class fileActivity_rt : AppCompatActivity() {
     private lateinit var areaLastSeenEditText: EditText
     private lateinit var timeLastSeenEditText: EditText
     private lateinit var ageEditText: EditText
+    private lateinit var sexEditText: EditText
     private lateinit var submitButton: Button
 
     interface MissingApi {
@@ -88,6 +97,9 @@ class fileActivity_rt : AppCompatActivity() {
         areaLastSeenEditText = findViewById(R.id.areaLastSeen)
         timeLastSeenEditText = findViewById(R.id.timeLastSeen)
         ageEditText = findViewById(R.id.age)
+        sexEditText = findViewById(R.id.sex)
+
+        val editTexts = listOf(fullNameEditText, descriptionEditText, areaLastSeenEditText, timeLastSeenEditText, ageEditText, sexEditText)
 
         submitButton = findViewById(R.id.filesubmitRT)
 
@@ -97,13 +109,19 @@ class fileActivity_rt : AppCompatActivity() {
             val areaLastSeen = areaLastSeenEditText.text.toString()
             val timeLastSeen = timeLastSeenEditText.text.toString()
             val age = ageEditText.text.toString().toIntOrNull()
+            val sex = sexEditText.text.toString()
 
-            if (fullName.isEmpty() || description.isEmpty() || areaLastSeen.isEmpty() || timeLastSeen.isEmpty() || age == null) {
+            val dateSubmitted = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
+            val filedBy = "TestName" //Add Sessioned User
+            val contactNum = "09123456789" //Add Sessioned User
+            val teamID = "None"
+
+            if (fullName.isEmpty() || description.isEmpty() || areaLastSeen.isEmpty() || timeLastSeen.isEmpty() || age == null || sex.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val missing = Missing(fullName, description, areaLastSeen, timeLastSeen, age)
+            val missing = Missing(fullName, description, areaLastSeen, timeLastSeen, age, sex, dateSubmitted, filedBy, contactNum, teamID)
             val gson = Gson()
             val json = gson.toJson(missing)
 
@@ -116,6 +134,9 @@ class fileActivity_rt : AppCompatActivity() {
                 .build()
 
             val missingApi = retrofit.create(MissingApi::class.java)
+
+            Toast.makeText(this, "Missing Person Details Sent", Toast.LENGTH_SHORT).show()
+            editTexts.forEach { it.text.clear() }
 
             val call = missingApi.postMissing(requestBody)
             call.enqueue(object : Callback<ResponseBody> {
