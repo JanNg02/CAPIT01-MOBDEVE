@@ -65,6 +65,9 @@ dependencies {
      //implementation(libs.bson.record.codec)
     implementation(libs.androidx.multidex)
     implementation(libs.play.services.maps)
+    implementation ("com.google.android.gms:play-services-maps:17.0.0")
+    implementation ("com.google.maps.android:android-maps-utils:2.2.5")
+    implementation(libs.volley)
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -75,6 +78,7 @@ dependencies {
 
     //Mapbox Dependencies
     implementation("com.mapbox.maps:android:11.4.1")
+
     // If you're using compose also add the compose extension
     implementation("com.mapbox.extension:maps-compose:11.4.1")
 }

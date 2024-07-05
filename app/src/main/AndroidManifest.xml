@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CAPIT01MOBDEVE"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDaka3Pso7shUImAerJ8SvrrmUSHsvmSXE" />
         <activity
             android:name=".login.login_act"
             android:exported="true">
