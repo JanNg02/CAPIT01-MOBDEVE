@@ -125,7 +125,7 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
         isMapReady = true
 
         // Add marker from address
-        addMarkerFromAddress("2401 Taft Ave, Malate, Manila, 1004 Metro Manila")
+        addMarkerFromAddress("4th floor, Greenbelt, 3 Esperanza St, Makati, 1224 Metro Manila")
 
         // Check if location permission is granted
         if (ContextCompat.checkSelfPermission(
