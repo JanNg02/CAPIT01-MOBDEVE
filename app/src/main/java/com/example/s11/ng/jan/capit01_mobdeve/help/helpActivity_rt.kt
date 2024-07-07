@@ -134,8 +134,13 @@ class helpActivity_rt : AppCompatActivity() {
                     geocoder.getFromLocation(location.latitude, location.longitude, 1)!!
                 val currentAddress = addresses[0].getAddressLine(0)
 
-                val fullName = "TestName"
-                val email = "TestMail1"
+                //get the currest Session or current User
+                val sp = getSharedPreferences("userSession", MODE_PRIVATE)
+                val fullNameData = sp.getString("residentFullName", "null")
+                val residentEmail = sp.getString("residentEmail", "null")
+
+                val fullName = fullNameData.toString()
+                val email = residentEmail.toString()
                 val dateLastSent = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
                 val age = 10
                 val teamID = "None"

@@ -49,20 +49,6 @@
         app:layout_constraintStart_toStartOf="@+id/Rectangle"
         app:layout_constraintTop_toTopOf="@+id/Rectangle" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="357dp"
-        android:layout_height="505dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="56dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rectangle"
-        app:srcCompat="@drawable/border" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="409dp"
@@ -154,19 +140,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<<<<<<< HEAD
-    <FrameLayout
-
-        android:layout_width="341dp"
-        android:layout_height="486dp"
-=======
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="361dp"
         android:layout_height="493dp"
->>>>>>> cbf5759162b9ff7e1addb2403b338ab395150be0
         android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
@@ -179,15 +158,7 @@
             android:id="@+id/mapView"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-<<<<<<< HEAD
-            android:layout_height="match_parent"
-            app:mapbox_locationComponentEnabled="true"
-            app:mapbox_locationComponentPuckBearing="heading">
-
-        </com.mapbox.maps.MapView>
-=======
             android:layout_height="match_parent" />
->>>>>>> cbf5759162b9ff7e1addb2403b338ab395150be0
 
     </FrameLayout>
 

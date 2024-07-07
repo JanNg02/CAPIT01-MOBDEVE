@@ -111,9 +111,14 @@ class fileActivity_rt : AppCompatActivity() {
             val age = ageEditText.text.toString().toIntOrNull()
             val sex = sexEditText.text.toString()
 
+            //get the currest Session or current User
+            val sp = getSharedPreferences("userSession", MODE_PRIVATE)
+            val fullNameData = sp.getString("residentFullName", "null")
+            val residentContactNumber = sp.getString("residentContactNumber", "null")
+
             val dateSubmitted = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
-            val filedBy = "TestName" //Add Sessioned User
-            val contactNum = "09123456789" //Add Sessioned User
+            val filedBy = fullNameData.toString() //Add Sessioned User
+            val contactNum = residentContactNumber.toString() //Add Sessioned User
             val teamID = "None"
 
             if (fullName.isEmpty() || description.isEmpty() || areaLastSeen.isEmpty() || timeLastSeen.isEmpty() || age == null || sex.isEmpty()) {
