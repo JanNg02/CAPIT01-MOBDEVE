@@ -1,60 +1,54 @@
 package com.example.s11.ng.jan.capit01_mobdeve.map
 
-import android.annotation.SuppressLint
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.location.Geocoder
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.example.s11.ng.jan.capit01_mobdeve.R
-import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
-import com.mapbox.maps.MapView
-import com.mapbox.maps.plugin.PuckBearing
-import com.mapbox.maps.plugin.locationcomponent.createDefault2DPuck
-import com.mapbox.maps.plugin.locationcomponent.location
-import com.mapbox.maps.plugin.viewport.viewport
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
+import com.google.maps.android.PolyUtil
+import java.io.IOException
 
-class mapActivity_rt : AppCompatActivity() {
+class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
     companion object {
         private const val LOCATION_REQUEST_CODE = 1
     }
+    private lateinit var mMap: GoogleMap
+    private var isMapReady = false
+    private lateinit var currentLocation: LatLng
+    private lateinit var destination: LatLng
+
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.map_rt)
 
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-        } else {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                )
-            ) {
-                //We can show user a dialog why this permission is necessary
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
-                    LOCATION_REQUEST_CODE
-                )
-            } else {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
-                    LOCATION_REQUEST_CODE
-                )
-            }
-        }
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+        // Request location permission
+        requestLocationPermission()
 
         val pnabutton: ImageButton = findViewById(R.id.pna_RT)
         pnabutton.setOnClickListener{
@@ -82,35 +76,109 @@ class mapActivity_rt : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("MissingPermission")
-    private fun enableUserLocation() {
-        val mapView = findViewById<MapView>(R.id.mapView)
-
-        with(mapView) {
-            location.locationPuck = createDefault2DPuck(withBearing = true)
-            location.enabled = true
-            location.puckBearing = PuckBearing.COURSE
-            viewport.transitionTo(
-                targetState = viewport.makeFollowPuckViewportState(),
-                transition = viewport.makeImmediateViewportTransition()
-            )
+    private fun requestLocationPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            ) {
+                //We can show user a dialog why this permission is necessary
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_REQUEST_CODE
+                )
+            } else {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_REQUEST_CODE
+                )
+            }
         }
     }
 
-    private fun disableUserLocation() {
-        val mapView = findViewById<MapView>(R.id.mapView)
-
-        with(mapView) {
-            location.enabled = false
+    private fun addMarkerFromAddress(address: String) {
+        val geocoder = Geocoder(this)
+        try {
+            val addresses = geocoder.getFromLocationName(address, 1)
+            if (addresses!!.isNotEmpty()) {
+                val latLng = LatLng(addresses[0].latitude, addresses[0].longitude)
+                mMap.addMarker(MarkerOptions().position(latLng).title(address))
+                destination = latLng
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+            } else {
+                Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: IOException) {
+            Toast.makeText(this, "Error finding address", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun resumeUserLocation() {
-        val mapView = findViewById<MapView>(R.id.mapView)
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        isMapReady = true
 
-        with(mapView) {
-            location.enabled = true
+        // Add marker from address
+        addMarkerFromAddress("4th floor, Greenbelt, 3 Esperanza St, Makati, 1224 Metro Manila")
+
+        // Check if location permission is granted
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            mMap.isMyLocationEnabled = true
+            mMap.uiSettings.isMyLocationButtonEnabled = true
+
+            // Get the current location using FusedLocationProviderClient
+            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    val latLng = LatLng(location.latitude, location.longitude)
+                    currentLocation = latLng
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+
+                    // Draw navigation route
+                    drawNavigationRoute()
+                }
+            }
         }
+    }
+
+    private fun drawNavigationRoute() {
+        val url = "https://maps.googleapis.com/maps/api/directions/json" +
+                "?origin=" + currentLocation.latitude + "," + currentLocation.longitude +
+                "&destination=" + destination.latitude + "," + destination.longitude +
+                "&mode=driving" +
+                "&key=AIzaSyDaka3Pso7shUImAerJ8SvrrmUSHsvmSXE"
+
+        val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
+            val routes = response.getJSONArray("routes")
+            val route = routes.getJSONObject(0)
+            val overviewPolyline = route.getJSONObject("overview_polyline")
+            val polylineString = overviewPolyline.getString("points")
+
+            val polylineList = PolyUtil.decode(polylineString)
+            val polylineOptions = PolylineOptions()
+            polylineOptions.color(Color.BLUE)
+            polylineOptions.width(10f)
+
+            for (point in polylineList) {
+                polylineOptions.add(point)
+            }
+
+            mMap.addPolyline(polylineOptions)
+        }, { error ->
+            Toast.makeText(this, "Error drawing navigation route", Toast.LENGTH_SHORT).show()
+        })
+
+        Volley.newRequestQueue(this).add(request)
     }
 
     override fun onRequestPermissionsResult(
@@ -121,30 +189,34 @@ class mapActivity_rt : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOCATION_REQUEST_CODE) {
             if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                enableUserLocation()
+                if (isMapReady) {
+                    if (ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        mMap.isMyLocationEnabled = true
+                    }
+                    mMap.uiSettings.isMyLocationButtonEnabled = true
+                }
+            } else {
+                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     override fun onStart() {
         super.onStart()
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            enableUserLocation()
+        if (isMapReady) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                mMap.isMyLocationEnabled = true
+            }
+            mMap.uiSettings.isMyLocationButtonEnabled = true
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        disableUserLocation()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        resumeUserLocation()
     }
 
     fun moveToPnaRT(){
