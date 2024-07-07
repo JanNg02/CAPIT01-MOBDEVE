@@ -95,8 +95,12 @@ class login_act : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val userInfo = response.body();
                     if (userInfo!= null) {
-                        //writeUser(userInfo.residentEmail)
-                        moveToHomeRT()
+                        writeUser(userInfo)
+                        if(userInfo.typeOfUser == "Resident") {
+                            moveToHomeRT()
+                        } else {
+                            moveToHomeBO()
+                        }
                         Toast.makeText(this@login_act,"yehey" + userInfo.residentFirstName, Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this@login_act, "Invalid username or password", Toast.LENGTH_SHORT).show()
@@ -115,9 +119,22 @@ class login_act : AppCompatActivity() {
         })
     }
 
-    fun writeUser(email : String){
+    fun writeUser(userInfo: userInfo){
         val editor = getSharedPreferences("userSession", MODE_PRIVATE).edit()
-        editor.putString("email", email)
+        editor.putString("residentID", userInfo.residentID)
+        editor.putString("residentFirstName", userInfo.residentFirstName)
+        editor.putString("residentLastName", userInfo.residentLastName)
+        editor.putString("residentFullName", userInfo.residentFullName)
+        editor.putString("residentSex", userInfo.residentSex)
+        editor.putString("residentBirthDate", userInfo.residentBirthDate)
+        editor.putString("residentAddress", userInfo.residentAddress)
+        editor.putString("residentEmail", userInfo.residentEmail)
+        editor.putString("residentCivilStatus", userInfo.residentCivilStatus)
+        editor.putString("residentContactNumber", userInfo.residentContactNumber)
+        editor.putString("residentEmergencyContactName", userInfo.residentEmergencyContactName)
+        editor.putString("residentEmergencyContactNumber", userInfo.residentEmergencyContactNumber)
+        editor.putString("residentIsActive", userInfo.residentIsActive)
+        editor.putString("typeOfUser", userInfo.typeOfUser)
         editor.apply()
     }
 
