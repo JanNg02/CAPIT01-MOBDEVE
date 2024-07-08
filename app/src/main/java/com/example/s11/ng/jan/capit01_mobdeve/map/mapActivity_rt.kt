@@ -85,50 +85,6 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun requestLocationPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                )
-            ) {
-                //We can show user a dialog why this permission is necessary
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
-                    LOCATION_REQUEST_CODE
-                )
-            } else {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
-                    LOCATION_REQUEST_CODE
-                )
-            }
-        }
-    }
-
-    private fun addMarkerFromAddress(address: String) {
-        val geocoder = Geocoder(this)
-        try {
-            val addresses = geocoder.getFromLocationName(address, 1)
-            if (addresses!!.isNotEmpty()) {
-                val latLng = LatLng(addresses[0].latitude, addresses[0].longitude)
-                mMap.addMarker(MarkerOptions().position(latLng).title(address))
-                destination = latLng
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-            } else {
-                Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show()
-            }
-        } catch (e: IOException) {
-            Toast.makeText(this, "Error finding address", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         isMapReady = true
@@ -157,6 +113,23 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
                     drawNavigationRoute()
                 }
             }
+        }
+    }
+
+    private fun addMarkerFromAddress(address: String) {
+        val geocoder = Geocoder(this)
+        try {
+            val addresses = geocoder.getFromLocationName(address, 1)
+            if (addresses!!.isNotEmpty()) {
+                val latLng = LatLng(addresses[0].latitude, addresses[0].longitude)
+                mMap.addMarker(MarkerOptions().position(latLng).title(address))
+                destination = latLng
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+            } else {
+                Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: IOException) {
+            Toast.makeText(this, "Error finding address", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -225,6 +198,33 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
             },
             Looper.getMainLooper()
         )
+    }
+
+    private fun requestLocationPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            ) {
+                //We can show user a dialog why this permission is necessary
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_REQUEST_CODE
+                )
+            } else {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_REQUEST_CODE
+                )
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(
