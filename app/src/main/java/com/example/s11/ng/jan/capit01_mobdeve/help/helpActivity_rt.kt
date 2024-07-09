@@ -50,7 +50,8 @@ data class SOS(
     @SerializedName("currentAddress") val currentAddress: String,
     @SerializedName("dateLastSent") val dateLastSent: String,
     @SerializedName("age") val age: Int,
-    @SerializedName("teamID") val teamID: String
+    @SerializedName("teamID") val teamID: String,
+    @SerializedName("isFound") val isFound: Boolean
 )
 
 class helpActivity_rt : AppCompatActivity() {
@@ -144,8 +145,9 @@ class helpActivity_rt : AppCompatActivity() {
                 val dateLastSent = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
                 val age = 10
                 val teamID = "None"
+                val isFound = false
 
-                val sos = SOS(fullName, email, currentAddress, dateLastSent, age, teamID)
+                val sos = SOS(fullName, email, currentAddress, dateLastSent, age, teamID, isFound)
                 val gson = Gson()
                 val json = gson.toJson(sos)
 

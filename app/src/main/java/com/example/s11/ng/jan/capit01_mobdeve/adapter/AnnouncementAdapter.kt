@@ -9,8 +9,6 @@ import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
 
 class AnnouncementAdapter(private var data: MutableList<modelPost>, homeactivityRt: homeActivity_rt) : RecyclerView.Adapter<AnnouncementAdapter.AnnouncementViewHolder>() {
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnnouncementAdapter.AnnouncementViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.posthome_rt, parent, false)

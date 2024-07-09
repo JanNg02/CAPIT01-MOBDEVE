@@ -44,7 +44,8 @@ data class Missing(
     @SerializedName("dateSubmitted") val dateSubmitted: String,
     @SerializedName("filedBy") val filedBy: String,
     @SerializedName("contactNum") val contactNum: String,
-    @SerializedName("teamID") val teamID: String
+    @SerializedName("teamID") val teamID: String,
+    @SerializedName("isFound") val isFound: Boolean
 )
 
 class fileActivity_rt : AppCompatActivity() {
@@ -120,13 +121,14 @@ class fileActivity_rt : AppCompatActivity() {
             val filedBy = fullNameData.toString() //Add Sessioned User
             val contactNum = residentContactNumber.toString() //Add Sessioned User
             val teamID = "None"
+            val isFound = false
 
             if (fullName.isEmpty() || description.isEmpty() || areaLastSeen.isEmpty() || timeLastSeen.isEmpty() || age == null || sex.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val missing = Missing(fullName, description, areaLastSeen, timeLastSeen, age, sex, dateSubmitted, filedBy, contactNum, teamID)
+            val missing = Missing(fullName, description, areaLastSeen, timeLastSeen, age, sex, dateSubmitted, filedBy, contactNum, teamID, isFound)
             val gson = Gson()
             val json = gson.toJson(missing)
 
