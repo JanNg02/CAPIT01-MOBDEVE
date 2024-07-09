@@ -25,6 +25,14 @@ class homeActivity_rt : AppCompatActivity(), OnDataFetchedListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_rt)
 
+        recyclerView = findViewById(R.id.rvHome_RT)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = AnnouncementAdapter(mutableListOf(), this)
+        recyclerView.adapter = adapter
+
+        val fetchPost = fetchPost(this)
+        fetchPost.execute()
+
         val pnabutton: ImageButton = findViewById(R.id.pna_RT)
         pnabutton.setOnClickListener{
             moveToPnaRT()
@@ -49,14 +57,6 @@ class homeActivity_rt : AppCompatActivity(), OnDataFetchedListener{
         dashbutton.setOnClickListener{
             moveToDashboardRT()
         }
-
-        recyclerView = findViewById(R.id.rvHome_RT)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = AnnouncementAdapter(mutableListOf(), this)
-        recyclerView.adapter = adapter
-
-        val fetchPost = fetchPost(this)
-        fetchPost.execute()
     }
 
     override fun onDataFetched(data: List<modelPost>) {
