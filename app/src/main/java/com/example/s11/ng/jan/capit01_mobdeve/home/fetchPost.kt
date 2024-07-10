@@ -20,7 +20,6 @@ class fetchPost(private val listener: OnDataFetchedListener) : AsyncTask<Void, V
 
     private val mongoDBApiURL = "https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/getNews"
 
-
     override fun doInBackground(vararg params: Void?): List<modelPost> {
         try {
             val url = URL(mongoDBApiURL)

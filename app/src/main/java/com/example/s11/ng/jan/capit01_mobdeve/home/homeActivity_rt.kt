@@ -1,20 +1,29 @@
 package com.example.s11.ng.jan.capit01_mobdeve.home
 
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s11.ng.jan.capit01_mobdeve.OnDataFetchedListener
 import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.adapter.AnnouncementAdapter
 import com.example.s11.ng.jan.capit01_mobdeve.adapter.modelPost
-import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.fetchPost
+import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
+import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
+import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.RemoteMessage
+
 
 class homeActivity_rt : AppCompatActivity(), OnDataFetchedListener{
 
@@ -29,6 +38,9 @@ class homeActivity_rt : AppCompatActivity(), OnDataFetchedListener{
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = AnnouncementAdapter(mutableListOf(), this)
         recyclerView.adapter = adapter
+
+        // Initialize Firebase Messaging
+        FirebaseMessaging.getInstance().subscribeToTopic("announcements")
 
         val fetchPost = fetchPost(this)
         fetchPost.execute()

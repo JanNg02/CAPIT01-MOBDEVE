@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "432142740932",
+    "project_id": "bdrss-22cc6",
+    "storage_bucket": "bdrss-22cc6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432142740932:android:d00f925217de6eb1f94891",
+        "android_client_info": {
+          "package_name": "com.example.s11.ng.jan.capit01_mobdeve"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKNCQvoYKiZTu6hx2HlIyrPZO6ctfm6SY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
