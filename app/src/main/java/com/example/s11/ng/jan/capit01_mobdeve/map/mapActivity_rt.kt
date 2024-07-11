@@ -120,9 +120,6 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
         mMap = googleMap
         isMapReady = true
 
-        // Add marker from address
-//        addMarkerFromAddress("2401 Taft Ave, Malate, Manila, 1004 Metro Manila")
-
         // Check if location permission is granted
         if (ContextCompat.checkSelfPermission(
                 this,
