@@ -51,10 +51,27 @@ class login_act : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login_rt)
+        //setContentView(R.layout.login_rt)
+
+            // Check if there is a valid user session
+            val sharedPreferences = getSharedPreferences("userSession", MODE_PRIVATE)
+            val residentID = sharedPreferences.getString("residentID", null)
+            val typeOfUser = sharedPreferences.getString("typeOfUser", null)
+
+            if (residentID!= null && typeOfUser!= null) {
+                // Skip login page and move to home activity
+                if (typeOfUser == "Resident") {
+                    moveToHomeRT()
+                } else {
+                    moveToHomeBO()
+                }
+            } else {
+                // Show login page
+                setContentView(R.layout.login_rt)
+                //...
+            }
 
         val loginRTbutton: Button = findViewById(R.id.loginRT)
-
         loginRTbutton.setOnClickListener {
             val username: EditText = findViewById(R.id.usernameRT)
             val userString = username.text.toString()
