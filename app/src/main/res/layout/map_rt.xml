@@ -49,6 +49,20 @@
         app:layout_constraintStart_toStartOf="@+id/Rectangle"
         app:layout_constraintTop_toTopOf="@+id/Rectangle" />
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="211dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="166dp"
+        android:layout_marginBottom="25dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Rectangle" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="409dp"
@@ -168,20 +182,6 @@
             app:srcCompat="@drawable/border" />
 
     </FrameLayout>
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="211dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="166dp"
-        android:layout_marginBottom="25dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rectangle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
