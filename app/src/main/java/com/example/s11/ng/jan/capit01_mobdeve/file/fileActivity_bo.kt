@@ -84,7 +84,7 @@ class fileActivity_bo : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val report = tanodReport(ID, locationText, dateSubmitted, "null", filedBy, teamID, descriptionText, false)
+            val report = tanodReport(ID, locationText, dateSubmitted, "null", filedBy, teamID, descriptionText, true)
             val gson = Gson()
             val json = gson.toJson(report)
 

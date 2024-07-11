@@ -58,8 +58,8 @@ class login_act : AppCompatActivity() {
         loginRTbutton.setOnClickListener {
             val username: EditText = findViewById(R.id.usernameRT)
             val userString = username.text.toString()
-            val password: EditText = findViewById(R.id.passwordRT)
-            val passwordString = password.text.toString()
+            //val password: EditText = findViewById(R.id.passwordRT)
+            //val passwordString = password.text.toString()
 
 //            if(userString.isEmpty()) {
 //                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
@@ -67,7 +67,7 @@ class login_act : AppCompatActivity() {
 //            }
 
             //moveToHomeRT()
-            loginUser(userString, passwordString)
+            loginUser(userString)
         }
         val loginBObutton: Button = findViewById(R.id.loginBO)
         loginBObutton.setOnClickListener {
@@ -75,7 +75,7 @@ class login_act : AppCompatActivity() {
         }
     }
 
-    fun loginUser(userString: String, passwordString: String) {
+    fun loginUser(userString: String) {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/")
             .addConverterFactory(GsonConverterFactory.create())
