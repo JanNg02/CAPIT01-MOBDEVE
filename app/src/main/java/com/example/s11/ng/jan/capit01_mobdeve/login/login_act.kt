@@ -125,7 +125,7 @@ class login_act : AppCompatActivity() {
                     if (userInfo!= null) {
                         writeUser(userInfo)
                         moveToHomeRT() //move to resident page
-                        Toast.makeText(this@login_act,"yehey" + userInfo.residentFirstName, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@login_act,"yehey " + userInfo.residentFirstName, Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this@login_act, "Invalid username or password", Toast.LENGTH_SHORT).show()
                     }
