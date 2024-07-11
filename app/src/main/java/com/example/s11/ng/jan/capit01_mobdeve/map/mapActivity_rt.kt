@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
+import android.os.Looper
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +20,12 @@ import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -38,6 +44,7 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
     private var isMapReady = false
     private lateinit var currentLocation: LatLng
     private lateinit var destination: LatLng
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -49,6 +56,8 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
 
         // Request location permission
         requestLocationPermission()
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         val pnabutton: ImageButton = findViewById(R.id.pna_RT)
         pnabutton.setOnClickListener{
@@ -76,56 +85,12 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun requestLocationPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                )
-            ) {
-                //We can show user a dialog why this permission is necessary
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
-                    LOCATION_REQUEST_CODE
-                )
-            } else {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
-                    LOCATION_REQUEST_CODE
-                )
-            }
-        }
-    }
-
-    private fun addMarkerFromAddress(address: String) {
-        val geocoder = Geocoder(this)
-        try {
-            val addresses = geocoder.getFromLocationName(address, 1)
-            if (addresses!!.isNotEmpty()) {
-                val latLng = LatLng(addresses[0].latitude, addresses[0].longitude)
-                mMap.addMarker(MarkerOptions().position(latLng).title(address))
-                destination = latLng
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-            } else {
-                Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show()
-            }
-        } catch (e: IOException) {
-            Toast.makeText(this, "Error finding address", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         isMapReady = true
 
         // Add marker from address
-        addMarkerFromAddress("4th floor, Greenbelt, 3 Esperanza St, Makati, 1224 Metro Manila")
+        addMarkerFromAddress("2401 Taft Ave, Malate, Manila, 1004 Metro Manila")
 
         // Check if location permission is granted
         if (ContextCompat.checkSelfPermission(
@@ -148,6 +113,23 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
                     drawNavigationRoute()
                 }
             }
+        }
+    }
+
+    private fun addMarkerFromAddress(address: String) {
+        val geocoder = Geocoder(this)
+        try {
+            val addresses = geocoder.getFromLocationName(address, 1)
+            if (addresses!!.isNotEmpty()) {
+                val latLng = LatLng(addresses[0].latitude, addresses[0].longitude)
+                mMap.addMarker(MarkerOptions().position(latLng).title(address))
+                destination = latLng
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+            } else {
+                Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: IOException) {
+            Toast.makeText(this, "Error finding address", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -181,6 +163,70 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
         Volley.newRequestQueue(this).add(request)
     }
 
+    private fun startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )!= PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )!= PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+
+        val locationRequest = LocationRequest.Builder(10000L)
+            .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+            .setMinUpdateIntervalMillis(10000L)
+            .setMaxUpdateDelayMillis(20000L)
+            .build()
+
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest,
+            object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult) {
+                    if (locationResult.locations.isNotEmpty()) {
+                        val location = locationResult.lastLocation
+                        val latLng = LatLng(location!!.latitude, location!!.longitude)
+                        currentLocation = latLng
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+
+                        // Draw navigation route
+                        drawNavigationRoute()
+                    }
+                }
+            },
+            Looper.getMainLooper()
+        )
+    }
+
+    private fun requestLocationPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            ) {
+                //We can show user a dialog why this permission is necessary
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_REQUEST_CODE
+                )
+            } else {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_REQUEST_CODE
+                )
+            }
+        }
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -207,16 +253,12 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onStart() {
         super.onStart()
-        if (isMapReady) {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                mMap.isMyLocationEnabled = true
-            }
-            mMap.uiSettings.isMyLocationButtonEnabled = true
-        }
+        startLocationUpdates()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        fusedLocationClient.removeLocationUpdates(object : LocationCallback() {})
     }
 
     fun moveToPnaRT(){
