@@ -61,21 +61,72 @@ class login_act : AppCompatActivity() {
             //val password: EditText = findViewById(R.id.passwordRT)
             //val passwordString = password.text.toString()
 
-//            if(userString.isEmpty()) {
-//                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
+            if(userString.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             //moveToHomeRT()
-            loginUser(userString)
+            loginUserResident(userString)
         }
         val loginBObutton: Button = findViewById(R.id.loginBO)
         loginBObutton.setOnClickListener {
-            moveToHomeBO()
+            val username: EditText = findViewById(R.id.usernameRT)
+            val userString = username.text.toString()
+            //val password: EditText = findViewById(R.id.passwordRT)
+            //val passwordString = password.text.toString()
+
+            if(userString.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            //moveToHomeRT()
+            loginUserTanod(userString)
         }
     }
 
-    fun loginUser(userString: String) {
+    fun loginUserResident(userString: String) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val loginAPI = retrofit.create(loginAPI::class.java)
+
+        val baseUrl = retrofit.baseUrl().toString()
+        Log.d("Base URL", baseUrl)
+
+        //val requestBody = userString.toRequestBody("text/plain".toMediaType())
+        val call = loginAPI.getUser(userString)
+        Log.d("UserString", call.toString())
+
+        call.enqueue(object : Callback<userInfo> {
+            override fun onResponse(call: Call<userInfo>, response: Response<userInfo>) {
+                if (response.isSuccessful) {
+                    val userInfo = response.body();
+                    if (userInfo!= null) {
+                        writeUser(userInfo)
+                        moveToHomeRT() //move to resident page
+                        Toast.makeText(this@login_act,"yehey" + userInfo.residentFirstName, Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@login_act, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Log.e("Error", "Response code: ${response.code()}")
+                    Log.e("Error", "Response error message: ${response.message()}")
+                    Toast.makeText(this@login_act, "Invalid username or password or NULL", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<userInfo>, t: Throwable) {
+                Log.e("Error", "Error: ${t.message}")
+                Toast.makeText(this@login_act, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun loginUserTanod(userString: String) {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -97,7 +148,7 @@ class login_act : AppCompatActivity() {
                     if (userInfo!= null) {
                         writeUser(userInfo)
                         if(userInfo.typeOfUser == "Resident") {
-                            moveToHomeRT()
+                            Toast.makeText(this@login_act,"You are not a Tanod or an Official", Toast.LENGTH_SHORT).show()
                         } else {
                             moveToHomeBO()
                         }
