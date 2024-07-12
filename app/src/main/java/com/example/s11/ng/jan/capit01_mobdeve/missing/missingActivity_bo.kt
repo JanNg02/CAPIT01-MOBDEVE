@@ -8,14 +8,27 @@ import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.fingerprint.fingerprintActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_bo
+import com.example.s11.ng.jan.capit01_mobdeve.login.login_act
 import com.example.s11.ng.jan.capit01_mobdeve.missing.missingActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.rescue.rescueActivity_bo
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class missingActivity_bo : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.missing_bo)
+
+
+        val logoutButton: FloatingActionButton = findViewById(R.id.logout_button_BO)
+        logoutButton.setOnClickListener{
+            val sp = getSharedPreferences("userSession", MODE_PRIVATE)
+            val editor = sp.edit()
+
+            editor.clear()
+            editor.apply()
+            moveToLogin()
+        }
 
         val responsebutton: ImageButton = findViewById(R.id.response_BO)
         responsebutton.setOnClickListener{
@@ -69,6 +82,12 @@ class missingActivity_bo : AppCompatActivity(){
 
     fun moveToFingerprintBO(){
         val intent = Intent(applicationContext, fingerprintActivity_bo::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    fun moveToLogin(){
+        val intent = Intent(applicationContext, login_act::class.java)
         startActivity(intent)
         finish()
     }

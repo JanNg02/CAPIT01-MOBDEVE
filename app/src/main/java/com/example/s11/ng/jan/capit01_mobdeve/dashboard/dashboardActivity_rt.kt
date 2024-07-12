@@ -10,11 +10,23 @@ import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
+import com.example.s11.ng.jan.capit01_mobdeve.login.login_act
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class dashboardActivity_rt : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_rt)
+
+        val logoutButton: FloatingActionButton = findViewById(R.id.logout_button_RT)
+        logoutButton.setOnClickListener{
+            val sp = getSharedPreferences("userSession", MODE_PRIVATE)
+            val editor = sp.edit()
+
+            editor.clear()
+            editor.apply()
+            moveToLogin()
+        }
 
         val pnabutton: ImageButton = findViewById(R.id.pna_RT)
         pnabutton.setOnClickListener{
@@ -68,6 +80,12 @@ class dashboardActivity_rt : AppCompatActivity() {
 
     fun moveToDashboardRT(){
         val intent = Intent(applicationContext, dashboardActivity_rt::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    fun moveToLogin(){
+        val intent = Intent(applicationContext, login_act::class.java)
         startActivity(intent)
         finish()
     }

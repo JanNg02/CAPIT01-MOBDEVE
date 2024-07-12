@@ -7,7 +7,11 @@ import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
 import android.os.Looper
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ImageButton
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -36,22 +40,25 @@ import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
 import java.io.IOException
 
-class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
+class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedListener {
     companion object {
         private const val LOCATION_REQUEST_CODE = 1
     }
+
     private lateinit var mMap: GoogleMap
     private var isMapReady = false
     private lateinit var currentLocation: LatLng
     private lateinit var destination: LatLng
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    override fun onCreate(savedInstanceState: Bundle?){
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.map_rt)
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
+        val mapFragment =
+            supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         // Request location permission
@@ -59,38 +66,59 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        val getEvacCenter = getEvacCenter(this)
+        getEvacCenter.execute()
+
         val pnabutton: ImageButton = findViewById(R.id.pna_RT)
-        pnabutton.setOnClickListener{
+        pnabutton.setOnClickListener {
             moveToPnaRT()
         }
 
         val mapbutton: ImageButton = findViewById(R.id.map_RT)
-        mapbutton.setOnClickListener{
+        mapbutton.setOnClickListener {
             moveToMapRT()
         }
 
         val helpbutton: ImageButton = findViewById(R.id.help_RT)
-        helpbutton.setOnClickListener{
+        helpbutton.setOnClickListener {
             moveToHelpRT()
         }
 
         val filebutton: ImageButton = findViewById(R.id.file_RT)
-        filebutton.setOnClickListener{
+        filebutton.setOnClickListener {
             moveToFileRT()
         }
 
         val dashbutton: ImageButton = findViewById(R.id.dashboard_RT)
-        dashbutton.setOnClickListener{
+        dashbutton.setOnClickListener {
             moveToDashboardRT()
+        }
+    }
+
+    override fun onDataFetched(data: List<modelEvacCenter>) {
+        // Set up the spinner
+        val spinner: Spinner = findViewById(R.id.spinner)
+        val adapter = ArrayAdapter(this@mapActivity_rt, android.R.layout.simple_spinner_item, data.map { it.evacName })
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedEvacAddress = data[position].evacAddress
+                addMarkerFromAddress(selectedEvacAddress)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Remove the marker
+                mMap.clear()
+                destination = LatLng(0.0, 0.0) // Initialize destination with a default value
+            }
         }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         isMapReady = true
-
-        // Add marker from address
-        addMarkerFromAddress("2401 Taft Ave, Malate, Manila, 1004 Metro Manila")
 
         // Check if location permission is granted
         if (ContextCompat.checkSelfPermission(
@@ -117,6 +145,8 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun addMarkerFromAddress(address: String) {
+        mMap.clear() // Clear the map
+
         val geocoder = Geocoder(this)
         try {
             val addresses = geocoder.getFromLocationName(address, 1)
@@ -125,6 +155,9 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
                 mMap.addMarker(MarkerOptions().position(latLng).title(address))
                 destination = latLng
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+
+                // Draw navigation route
+                drawNavigationRoute()
             } else {
                 Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show()
             }
@@ -134,33 +167,35 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun drawNavigationRoute() {
-        val url = "https://maps.googleapis.com/maps/api/directions/json" +
-                "?origin=" + currentLocation.latitude + "," + currentLocation.longitude +
-                "&destination=" + destination.latitude + "," + destination.longitude +
-                "&mode=driving" +
-                "&key=AIzaSyDaka3Pso7shUImAerJ8SvrrmUSHsvmSXE"
+        if (::destination.isInitialized) {
+            val url = "https://maps.googleapis.com/maps/api/directions/json" +
+                    "?origin=" + currentLocation.latitude + "," + currentLocation.longitude +
+                    "&destination=" + destination.latitude + "," + destination.longitude +
+                    "&mode=driving" +
+                    "&key=AIzaSyDaka3Pso7shUImAerJ8SvrrmUSHsvmSXE"
 
-        val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
-            val routes = response.getJSONArray("routes")
-            val route = routes.getJSONObject(0)
-            val overviewPolyline = route.getJSONObject("overview_polyline")
-            val polylineString = overviewPolyline.getString("points")
+            val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
+                val routes = response.getJSONArray("routes")
+                val route = routes.getJSONObject(0)
+                val overviewPolyline = route.getJSONObject("overview_polyline")
+                val polylineString = overviewPolyline.getString("points")
 
-            val polylineList = PolyUtil.decode(polylineString)
-            val polylineOptions = PolylineOptions()
-            polylineOptions.color(Color.BLUE)
-            polylineOptions.width(10f)
+                val polylineList = PolyUtil.decode(polylineString)
+                val polylineOptions = PolylineOptions()
+                polylineOptions.color(Color.BLUE)
+                polylineOptions.width(10f)
 
-            for (point in polylineList) {
-                polylineOptions.add(point)
-            }
+                for (point in polylineList) {
+                    polylineOptions.add(point)
+                }
 
-            mMap.addPolyline(polylineOptions)
-        }, { error ->
-            Toast.makeText(this, "Error drawing navigation route", Toast.LENGTH_SHORT).show()
-        })
+                mMap.addPolyline(polylineOptions)
+            }, { error ->
+                Toast.makeText(this, "Error drawing navigation route", Toast.LENGTH_SHORT).show()
+            })
 
-        Volley.newRequestQueue(this).add(request)
+            Volley.newRequestQueue(this).add(request)
+        }
     }
 
     private fun startLocationUpdates() {
