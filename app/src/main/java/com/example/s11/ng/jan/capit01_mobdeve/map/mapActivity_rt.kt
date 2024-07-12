@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -50,12 +51,20 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var navigationPolyline: Polyline? = null
 
+    private lateinit var spinner: Spinner
+    private val sharedPreferences by lazy { getSharedPreferences("MyPrefs", MODE_PRIVATE) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.map_rt)
 
         initMap()
+
+        spinner = findViewById(R.id.spinner)
+        // Retrieve the saved position
+        val savedPosition = sharedPreferences.getInt("selectedPosition", 0)
+        spinner.setSelection(savedPosition)
 
         val getEvacCenter = getEvacCenter(this)
         getEvacCenter.execute()
@@ -102,10 +111,14 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
 
     override fun onDataFetched(data: List<modelEvacCenter>) {
         // Set up the spinner
-        val spinner: Spinner = findViewById(R.id.spinner)
+        spinner = findViewById(R.id.spinner)
         val adapter = ArrayAdapter(this@mapActivity_rt, android.R.layout.simple_spinner_item, data.map { it.evacName })
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
+
+        // Retrieve the saved position
+        val savedPosition = sharedPreferences.getInt("selectedPosition", 0)
+        spinner.setSelection(savedPosition)
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -116,6 +129,9 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
                 mMap.clear() // Clear the map
 
                 val selectedEvacAddress = data[position].evacAddress
+
+                sharedPreferences.edit().putInt("selectedPosition", position).apply()
+
                 addMarkerFromAddress(selectedEvacAddress)
             }
 
