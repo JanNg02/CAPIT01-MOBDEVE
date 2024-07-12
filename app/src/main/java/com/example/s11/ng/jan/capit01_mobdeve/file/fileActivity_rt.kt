@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -58,7 +60,9 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
     private lateinit var areaLastSeenEditText: EditText
     private lateinit var timeLastSeenEditText: EditText
     private lateinit var ageEditText: EditText
-    private lateinit var sexEditText: EditText
+    private lateinit var sexRadioGroup: RadioGroup
+    private lateinit var maleRadioButton: RadioButton
+    private lateinit var femaleRadioButton: RadioButton
     private lateinit var submitButton: Button
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
@@ -86,9 +90,12 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
         areaLastSeenEditText = findViewById(R.id.areaLastSeen)
         timeLastSeenEditText = findViewById(R.id.timeLastSeen)
         ageEditText = findViewById(R.id.age)
-        sexEditText = findViewById(R.id.sex)
 
-        val editTexts = listOf(fullNameEditText, descriptionEditText, areaLastSeenEditText, timeLastSeenEditText, ageEditText, sexEditText)
+        sexRadioGroup = findViewById(R.id.sexRadioGroup)
+        maleRadioButton = findViewById(R.id.maleRadioButton)
+        femaleRadioButton = findViewById(R.id.femaleRadioButton)
+
+        val editTexts = listOf(fullNameEditText, descriptionEditText, areaLastSeenEditText, timeLastSeenEditText, ageEditText)
 
         submitButton = findViewById(R.id.filesubmitRT)
 
@@ -98,7 +105,7 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
             val areaLastSeen = areaLastSeenEditText.text.toString()
             val timeLastSeen = timeLastSeenEditText.text.toString()
             val age = ageEditText.text.toString().toIntOrNull()
-            val sex = sexEditText.text.toString()
+            val sex: String
 
             //get the currest Session or current User
             val sp = getSharedPreferences("userSession", MODE_PRIVATE)
@@ -111,9 +118,18 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
             val teamID = "None"
             val isFound = false
 
-            if (fullName.isEmpty() || description.isEmpty() || areaLastSeen.isEmpty() || timeLastSeen.isEmpty() || age == null || sex.isEmpty()) {
+            if (fullName.isEmpty() || description.isEmpty() || areaLastSeen.isEmpty() || timeLastSeen.isEmpty() || age == null) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
+            }
+
+            when (sexRadioGroup.checkedRadioButtonId) {
+                R.id.maleRadioButton -> sex = "Male"
+                R.id.femaleRadioButton -> sex = "Female"
+                else -> {
+                    Toast.makeText(this, "Please select a sex", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
             }
 
             val missing = Missing(fullName, description, areaLastSeen, timeLastSeen, age, sex, dateSubmitted, filedBy, contactNum, teamID, isFound)
@@ -121,7 +137,6 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
             val json = gson.toJson(missing)
 
             val requestBody = json.toRequestBody("application/json".toMediaType())
-
 
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/")
@@ -169,7 +184,9 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
         areaLastSeenEditText.text.clear()
         timeLastSeenEditText.text.clear()
         ageEditText.text.clear()
-        sexEditText.text.clear()
+
+        maleRadioButton.isChecked = false
+        femaleRadioButton.isChecked = false
 
         swipeRefreshLayout.isRefreshing = false // Reset the refresh indicator
     }

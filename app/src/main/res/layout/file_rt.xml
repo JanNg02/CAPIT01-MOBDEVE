@@ -184,26 +184,43 @@
             android:layout_marginEnd="58dp"
             android:ems="10"
             android:hint="Age"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/missingFullName" />
 
-        <EditText
-            android:id="@+id/sex"
+        <RadioGroup
+            android:id="@+id/sexRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="55dp"
             android:layout_marginTop="13dp"
             android:layout_marginEnd="58dp"
-            android:ems="10"
-            android:hint="Sex"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/age" />
+            app:layout_constraintTop_toBottomOf="@+id/age">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/maleRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/femaleRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female" />
+
+            </LinearLayout>
+
+        </RadioGroup>
 
         <EditText
             android:id="@+id/description"
@@ -218,7 +235,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sex" />
+            app:layout_constraintTop_toBottomOf="@+id/sexRadioGroup" />
 
         <EditText
             android:id="@+id/areaLastSeen"
