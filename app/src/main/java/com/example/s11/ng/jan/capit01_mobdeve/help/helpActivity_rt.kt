@@ -20,6 +20,7 @@ import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.file.Missing
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
+import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
@@ -78,30 +79,7 @@ class helpActivity_rt : AppCompatActivity() {
             }
         }
 
-        val pnabutton: ImageButton = findViewById(R.id.pna_RT)
-        pnabutton.setOnClickListener{
-            moveToPnaRT()
-        }
-
-        val mapbutton: ImageButton = findViewById(R.id.map_RT)
-        mapbutton.setOnClickListener{
-            moveToMapRT()
-        }
-
-        val helpbutton: ImageButton = findViewById(R.id.help_RT)
-        helpbutton.setOnClickListener{
-            moveToHelpRT()
-        }
-
-        val filebutton: ImageButton = findViewById(R.id.file_RT)
-        filebutton.setOnClickListener{
-            moveToFileRT()
-        }
-
-        val dashbutton: ImageButton = findViewById(R.id.dashboard_RT)
-        dashbutton.setOnClickListener{
-            moveToDashboardRT()
-        }
+        setupFooter_rt() // Call the footer setup function
     }
 
     private fun checkPermission(): Boolean {
@@ -191,35 +169,5 @@ class helpActivity_rt : AppCompatActivity() {
                 Toast.makeText(this, "Unable to get current location", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    fun moveToPnaRT(){
-        val intent = Intent(applicationContext, homeActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToMapRT(){
-        val intent = Intent(applicationContext, mapActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToHelpRT(){
-        val intent = Intent(applicationContext, helpActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToFileRT(){
-        val intent = Intent(applicationContext, fileActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToDashboardRT(){
-        val intent = Intent(applicationContext, dashboardActivity_rt::class.java)
-        startActivity(intent)
-        finish()
     }
 }

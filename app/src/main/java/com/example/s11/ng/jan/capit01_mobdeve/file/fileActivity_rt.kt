@@ -13,6 +13,7 @@ import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
+import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
 import com.google.gson.Gson
 import com.google.gson.JsonPrimitive
 import com.google.gson.JsonSyntaxException
@@ -66,32 +67,6 @@ class fileActivity_rt : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.file_rt)
-
-        val pnabutton: ImageButton = findViewById(R.id.pna_RT)
-        pnabutton.setOnClickListener {
-            moveToPnaRT()
-        }
-
-        val mapbutton: ImageButton = findViewById(R.id.map_RT)
-        mapbutton.setOnClickListener {
-            moveToMapRT()
-        }
-
-        val helpbutton: ImageButton = findViewById(R.id.help_RT)
-        helpbutton.setOnClickListener {
-            moveToHelpRT()
-        }
-
-        val filebutton: ImageButton = findViewById(R.id.file_RT)
-        filebutton.setOnClickListener {
-            moveToFileRT()
-        }
-
-        val dashbutton: ImageButton = findViewById(R.id.dashboard_RT)
-        dashbutton.setOnClickListener {
-            moveToDashboardRT()
-        }
-
 
         fullNameEditText = findViewById(R.id.missingFullName)
         descriptionEditText = findViewById(R.id.description)
@@ -173,59 +148,7 @@ class fileActivity_rt : AppCompatActivity() {
                 }
             })
         }
-    }
-    fun moveToPnaRT(){
-        val intent = Intent(applicationContext, homeActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToMapRT(){
-        val intent = Intent(applicationContext, mapActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToHelpRT(){
-        val intent = Intent(applicationContext, helpActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToFileRT(){
-        val intent = Intent(applicationContext, fileActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToDashboardRT(){
-        val intent = Intent(applicationContext, dashboardActivity_rt::class.java)
-        startActivity(intent)
-        finish()
+        setupFooter_rt() // Call the footer setup function
     }
 }
-//
-//        val fileRTbutton: Button = findViewById(R.id.filesubmitRT)
-//        fileRTbutton.setOnClickListener{
-//            val missingFullName = editTextMissingFullName.text.toString()
-//            val description = editTextDescription.text.toString()
-//            val areaLastSeen = editTextAreaLastSeen.text.toString()
-//            val timeLastSeen = editTextTimeLastSeen.text.toString()
-//            var age: Int? = null
-//            val ageString = editTextAge.text.toString()
-//            if (ageString.isNotEmpty()) {
-//                try {
-//                    age = ageString.toInt()
-//                } catch (e: NumberFormatException) {
-//                    // Handle the case where the user enters a non-numeric value
-//                    Toast.makeText(this, "Please enter a valid age", Toast.LENGTH_SHORT).show()
-//                    return@setOnClickListener
-//                }
-//            } else {
-//                Toast.makeText(this, "Please enter an age", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
-//
-//            val uploadMissing = uploadMissing(missingFullName, description, areaLastSeen, timeLastSeen, age!!, this)
-//            uploadMissing.execute()
-//        }
+

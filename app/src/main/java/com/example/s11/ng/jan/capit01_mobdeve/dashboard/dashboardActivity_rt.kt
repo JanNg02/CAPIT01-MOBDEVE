@@ -11,6 +11,7 @@ import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.login.login_act
+import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class dashboardActivity_rt : AppCompatActivity() {
@@ -28,60 +29,7 @@ class dashboardActivity_rt : AppCompatActivity() {
             moveToLogin()
         }
 
-        val pnabutton: ImageButton = findViewById(R.id.pna_RT)
-        pnabutton.setOnClickListener{
-            moveToPnaRT()
-        }
-
-        val mapbutton: ImageButton = findViewById(R.id.map_RT)
-        mapbutton.setOnClickListener{
-            moveToMapRT()
-        }
-
-        val helpbutton: ImageButton = findViewById(R.id.help_RT)
-        helpbutton.setOnClickListener{
-            moveToHelpRT()
-        }
-
-        val filebutton: ImageButton = findViewById(R.id.file_RT)
-        filebutton.setOnClickListener{
-            moveToFileRT()
-        }
-
-        val dashbutton: ImageButton = findViewById(R.id.dashboard_RT)
-        dashbutton.setOnClickListener{
-            moveToDashboardRT()
-        }
-    }
-
-    fun moveToPnaRT(){
-        val intent = Intent(applicationContext, homeActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToMapRT(){
-        val intent = Intent(applicationContext, mapActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToHelpRT(){
-        val intent = Intent(applicationContext, helpActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToFileRT(){
-        val intent = Intent(applicationContext, fileActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToDashboardRT(){
-        val intent = Intent(applicationContext, dashboardActivity_rt::class.java)
-        startActivity(intent)
-        finish()
+        setupFooter_rt() // Call the footer setup function
     }
 
     fun moveToLogin(){

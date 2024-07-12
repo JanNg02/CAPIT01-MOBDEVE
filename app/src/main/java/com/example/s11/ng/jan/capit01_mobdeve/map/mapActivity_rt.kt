@@ -20,10 +20,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.s11.ng.jan.capit01_mobdeve.R
-import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
+import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -36,6 +33,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
 import java.io.IOException
@@ -50,70 +48,28 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
     private lateinit var currentLocation: LatLng
     private lateinit var destination: LatLng
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-
+    private var navigationPolyline: Polyline? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.map_rt)
 
-        val mapFragment =
-            supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-
-        // Request location permission
-        requestLocationPermission()
-
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        initMap()
 
         val getEvacCenter = getEvacCenter(this)
         getEvacCenter.execute()
 
-        val pnabutton: ImageButton = findViewById(R.id.pna_RT)
-        pnabutton.setOnClickListener {
-            moveToPnaRT()
-        }
-
-        val mapbutton: ImageButton = findViewById(R.id.map_RT)
-        mapbutton.setOnClickListener {
-            moveToMapRT()
-        }
-
-        val helpbutton: ImageButton = findViewById(R.id.help_RT)
-        helpbutton.setOnClickListener {
-            moveToHelpRT()
-        }
-
-        val filebutton: ImageButton = findViewById(R.id.file_RT)
-        filebutton.setOnClickListener {
-            moveToFileRT()
-        }
-
-        val dashbutton: ImageButton = findViewById(R.id.dashboard_RT)
-        dashbutton.setOnClickListener {
-            moveToDashboardRT()
-        }
+        setupFooter_rt() // Call the footer setup function
     }
 
-    override fun onDataFetched(data: List<modelEvacCenter>) {
-        // Set up the spinner
-        val spinner: Spinner = findViewById(R.id.spinner)
-        val adapter = ArrayAdapter(this@mapActivity_rt, android.R.layout.simple_spinner_item, data.map { it.evacName })
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
+    private fun initMap() {
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedEvacAddress = data[position].evacAddress
-                addMarkerFromAddress(selectedEvacAddress)
-            }
+        requestLocationPermission()
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Remove the marker
-                mMap.clear()
-                destination = LatLng(0.0, 0.0) // Initialize destination with a default value
-            }
-        }
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -144,9 +100,34 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
         }
     }
 
-    private fun addMarkerFromAddress(address: String) {
-        mMap.clear() // Clear the map
+    override fun onDataFetched(data: List<modelEvacCenter>) {
+        // Set up the spinner
+        val spinner: Spinner = findViewById(R.id.spinner)
+        val adapter = ArrayAdapter(this@mapActivity_rt, android.R.layout.simple_spinner_item, data.map { it.evacName })
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
 
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                // Clear previous navigation route and marker
+                if (navigationPolyline != null) {
+                    navigationPolyline!!.remove()
+                }
+                mMap.clear() // Clear the map
+
+                val selectedEvacAddress = data[position].evacAddress
+                addMarkerFromAddress(selectedEvacAddress)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Remove the marker
+                mMap.clear()
+                destination = LatLng(0.0, 0.0) // Initialize destination with a default value
+            }
+        }
+    }
+
+    private fun addMarkerFromAddress(address: String) {
         val geocoder = Geocoder(this)
         try {
             val addresses = geocoder.getFromLocationName(address, 1)
@@ -167,7 +148,11 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
     }
 
     private fun drawNavigationRoute() {
-        if (::destination.isInitialized) {
+        if (navigationPolyline != null) {
+            navigationPolyline!!.remove()
+        }
+
+        if (::destination.isInitialized && ::currentLocation.isInitialized) {
             val url = "https://maps.googleapis.com/maps/api/directions/json" +
                     "?origin=" + currentLocation.latitude + "," + currentLocation.longitude +
                     "&destination=" + destination.latitude + "," + destination.longitude +
@@ -189,12 +174,17 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
                     polylineOptions.add(point)
                 }
 
-                mMap.addPolyline(polylineOptions)
+                // Add the polyline to the map on the main thread
+                runOnUiThread {
+                    navigationPolyline = mMap.addPolyline(polylineOptions)
+                }
             }, { error ->
                 Toast.makeText(this, "Error drawing navigation route", Toast.LENGTH_SHORT).show()
             })
 
-            Volley.newRequestQueue(this).add(request)
+            // Execute the request on a background thread
+            val queue = Volley.newRequestQueue(this)
+            queue.add(request)
         }
     }
 
@@ -236,29 +226,8 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
     }
 
     private fun requestLocationPermission() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                )
-            ) {
-                //We can show user a dialog why this permission is necessary
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
-                    LOCATION_REQUEST_CODE
-                )
-            } else {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
-                    LOCATION_REQUEST_CODE
-                )
-            }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_REQUEST_CODE)
         }
     }
 
@@ -279,6 +248,19 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
                         mMap.isMyLocationEnabled = true
                     }
                     mMap.uiSettings.isMyLocationButtonEnabled = true
+
+                    // Get the current location using FusedLocationProviderClient
+                    val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+                    fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                        if (location != null) {
+                            val latLng = LatLng(location.latitude, location.longitude)
+                            currentLocation = latLng
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+
+                            // Draw navigation route
+                            drawNavigationRoute()
+                        }
+                    }
                 }
             } else {
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
@@ -294,35 +276,5 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
     override fun onStop() {
         super.onStop()
         fusedLocationClient.removeLocationUpdates(object : LocationCallback() {})
-    }
-
-    fun moveToPnaRT(){
-        val intent = Intent(applicationContext, homeActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToMapRT(){
-        val intent = Intent(applicationContext, mapActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToHelpRT(){
-        val intent = Intent(applicationContext, helpActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToFileRT(){
-        val intent = Intent(applicationContext, fileActivity_rt::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun moveToDashboardRT(){
-        val intent = Intent(applicationContext, dashboardActivity_rt::class.java)
-        startActivity(intent)
-        finish()
     }
 }
