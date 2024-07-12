@@ -12,55 +12,55 @@ import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
 fun AppCompatActivity.setupFooter_rt() {
     val pnabutton: ImageButton = findViewById(R.id.pna_RT)
     pnabutton.setOnClickListener {
-        moveToPnaRT(this)
+        moveToPnaRT()
     }
 
     val mapbutton: ImageButton = findViewById(R.id.map_RT)
     mapbutton.setOnClickListener {
-        moveToMapRT(this)
+        moveToMapRT()
     }
 
     val helpbutton: ImageButton = findViewById(R.id.help_RT)
     helpbutton.setOnClickListener {
-        moveToHelpRT(this)
+        moveToHelpRT()
     }
 
     val filebutton: ImageButton = findViewById(R.id.file_RT)
     filebutton.setOnClickListener {
-        moveToFileRT(this)
+        moveToFileRT()
     }
 
     val dashbutton: ImageButton = findViewById(R.id.dashboard_RT)
     dashbutton.setOnClickListener {
-        moveToDashboardRT(this)
+        moveToDashboardRT()
     }
 }
 
-fun AppCompatActivity.moveToPnaRT(appCompatActivity: AppCompatActivity) {
+fun AppCompatActivity.moveToPnaRT() {
     val intent = Intent(applicationContext, homeActivity_rt::class.java)
     startActivity(intent)
     finish()
 }
 
-fun AppCompatActivity.moveToMapRT(appCompatActivity: AppCompatActivity) {
+fun AppCompatActivity.moveToMapRT() {
     val intent = Intent(applicationContext, mapActivity_rt::class.java)
     startActivity(intent)
     finish()
 }
 
-fun AppCompatActivity.moveToHelpRT(appCompatActivity: AppCompatActivity) {
+fun AppCompatActivity.moveToHelpRT() {
     val intent = Intent(applicationContext, helpActivity_rt::class.java)
     startActivity(intent)
     finish()
 }
 
-fun AppCompatActivity.moveToFileRT(appCompatActivity: AppCompatActivity) {
+fun AppCompatActivity.moveToFileRT() {
     val intent = Intent(applicationContext, fileActivity_rt::class.java)
     startActivity(intent)
     finish()
 }
 
-fun AppCompatActivity.moveToDashboardRT(appCompatActivity: AppCompatActivity) {
+fun AppCompatActivity.moveToDashboardRT() {
     val intent = Intent(applicationContext, dashboardActivity_rt::class.java)
     startActivity(intent)
     finish()
