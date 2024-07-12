@@ -8,10 +8,12 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
+import com.example.s11.ng.jan.capit01_mobdeve.fetchPost
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
 import com.google.gson.Gson
@@ -49,7 +51,7 @@ data class Missing(
     @SerializedName("isFound") val isFound: Boolean
 )
 
-class fileActivity_rt : AppCompatActivity() {
+class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var fullNameEditText: EditText
     private lateinit var descriptionEditText: EditText
@@ -58,6 +60,8 @@ class fileActivity_rt : AppCompatActivity() {
     private lateinit var ageEditText: EditText
     private lateinit var sexEditText: EditText
     private lateinit var submitButton: Button
+
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     interface MissingApi {
         @POST("postMissing")
@@ -68,6 +72,15 @@ class fileActivity_rt : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.file_rt)
 
+        swipeRefreshLayout = findViewById(R.id.refreshFileMissingPerson)
+        swipeRefreshLayout.setOnRefreshListener(this)
+
+        fileMissingPerson()
+
+        setupFooter_rt() // Call the footer setup function
+    }
+
+    private fun fileMissingPerson() {
         fullNameEditText = findViewById(R.id.missingFullName)
         descriptionEditText = findViewById(R.id.description)
         areaLastSeenEditText = findViewById(R.id.areaLastSeen)
@@ -148,7 +161,17 @@ class fileActivity_rt : AppCompatActivity() {
                 }
             })
         }
-        setupFooter_rt() // Call the footer setup function
+    }
+
+    override fun onRefresh() {
+        fullNameEditText.text.clear()
+        descriptionEditText.text.clear()
+        areaLastSeenEditText.text.clear()
+        timeLastSeenEditText.text.clear()
+        ageEditText.text.clear()
+        sexEditText.text.clear()
+
+        swipeRefreshLayout.isRefreshing = false // Reset the refresh indicator
     }
 }
 

@@ -12,56 +12,33 @@ import com.example.s11.ng.jan.capit01_mobdeve.rescue.rescueActivity_bo
 fun AppCompatActivity.setupFooter_bo() {
     val responsebutton: ImageButton = findViewById(R.id.response_BO)
     responsebutton.setOnClickListener{
-        moveToResponseBO()
+        navigateTo(homeActivity_bo::class.java)
     }
 
     val rescuebutton: ImageButton = findViewById(R.id.rescueboard_BO)
     rescuebutton.setOnClickListener{
-        moveToRescueBO()
+        navigateTo(rescueActivity_bo::class.java)
     }
 
     val missingbutton: ImageButton = findViewById(R.id.missing_BO)
     missingbutton.setOnClickListener{
-        moveToMissingBO()
+        navigateTo(missingActivity_bo::class.java)
     }
 
     val fileareabutton: ImageButton = findViewById(R.id.filearea_BO)
     fileareabutton.setOnClickListener{
-        moveToFileareaBO()
+        navigateTo(fileActivity_bo::class.java)
     }
 
     val fingerprintbutton: ImageButton = findViewById(R.id.fingerprint_BO)
     fingerprintbutton.setOnClickListener{
-        moveToFingerprintBO()
+        navigateTo(fingerprintActivity_bo::class.java)
     }
 }
-
-fun AppCompatActivity.moveToResponseBO(){
-    val intent = Intent(applicationContext, homeActivity_bo::class.java)
-    startActivity(intent)
-    finish()
-}
-
-fun AppCompatActivity.moveToRescueBO(){
-    val intent = Intent(applicationContext, rescueActivity_bo::class.java)
-    startActivity(intent)
-    finish()
-}
-
-fun AppCompatActivity.moveToMissingBO(){
-    val intent = Intent(applicationContext, missingActivity_bo::class.java)
-    startActivity(intent)
-    finish()
-}
-
-fun AppCompatActivity.moveToFileareaBO(){
-    val intent = Intent(applicationContext, fileActivity_bo::class.java)
-    startActivity(intent)
-    finish()
-}
-
-fun AppCompatActivity.moveToFingerprintBO(){
-    val intent = Intent(applicationContext, fingerprintActivity_bo::class.java)
-    startActivity(intent)
-    finish()
+private fun AppCompatActivity.navigateTo(destinationActivity: Class<*>) {
+    if (this::class.java != destinationActivity) {
+        val intent = Intent(applicationContext, destinationActivity)
+        startActivity(intent)
+        finish()
+    }
 }
