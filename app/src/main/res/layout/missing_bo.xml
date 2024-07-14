@@ -1,164 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/missingbo_page"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="#79FFFFFF"
-    android:backgroundTint="#8E8D8D"
-    android:foregroundTint="#79FFFFFF"
-    tools:context=".missing.missingActivity_bo">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/Rectangle"
-        android:layout_width="410dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="1dp"
-        android:src="@drawable/rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/picRT"
-        android:layout_width="63dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/Rectangle"
-        app:layout_constraintEnd_toEndOf="@+id/Rectangle"
-        app:layout_constraintTop_toTopOf="@+id/Rectangle"
-        tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/usernameRT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="317dp"
-        android:layout_marginBottom="29dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/Rectangle"
-        app:layout_constraintEnd_toEndOf="@+id/Rectangle"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/Rectangle"
-        app:layout_constraintTop_toTopOf="@+id/Rectangle" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="409dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="384sp"
+            android:layout_height="571sp"
+            android:layout_marginTop="32sp"
+            android:layout_marginBottom="37sp"
+            android:background="@drawable/imageborder"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/getMissingPersons_RV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <ImageView
-            android:id="@+id/Rectangle2"
-            android:layout_width="412dp"
-            android:layout_height="51dp"
-            android:layout_marginBottom="13dp"
-            android:src="@drawable/rectangle"
+            android:id="@+id/imageView6"
+            android:layout_width="410sp"
+            android:layout_height="49sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/rectanglesharp" />
+
+        <ImageButton
+            android:id="@+id/missing_BO"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="186sp"
+            android:layout_marginEnd="187sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_person_search_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/fingerprint_BO"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="338sp"
+            android:layout_marginEnd="35sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_fingerprint_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/filearea_BO"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="263sp"
+            android:layout_marginEnd="110sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_report_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/rescueboard_BO"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="106sp"
+            android:layout_marginEnd="267sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_dashboard_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/response_BO"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="326dp"
-            android:layout_marginBottom="1dp"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="26sp"
+            android:layout_marginEnd="347sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
             android:src="@drawable/baseline_view_list_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageButton
-            android:id="@+id/rescueboard_BO"
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="262sp"
+            android:layout_height="56sp"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="28sp"
+            android:layout_marginEnd="133sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rectangle" />
+
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="109dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="255dp"
-            android:layout_marginBottom="1dp"
-            android:src="@drawable/baseline_dashboard_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+            android:layout_marginStart="41sp"
+            android:layout_marginTop="44sp"
+            android:layout_marginEnd="161sp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Missing Person Details"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/fingerprint_BO"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/logout_button_BO"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="329dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="35dp"
-            android:layout_marginBottom="1dp"
-            android:src="@drawable/baseline_fingerprint_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+            android:layout_marginTop="28sp"
+            android:layout_marginEnd="13sp"
+            android:background="@drawable/imageborder"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_logout_24" />
 
-        <ImageButton
-            android:id="@+id/filearea_BO"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="254dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="110dp"
-            android:layout_marginBottom="1dp"
-            android:src="@drawable/baseline_report_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
-
-        <ImageButton
-            android:id="@+id/missing_BO"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="182dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="182dp"
-            android:layout_marginBottom="3dp"
-            android:src="@drawable/baseline_person_search_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/getMissingPersons_RV"
-        android:layout_width="348dp"
-        android:layout_height="481dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rectangle" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/logout_button_BO"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/baseline_logout_24" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
