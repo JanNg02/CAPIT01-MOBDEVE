@@ -140,6 +140,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/getMissingPersons_RV"
         android:layout_width="348dp"
         android:layout_height="481dp"
         android:layout_marginStart="31dp"
