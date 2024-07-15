@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="262sp"
+            android:layout_height="56sp"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="28sp"
+            android:layout_marginEnd="133sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rectangle" />
+
+        <TextView
+            android:id="@+id/PageTitle_missingDesc_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41sp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="161sp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Missing Persons Reported"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.406"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="384sp"
+            android:layout_height="571sp"
+            android:layout_marginTop="32sp"
+            android:layout_marginBottom="37sp"
+            android:background="@drawable/imageborder"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/getMissingPersons_RV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="409dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/Rectangle2"
+                android:layout_width="412dp"
+                android:layout_height="51dp"
+                android:layout_marginBottom="13dp"
+                android:src="@drawable/rectangle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageButton
+                android:id="@+id/pna_RT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="38dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="326dp"
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/outline_article_24"
+                app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
+                app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
+                app:layout_constraintStart_toStartOf="@+id/Rectangle2"
+                app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+
+            <ImageButton
+                android:id="@+id/map_RT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="109dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="255dp"
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/baseline_map_24"
+                app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
+                app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
+                app:layout_constraintStart_toStartOf="@+id/Rectangle2"
+                app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+
+            <ImageButton
+                android:id="@+id/dashboard_RT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="329dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="35dp"
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/baseline_align_vertical_bottom_24"
+                app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
+                app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/Rectangle2"
+                app:layout_constraintTop_toTopOf="@+id/Rectangle2"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageButton
+                android:id="@+id/file_RT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="254dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="110dp"
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/baseline_report_24"
+                app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
+                app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
+                app:layout_constraintStart_toStartOf="@+id/Rectangle2"
+                app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+
+            <ImageButton
+                android:id="@+id/help_RT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="182dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="182dp"
+                android:layout_marginBottom="3dp"
+                android:src="@drawable/baseline_emergency_share_24"
+                app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
+                app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
+                app:layout_constraintStart_toStartOf="@+id/Rectangle2"
+                app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/logout_button_BO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28sp"
+            android:layout_marginEnd="13sp"
+            android:background="@drawable/imageborder"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_logout_24" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

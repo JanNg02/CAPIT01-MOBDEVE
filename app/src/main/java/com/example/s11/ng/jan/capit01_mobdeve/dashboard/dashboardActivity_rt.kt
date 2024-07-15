@@ -2,6 +2,7 @@ package com.example.s11.ng.jan.capit01_mobdeve.dashboard
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.s11.ng.jan.capit01_mobdeve.R
@@ -18,6 +19,13 @@ class dashboardActivity_rt : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_rt)
+
+        val missingPersonReportedButton: Button = findViewById(R.id.missingReported_button_rt)
+
+       missingPersonReportedButton.setOnClickListener{
+           val intent = Intent(applicationContext, reportedMissing_rt::class.java)
+           startActivity(intent)
+       }
 
         val logoutButton: FloatingActionButton = findViewById(R.id.logout_button_RT)
         logoutButton.setOnClickListener{

@@ -23,6 +23,12 @@
         android:theme="@style/Theme.CAPIT01MOBDEVE"
         tools:targetApi="31">
         <activity
+            android:name=".dashboard.missingPersonReported_desc_rt"
+            android:exported="false" />
+        <activity
+            android:name=".dashboard.reportedMissing_rt"
+            android:exported="false" />
+        <activity
             android:name=".missing.missing_descp"
             android:exported="false" />
 

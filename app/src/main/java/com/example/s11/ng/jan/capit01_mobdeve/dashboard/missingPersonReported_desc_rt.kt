@@ -1,17 +1,15 @@
-package com.example.s11.ng.jan.capit01_mobdeve.missing
+package com.example.s11.ng.jan.capit01_mobdeve.dashboard
 
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.s11.ng.jan.capit01_mobdeve.R
-import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_bo
+import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
 
-class missing_descp : AppCompatActivity() {
-
+class missingPersonReported_desc_rt : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.missing_desc_layout)
-
+        setContentView(R.layout.missing_person_reported_desc_rt)
 
         val titleTextView = findViewById<TextView>(R.id.titleDetailsReported_TV)
         val fullNameTextView = findViewById<TextView>(R.id.fullNameReported_TV)
@@ -46,6 +44,6 @@ class missing_descp : AppCompatActivity() {
             contactNumTextView.text = contactNum
         }
 
-        setupFooter_bo()
+        setupFooter_rt()
     }
 }

@@ -139,85 +139,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/missingRT"
-        android:layout_width="280dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="58dp"
-        android:layout_marginEnd="67dp"
-        android:text="Missing persons reported:"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rectangle" />
-
-    <TextView
-        android:id="@+id/missingCountRT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="184dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="187dp"
-        android:text="123"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/missingRT" />
-
-    <TextView
-        android:id="@+id/demandRT"
-        android:layout_width="280dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="67dp"
-        android:text="On-remand rescue:"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/missingCountRT" />
-
-    <TextView
-        android:id="@+id/demandCountRT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="185dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="186dp"
-        android:text="123"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/demandRT" />
-
-    <TextView
-        android:id="@+id/safeRT"
-        android:layout_width="224dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="92dp"
-        android:text="Amount of people who are safe:"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/demandCountRT" />
-
-    <TextView
-        android:id="@+id/safeCountRT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="185dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="186dp"
-        android:text="123"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/safeRT" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/logout_button_RT"
         android:layout_width="wrap_content"
@@ -226,5 +147,25 @@
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/baseline_logout_24" />
+
+    <Button
+        android:id="@+id/missingReported_button_rt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:text="Missing Persons Reported"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Rectangle" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/missingReported_button_rt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
