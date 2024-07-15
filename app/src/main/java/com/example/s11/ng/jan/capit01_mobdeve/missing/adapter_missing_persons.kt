@@ -23,11 +23,16 @@ class MissingPersonAdapter(private val missingPersonData: List<missingPersonData
 
         // Add an OnClickListener to each item
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, homeActivity_rt::class.java)
+            val intent = Intent(holder.itemView.context, missing_descp::class.java)
             intent.putExtra("miaID", missingPerson.miaID)
+            intent.putExtra("title", "Case#" + (position + 1) + ": "+missingPerson.missingFullName)
             intent.putExtra("missingFullName", missingPerson.missingFullName)
-            intent.putExtra("description", missingPerson.description)
+            intent.putExtra("age", missingPerson.age)
+            intent.putExtra("gender", missingPerson.sex)
             intent.putExtra("areaLastSeen", missingPerson.areaLastSeen)
+            intent.putExtra("description", missingPerson.description)
+            intent.putExtra("filedBy", missingPerson.filedBy)
+            intent.putExtra("dateSubmitted", missingPerson.dateSubmitted)
             intent.putExtra("contactNum", missingPerson.contactNum)
             holder.itemView.context.startActivity(intent)
         }

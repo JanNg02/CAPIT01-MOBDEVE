@@ -29,7 +29,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 data class missingPersonData(
-    @SerializedName("age") val residentID : Int,
+    @SerializedName("age") val age : Int,
     @SerializedName("areaLastSeen") val areaLastSeen : String,
     @SerializedName("contactNum") val contactNum : String,
     @SerializedName("dateSubmitted") val dateSubmitted : String,

@@ -1,28 +1,18 @@
 package com.example.s11.ng.jan.capit01_mobdeve.file
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.s11.ng.jan.capit01_mobdeve.R
-import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.fetchPost
-import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
 import com.google.gson.Gson
-import com.google.gson.JsonPrimitive
-import com.google.gson.JsonSyntaxException
 import com.google.gson.annotations.SerializedName
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -34,7 +24,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
-import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -88,7 +77,7 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
         fullNameEditText = findViewById(R.id.missingFullName)
         descriptionEditText = findViewById(R.id.description)
         areaLastSeenEditText = findViewById(R.id.areaLastSeen)
-        timeLastSeenEditText = findViewById(R.id.timeLastSeen)
+        timeLastSeenEditText = findViewById(R.id.dateLastSeen)
         ageEditText = findViewById(R.id.age)
 
         sexRadioGroup = findViewById(R.id.sexRadioGroup)
