@@ -35,6 +35,8 @@ class MissingPersonReportedAdapter(private val missingPersonData: List<missingPe
             intent.putExtra("filedBy", missingPerson.filedBy)
             intent.putExtra("dateSubmitted", missingPerson.dateSubmitted)
             intent.putExtra("contactNum", missingPerson.contactNum)
+            intent.putExtra("teamID", missingPerson.teamID)
+            intent.putExtra("isFound", missingPerson.isFound)
             holder.itemView.context.startActivity(intent)
         }
     }

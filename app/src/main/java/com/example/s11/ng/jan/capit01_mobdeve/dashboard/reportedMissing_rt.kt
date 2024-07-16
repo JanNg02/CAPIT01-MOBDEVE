@@ -34,7 +34,7 @@ data class missingPersonDataReported(
     @SerializedName("isFound") val isFound : Boolean,
     @SerializedName("missingFullName") val missingFullName : String,
     @SerializedName("sex") val sex : String,
-    @SerializedName("teamdID") val teamID : String,
+    @SerializedName("teamID") val teamID : String,
     @SerializedName("timeLastSeen") val timeLastSeen : String,
     @SerializedName("miaID") val miaID : String,
 )
@@ -78,9 +78,6 @@ class reportedMissing_rt : AppCompatActivity() {
 
         val sp = getSharedPreferences("userSession", MODE_PRIVATE)
         val userName = sp.getString("residentFullName", "null")
-        //val encodedUserName = URLEncoder.encode(userName, "UTF-8")
-
-        //Log.e("userName", "Response code: $encodedUserName")
 
         val call = getMissingPerson.getUserMissingReport(userName.toString())
 

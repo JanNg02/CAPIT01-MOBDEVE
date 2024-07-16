@@ -1,5 +1,6 @@
 package com.example.s11.ng.jan.capit01_mobdeve.dashboard
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,8 @@ class missingPersonReported_desc_rt : AppCompatActivity() {
         val descriptionTextView = findViewById<TextView>(R.id.description_missing_Reported_TV)
         val areaLastSeenTextView = findViewById<TextView>(R.id.areaLastSeenReported_TV)
         val contactNumTextView = findViewById<TextView>(R.id.ContactNumberReported_TV)
+        val assignedTeamTextView = findViewById<TextView>(R.id.assignedTeam_TV)
+        val isFoundTextView = findViewById<TextView>(R.id.isFound_TV)
 
         val intent = intent
         val extras = intent.extras
@@ -33,6 +36,8 @@ class missingPersonReported_desc_rt : AppCompatActivity() {
             val filedBy = it.getString("filedBy")
             val dateSubmitted = it.getString("dateSubmitted")
             val contactNum = it.getString("contactNum")
+            val assignedTeam = it.getString("teamID")
+            val isFound = it.getBoolean("isFound")
 
             titleTextView.text = title
             fullNameTextView.text = missingFullName
@@ -42,6 +47,23 @@ class missingPersonReported_desc_rt : AppCompatActivity() {
             sexTextView.text = sex
             filedByTextView.text = "Filed By: " + filedBy + " on " + dateSubmitted
             contactNumTextView.text = contactNum
+            assignedTeamTextView.text =
+                if (assignedTeam == "None") {
+                    assignedTeamTextView.setTextColor(Color.RED); // Red for no team
+                    "No Team Assigned Yet"
+                } else {
+                    assignedTeamTextView.setTextColor(Color.GREEN); // Green for team assigned
+                    "Team " + assignedTeam // Add the team name if assigned
+                }
+
+            isFoundTextView.text =
+                if (isFound) {
+                    isFoundTextView.setTextColor(Color.GREEN); // Green for found
+                    "Found Meet the Person in the Brgy Hall"
+                } else {
+                    isFoundTextView.setTextColor(Color.RED); // Red for not found
+                    "Not Found Yet"
+                }
         }
 
         setupFooter_rt()
