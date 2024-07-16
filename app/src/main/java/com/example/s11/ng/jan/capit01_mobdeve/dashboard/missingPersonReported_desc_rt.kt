@@ -47,6 +47,7 @@ class missingPersonReported_desc_rt : AppCompatActivity() {
             sexTextView.text = sex
             filedByTextView.text = "Filed By: " + filedBy + " on " + dateSubmitted
             contactNumTextView.text = contactNum
+
             assignedTeamTextView.text =
                 if (assignedTeam == "None") {
                     assignedTeamTextView.setTextColor(Color.RED); // Red for no team
