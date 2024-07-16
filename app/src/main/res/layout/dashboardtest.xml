@@ -71,65 +71,95 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="211sp"
-            android:layout_height="21sp"
-            android:layout_marginStart="16sp"
-            android:layout_marginTop="12sp"
-            android:layout_marginEnd="184sp"
-            android:spinnerMode="dropdown"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/logout_button_RT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView12" />
-
-        <FrameLayout
-            android:layout_width="343sp"
-            android:layout_height="546sp"
-            android:layout_marginStart="34sp"
-            android:layout_marginTop="12sp"
-            android:layout_marginEnd="34sp"
-            android:layout_marginBottom="44sp"
-            android:background="@drawable/imageborder"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner">
-
-            <fragment
-                android:id="@+id/mapView"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </FrameLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_logout_24" />
 
         <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="90sp"
-            android:layout_height="37sp"
-            android:layout_marginStart="16sp"
-            android:layout_marginTop="10sp"
-            android:layout_marginEnd="300sp"
+            android:id="@+id/imageView"
+            android:layout_width="167dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="218dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/rectangle" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="41sp"
-            android:layout_marginTop="16sp"
-            android:layout_marginEnd="326sp"
-            android:text="Maps"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="258dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Dashboard"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="390dp"
+            android:layout_height="514dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="11dp"
+            android:background="@drawable/imageborder"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Emergency Contacts"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contact Number"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0918432942"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="338dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="14dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+            app:srcCompat="@drawable/baseline_call_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

@@ -25,11 +25,6 @@ fun AppCompatActivity.setupFooter_rt() {
         navigateTo(helpActivity_rt::class.java)
     }
 
-    val filebutton: ImageButton = findViewById(R.id.file_RT)
-    filebutton.setOnClickListener {
-        navigateTo(fileActivity_rt::class.java)
-    }
-
     val dashbutton: ImageButton = findViewById(R.id.dashboard_RT)
     dashbutton.setOnClickListener {
         navigateTo(dashboardActivity_rt::class.java)

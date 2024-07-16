@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.s11.ng.jan.capit01_mobdeve.R
-import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
+import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_bo
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import okhttp3.MediaType.Companion.toMediaType
@@ -70,7 +70,7 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
 
         fileMissingPerson()
 
-        setupFooter_rt() // Call the footer setup function
+        setupFooter_bo() // Call the footer setup function
     }
 
     private fun fileMissingPerson() {

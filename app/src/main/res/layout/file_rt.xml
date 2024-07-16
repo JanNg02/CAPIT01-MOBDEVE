@@ -1,210 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/refreshFileMissingPerson"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/file_page"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#79FFFFFF"
-        android:backgroundTint="#8E8D8D"
-        android:foregroundTint="#79FFFFFF"
-        tools:context=".file.fileActivity_rt">
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/Rectangle"
-            android:layout_width="410dp"
-            android:layout_height="76dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="1dp"
-            android:src="@drawable/rectangle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/pic_RT"
-            android:layout_width="63dp"
-            android:layout_height="61dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="38dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle"
-            tools:src="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/usernameRT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="317dp"
-            android:layout_marginBottom="29dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="300dp"
-            android:layout_height="424dp"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="31dp"
-            android:layout_marginEnd="47dp"
-            android:layout_marginBottom="82dp"
-            app:layout_constraintBottom_toTopOf="@+id/filesubmitRT"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Rectangle"
-            app:srcCompat="@drawable/border" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="409dp"
-            android:layout_height="64dp"
+            android:id="@+id/imageView6"
+            android:layout_width="410sp"
+            android:layout_height="49sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/rectanglesharp" />
 
-            <ImageView
-                android:id="@+id/Rectangle2"
-                android:layout_width="412dp"
-                android:layout_height="51dp"
-                android:layout_marginBottom="13dp"
-                android:src="@drawable/rectangle"
-                app:layout_constraintBottom_toBottomOf="parent"
+        <ImageButton
+            android:id="@+id/missing_BO"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="106sp"
+            android:layout_marginEnd="267sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_people_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/fingerprint_BO"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="338sp"
+            android:layout_marginEnd="35sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_fingerprint_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/filearea_BO"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="186sp"
+            android:layout_marginEnd="187sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_report_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/file_RT"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="263sp"
+            android:layout_marginEnd="110sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_person_search_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/response_BO"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="26sp"
+            android:layout_marginEnd="347sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_view_list_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:layout_width="353sp"
+            android:layout_height="546sp"
+            android:layout_marginStart="30sp"
+            android:layout_marginTop="26sp"
+            android:layout_marginEnd="30sp"
+            android:layout_marginBottom="35sp"
+            android:background="@drawable/imageborder"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView15">
+
+            <EditText
+                android:id="@+id/missingFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="65sp"
+                android:layout_marginTop="40sp"
+                android:layout_marginEnd="68sp"
+                android:background="@drawable/imageborder"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="58sp"
+                android:background="@drawable/imageborder"
+                android:ems="2"
+                android:hint="Age"
+                android:inputType="number"
+                android:textSize="24sp" />
+
+            <RadioGroup
+                android:id="@+id/sexRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55sp"
+                android:layout_marginTop="13sp"
+                android:layout_marginEnd="58sp"
+                android:background="@drawable/imageborder"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/age">
 
-            <ImageButton
-                android:id="@+id/pna_RT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="38dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="326dp"
-                android:layout_marginBottom="2dp"
-                android:src="@drawable/outline_article_24"
-                app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-                app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-                app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-                app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
-
-            <ImageButton
-                android:id="@+id/map_RT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="109dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="255dp"
-                android:layout_marginBottom="2dp"
-                android:src="@drawable/baseline_map_24"
-                app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-                app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-                app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-                app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
-
-            <ImageButton
-                android:id="@+id/dashboard_RT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="329dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="35dp"
-                android:layout_marginBottom="2dp"
-                android:src="@drawable/baseline_align_vertical_bottom_24"
-                app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-                app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-                app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-                app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
-
-            <ImageButton
-                android:id="@+id/file_RT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="254dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="110dp"
-                android:layout_marginBottom="2dp"
-                android:src="@drawable/baseline_report_24"
-                app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-                app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-                app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-                app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
-
-            <ImageButton
-                android:id="@+id/help_RT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="182dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="182dp"
-                android:layout_marginBottom="3dp"
-                android:src="@drawable/baseline_emergency_share_24"
-                app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-                app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-                app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-                app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <EditText
-            android:id="@+id/missingFullName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="65dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="68dp"
-            android:ems="10"
-            android:hint="Name"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.45"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Rectangle" />
-
-        <EditText
-            android:id="@+id/age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="55dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="58dp"
-            android:ems="10"
-            android:hint="Age"
-            android:inputType="number"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/missingFullName" />
-
-        <RadioGroup
-            android:id="@+id/sexRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="55dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="58dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/age">
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal">-->
+                <!--            <LinearLayout-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:orientation="horizontal">-->
 
                 <RadioButton
                     android:id="@+id/maleRadioButton"
@@ -218,69 +155,90 @@
                     android:layout_height="wrap_content"
                     android:text="Female" />
 
-<!--            </LinearLayout>-->
+                <!--            </LinearLayout>-->
 
-        </RadioGroup>
+            </RadioGroup>
 
-        <EditText
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="55dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="58dp"
-            android:ems="10"
-            android:hint="Description"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55sp"
+                android:layout_marginTop="50sp"
+                android:layout_marginEnd="58sp"
+                android:background="@drawable/imageborder"
+                android:ems="50"
+                android:hint="Description"
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/areaLastSeen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55sp"
+                android:layout_marginTop="50sp"
+                android:layout_marginEnd="58sp"
+                android:background="@drawable/imageborder"
+                android:ems="50"
+                android:hint="Last seen location"
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/dateLastSeen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55sp"
+                android:layout_marginTop="50sp"
+                android:layout_marginEnd="58sp"
+                android:background="@drawable/imageborder"
+                android:ems="50"
+                android:hint="Last time seen"
+                android:inputType="textPersonName"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/filesubmitRT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="47sp"
+                android:layout_marginTop="40sp"
+                android:layout_marginEnd="47sp"
+                android:layout_marginBottom="30sp"
+                android:background="@color/black"
+                android:gravity="center"
+                android:text="Submit"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="215sp"
+            android:layout_height="52sp"
+            android:layout_marginStart="29sp"
+            android:layout_marginTop="25sp"
+            android:layout_marginEnd="180sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sexRadioGroup" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rectangle" />
 
-        <EditText
-            android:id="@+id/areaLastSeen"
+        <TextView
+            android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="55dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="58dp"
-            android:ems="10"
-            android:hint="Last seen location"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description" />
-
-        <EditText
-            android:id="@+id/dateLastSeen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="55dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="58dp"
-            android:ems="10"
-            android:hint="Last time seen"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/areaLastSeen" />
-
-        <Button
-            android:id="@+id/filesubmitRT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            android:layout_marginEnd="47dp"
-            android:layout_marginBottom="30dp"
-            android:background="@color/black"
-            android:text="Submit"
+            android:layout_marginStart="36sp"
+            android:layout_marginTop="37sp"
+            android:layout_marginEnd="196sp"
+            android:fontFamily="sans-serif-medium"
+            android:text="File Missing Person"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
