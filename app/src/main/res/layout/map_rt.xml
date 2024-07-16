@@ -1,185 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/maprt_page"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="#79FFFFFF"
-    android:backgroundTint="#8E8D8D"
-    android:foregroundTint="#79FFFFFF"
-    tools:context=".map.mapActivity_rt">
-
-
-    <ImageView
-        android:id="@+id/Rectangle"
-        android:layout_width="410dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="1dp"
-        android:src="@drawable/rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/pic_RT"
-        android:layout_width="63dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/Rectangle"
-        app:layout_constraintEnd_toEndOf="@+id/Rectangle"
-        app:layout_constraintTop_toTopOf="@+id/Rectangle"
-        tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/usernameRT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="317dp"
-        android:layout_marginBottom="29dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/Rectangle"
-        app:layout_constraintEnd_toEndOf="@+id/Rectangle"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/Rectangle"
-        app:layout_constraintTop_toTopOf="@+id/Rectangle" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="211dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="166dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rectangle" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="409dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/Rectangle2"
-            android:layout_width="412dp"
-            android:layout_height="51dp"
-            android:layout_marginBottom="13dp"
-            android:src="@drawable/rectangle"
+            android:id="@+id/imageView6"
+            android:layout_width="410sp"
+            android:layout_height="49sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/rectanglesharp" />
+
+        <ImageButton
+            android:id="@+id/pna_RT"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="26sp"
+            android:layout_marginEnd="347sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/outline_article_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/pna_RT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="326dp"
-            android:layout_marginBottom="2dp"
-            android:src="@drawable/outline_article_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
-
-        <ImageButton
             android:id="@+id/map_RT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="109dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="255dp"
-            android:layout_marginBottom="2dp"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="106sp"
+            android:layout_marginEnd="267sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
             android:src="@drawable/baseline_map_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/dashboard_RT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="329dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="35dp"
-            android:layout_marginBottom="2dp"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="338sp"
+            android:layout_marginEnd="35sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
             android:src="@drawable/baseline_align_vertical_bottom_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/file_RT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="254dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="110dp"
-            android:layout_marginBottom="2dp"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="263sp"
+            android:layout_marginEnd="110sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
             android:src="@drawable/baseline_report_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/help_RT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="182dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="182dp"
-            android:layout_marginBottom="3dp"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="186sp"
+            android:layout_marginEnd="187sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
             android:src="@drawable/baseline_emergency_share_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="211sp"
+            android:layout_height="21sp"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="12sp"
+            android:layout_marginEnd="184sp"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="341dp"
-        android:layout_height="486dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rectangle">
+        <FrameLayout
+            android:layout_width="343sp"
+            android:layout_height="546sp"
+            android:layout_marginStart="34sp"
+            android:layout_marginTop="12sp"
+            android:layout_marginEnd="34sp"
+            android:layout_marginBottom="44sp"
+            android:background="@drawable/imageborder"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner">
 
-        <fragment
-            android:id="@+id/mapView"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <fragment
+                android:id="@+id/mapView"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/border" />
+            android:id="@+id/imageView12"
+            android:layout_width="90sp"
+            android:layout_height="37sp"
+            android:layout_marginStart="16sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginEnd="300sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rectangle" />
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="41sp"
+            android:layout_marginTop="16sp"
+            android:layout_marginEnd="326sp"
+            android:text="Maps"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
