@@ -42,7 +42,7 @@
             android:id="@+id/missing_BO"
             android:layout_width="35sp"
             android:layout_height="35sp"
-            android:layout_marginStart="186sp"
+            android:layout_marginStart="100sp"
             android:layout_marginEnd="187sp"
             android:layout_marginBottom="6sp"
             android:background="@drawable/imageborder"
@@ -56,7 +56,7 @@
             android:layout_width="35sp"
             android:layout_height="35sp"
             android:layout_marginStart="338sp"
-            android:layout_marginEnd="35sp"
+            android:layout_marginEnd="80sp"
             android:layout_marginBottom="6sp"
             android:background="@drawable/imageborder"
             android:src="@drawable/baseline_fingerprint_24"
@@ -68,7 +68,7 @@
             android:id="@+id/filearea_BO"
             android:layout_width="35sp"
             android:layout_height="35sp"
-            android:layout_marginStart="263sp"
+            android:layout_marginStart="200sp"
             android:layout_marginEnd="110sp"
             android:layout_marginBottom="6sp"
             android:background="@drawable/imageborder"
@@ -78,23 +78,10 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/rescueboard_BO"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_marginStart="106sp"
-            android:layout_marginEnd="267sp"
-            android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
-            android:src="@drawable/baseline_dashboard_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageButton
             android:id="@+id/response_BO"
             android:layout_width="35sp"
             android:layout_height="35sp"
-            android:layout_marginStart="26sp"
+            android:layout_marginStart="80sp"
             android:layout_marginEnd="347sp"
             android:layout_marginBottom="6sp"
             android:background="@drawable/imageborder"
