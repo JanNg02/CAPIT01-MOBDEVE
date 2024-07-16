@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <ImageView
@@ -20,11 +20,13 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="317dp"
-        android:layout_height="469dp"
+        android:layout_width="353dp"
+        android:layout_height="604dp"
         android:layout_marginStart="26dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="26dp"
+        android:layout_marginBottom="110dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,12 +38,12 @@
         android:layout_height="41dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="5dp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-medium"
-        android:autoSizeTextType="uniform"
         android:autoSizeMaxTextSize="23sp"
         android:autoSizeMinTextSize="15sp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="sans-serif-medium"
         android:text="TextView"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,8 +56,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="21dp"
         android:fontFamily="sans-serif-light"
-        android:textSize="15dp"
         android:text="TextView"
+        android:textSize="15dp"
         app:layout_constraintEnd_toStartOf="@+id/date_RT"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,9 +69,9 @@
         android:layout_height="34dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
-        android:textSize="15dp"
         android:fontFamily="sans-serif-light"
         android:text="TextView"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_RT" />
 
@@ -84,7 +86,10 @@
         android:layout_weight="1"
         android:fillViewport="true"
         android:orientation="vertical"
-        android:scrollbars="vertical"
+        android:autoSizeMaxTextSize="15sp"
+        android:autoSizeMinTextSize="10sp"
+        android:autoSizeStepGranularity="1sp"
+        android:autoSizeTextType="uniform"
         android:text="TextView"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
@@ -93,9 +98,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_RT" />
 
-<!--    android:autoSizeMaxTextSize="15sp"-->
-<!--    android:autoSizeMinTextSize="8sp"-->
-<!--    android:autoSizeStepGranularity="1sp"-->
-<!--    android:autoSizeTextType="uniform"-->
+    <!--    android:autoSizeMaxTextSize="15sp"-->
+    <!--    android:autoSizeMinTextSize="8sp"-->
+    <!--    android:autoSizeStepGranularity="1sp"-->
+    <!--    android:autoSizeTextType="uniform"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
