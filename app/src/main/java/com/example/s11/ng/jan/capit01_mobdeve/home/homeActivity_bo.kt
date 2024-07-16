@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_bo
-import com.example.s11.ng.jan.capit01_mobdeve.rescue.rescueActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.missing.missingActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.fingerprint.fingerprintActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_bo

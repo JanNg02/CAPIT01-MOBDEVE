@@ -7,17 +7,11 @@ import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.fingerprint.fingerprintActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.missing.missingActivity_bo
-import com.example.s11.ng.jan.capit01_mobdeve.rescue.rescueActivity_bo
 
 fun AppCompatActivity.setupFooter_bo() {
     val responsebutton: ImageButton = findViewById(R.id.response_BO)
     responsebutton.setOnClickListener{
         navigateTo(homeActivity_bo::class.java)
-    }
-
-    val rescuebutton: ImageButton = findViewById(R.id.rescueboard_BO)
-    rescuebutton.setOnClickListener{
-        navigateTo(rescueActivity_bo::class.java)
     }
 
     val missingbutton: ImageButton = findViewById(R.id.missing_BO)

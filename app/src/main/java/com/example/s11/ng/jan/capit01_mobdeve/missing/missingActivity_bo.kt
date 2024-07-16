@@ -16,7 +16,6 @@ import com.example.s11.ng.jan.capit01_mobdeve.login.loginAPI
 import com.example.s11.ng.jan.capit01_mobdeve.login.login_act
 import com.example.s11.ng.jan.capit01_mobdeve.login.userInfo
 import com.example.s11.ng.jan.capit01_mobdeve.missing.missingActivity_bo
-import com.example.s11.ng.jan.capit01_mobdeve.rescue.rescueActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_bo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.annotations.SerializedName

@@ -1,154 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/homebo_page"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="#79FFFFFF"
-    android:backgroundTint="#8E8D8D"
-    android:foregroundTint="#79FFFFFF"
-    tools:context=".home.homeActivity_bo">
-
-    <ImageView
-        android:id="@+id/Rectangle"
-        android:layout_width="410dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="1dp"
-        android:src="@drawable/rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/picRT"
-        android:layout_width="63dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/Rectangle"
-        app:layout_constraintEnd_toEndOf="@+id/Rectangle"
-        app:layout_constraintTop_toTopOf="@+id/Rectangle"
-        tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/usernameRT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="317dp"
-        android:layout_marginBottom="29dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/Rectangle"
-        app:layout_constraintEnd_toEndOf="@+id/Rectangle"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/Rectangle"
-        app:layout_constraintTop_toTopOf="@+id/Rectangle" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="409dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/Rectangle2"
-            android:layout_width="412dp"
-            android:layout_height="51dp"
-            android:layout_marginBottom="13dp"
-            android:src="@drawable/rectangle"
+            android:id="@+id/imageView6"
+            android:layout_width="410sp"
+            android:layout_height="49sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/rectanglesharp" />
+
+        <ImageButton
+            android:id="@+id/missing_BO"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="100sp"
+            android:layout_marginEnd="187sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_person_search_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/fingerprint_BO"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="338sp"
+            android:layout_marginEnd="80sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_fingerprint_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/filearea_BO"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="200sp"
+            android:layout_marginEnd="110sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
+            android:src="@drawable/baseline_report_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/response_BO"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="326dp"
-            android:layout_marginBottom="1dp"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginStart="80sp"
+            android:layout_marginEnd="347sp"
+            android:layout_marginBottom="6sp"
+            android:background="@drawable/imageborder"
             android:src="@drawable/baseline_view_list_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageButton
-            android:id="@+id/rescueboard_BO"
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="165sp"
+            android:layout_height="61sp"
+            android:layout_marginStart="23sp"
+            android:layout_marginTop="16sp"
+            android:layout_marginEnd="223sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rectangle" />
+
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="109dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="255dp"
-            android:layout_marginBottom="1dp"
-            android:src="@drawable/baseline_dashboard_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+            android:layout_marginStart="45sp"
+            android:layout_marginTop="32sp"
+            android:layout_marginEnd="249sp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Ongoing Task"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/fingerprint_BO"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="329dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="35dp"
-            android:layout_marginBottom="1dp"
-            android:src="@drawable/baseline_fingerprint_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+        <LinearLayout
+            android:layout_width="386sp"
+            android:layout_height="554sp"
+            android:layout_marginStart="12sp"
+            android:layout_marginTop="24sp"
+            android:layout_marginEnd="13sp"
+            android:layout_marginBottom="27sp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView7">
 
-        <ImageButton
-            android:id="@+id/filearea_BO"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="254dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="110dp"
-            android:layout_marginBottom="1dp"
-            android:src="@drawable/baseline_report_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
-
-        <ImageButton
-            android:id="@+id/missing_BO"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="182dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="182dp"
-            android:layout_marginBottom="3dp"
-            android:src="@drawable/baseline_person_search_24"
-            app:layout_constraintBottom_toBottomOf="@+id/Rectangle2"
-            app:layout_constraintEnd_toEndOf="@+id/Rectangle2"
-            app:layout_constraintStart_toStartOf="@+id/Rectangle2"
-            app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="348dp"
-        android:layout_height="488dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="22dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rectangle" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

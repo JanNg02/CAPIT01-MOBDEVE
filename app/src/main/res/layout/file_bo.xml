@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/imageView9"
-            android:layout_width="268sp"
-            android:layout_height="69sp"
+            android:layout_width="207dp"
+            android:layout_height="67dp"
             android:layout_marginStart="16sp"
             android:layout_marginTop="48sp"
             android:layout_marginEnd="127sp"
@@ -130,7 +130,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.301"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -138,21 +138,16 @@
             android:id="@+id/imageView6"
             android:layout_width="410sp"
             android:layout_height="49sp"
-            android:layout_marginTop="637dp"
-            android:layout_marginEnd="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/rectanglesharp" />
 
         <ImageButton
             android:id="@+id/missing_BO"
             android:layout_width="35sp"
             android:layout_height="35sp"
-            android:layout_marginStart="186sp"
+            android:layout_marginStart="100sp"
             android:layout_marginEnd="187sp"
             android:layout_marginBottom="6sp"
             android:background="@drawable/imageborder"
@@ -166,7 +161,7 @@
             android:layout_width="35sp"
             android:layout_height="35sp"
             android:layout_marginStart="338sp"
-            android:layout_marginEnd="35sp"
+            android:layout_marginEnd="80sp"
             android:layout_marginBottom="6sp"
             android:background="@drawable/imageborder"
             android:src="@drawable/baseline_fingerprint_24"
@@ -178,7 +173,7 @@
             android:id="@+id/filearea_BO"
             android:layout_width="35sp"
             android:layout_height="35sp"
-            android:layout_marginStart="263sp"
+            android:layout_marginStart="200sp"
             android:layout_marginEnd="110sp"
             android:layout_marginBottom="6sp"
             android:background="@drawable/imageborder"
@@ -188,23 +183,10 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/rescueboard_BO"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_marginStart="106sp"
-            android:layout_marginEnd="267sp"
-            android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
-            android:src="@drawable/baseline_dashboard_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageButton
             android:id="@+id/response_BO"
             android:layout_width="35sp"
             android:layout_height="35sp"
-            android:layout_marginStart="26sp"
+            android:layout_marginStart="80sp"
             android:layout_marginEnd="347sp"
             android:layout_marginBottom="6sp"
             android:background="@drawable/imageborder"
