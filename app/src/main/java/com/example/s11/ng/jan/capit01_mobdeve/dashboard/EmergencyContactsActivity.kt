@@ -46,11 +46,19 @@ class EmergencyContactsActivity : AppCompatActivity() {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                 makeCall(selectedContact.phoneNumber)
             } else {
+                requestPermission(selectedContact.phoneNumber)
                 Toast.makeText(this, "Permission denied. Cannot make call.", Toast.LENGTH_SHORT).show()
             }
         }
 
         setupFooter_rt()
+    }
+
+    private fun requestPermission(phoneNumber: String) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
+            Toast.makeText(this, "This app needs permission to make a call.", Toast.LENGTH_SHORT).show()
+        }
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), CALL_PHONE_REQUEST_CODE)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -64,7 +72,6 @@ class EmergencyContactsActivity : AppCompatActivity() {
         }
     }
     private fun makeCall(phoneNumber: String) {
-
         val intent = Intent(Intent.ACTION_CALL)
         intent.data = Uri.parse("tel:$phoneNumber")
         startActivity(intent)
