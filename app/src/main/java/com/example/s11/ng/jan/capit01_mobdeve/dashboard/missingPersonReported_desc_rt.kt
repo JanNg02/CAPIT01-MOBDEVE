@@ -10,7 +10,7 @@ import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
 class missingPersonReported_desc_rt : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.missing_person_reported_desc_rt)
+        setContentView(R.layout.missing_desc_layout)
 
         val titleTextView = findViewById<TextView>(R.id.titleDetailsReported_TV)
         val fullNameTextView = findViewById<TextView>(R.id.fullNameReported_TV)
@@ -20,8 +20,6 @@ class missingPersonReported_desc_rt : AppCompatActivity() {
         val descriptionTextView = findViewById<TextView>(R.id.description_missing_Reported_TV)
         val areaLastSeenTextView = findViewById<TextView>(R.id.areaLastSeenReported_TV)
         val contactNumTextView = findViewById<TextView>(R.id.ContactNumberReported_TV)
-        val assignedTeamTextView = findViewById<TextView>(R.id.assignedTeam_TV)
-        val isFoundTextView = findViewById<TextView>(R.id.isFound_TV)
 
         val intent = intent
         val extras = intent.extras
@@ -47,24 +45,6 @@ class missingPersonReported_desc_rt : AppCompatActivity() {
             sexTextView.text = sex
             filedByTextView.text = "Filed By: " + filedBy + " on " + dateSubmitted
             contactNumTextView.text = contactNum
-
-            assignedTeamTextView.text =
-                if (assignedTeam == "None") {
-                    assignedTeamTextView.setTextColor(Color.RED); // Red for no team
-                    "No Team Assigned Yet"
-                } else {
-                    assignedTeamTextView.setTextColor(Color.GREEN); // Green for team assigned
-                    "Team " + assignedTeam // Add the team name if assigned
-                }
-
-            isFoundTextView.text =
-                if (isFound) {
-                    isFoundTextView.setTextColor(Color.GREEN); // Green for found
-                    "Found Meet the Person in the Brgy Hall"
-                } else {
-                    isFoundTextView.setTextColor(Color.RED); // Red for not found
-                    "Not Found Yet"
-                }
         }
 
         setupFooter_rt()

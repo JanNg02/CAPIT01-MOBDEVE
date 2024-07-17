@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/refreshAnnouncement"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -83,11 +83,11 @@
 
         <ImageView
             android:id="@+id/imageView13"
-            android:layout_width="97dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="290dp"
+            android:layout_width="97sp"
+            android:layout_height="48sp"
+            android:layout_marginStart="24sp"
+            android:layout_marginTop="16sp"
+            android:layout_marginEnd="290sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -97,9 +97,9 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="46dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="315dp"
+            android:layout_marginStart="46sp"
+            android:layout_marginTop="25sp"
+            android:layout_marginEnd="315sp"
             android:fontFamily="sans-serif-medium"
             android:text="News"
             android:textColor="@color/white"
@@ -110,15 +110,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_width="367dp"
-            android:layout_height="563dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="24dp"
+            android:layout_width="367sp"
+            android:layout_height="563sp"
+            android:layout_marginStart="22sp"
+            android:layout_marginTop="25sp"
+            android:layout_marginEnd="22sp"
+            android:layout_marginBottom="79sp"
             android:background="@drawable/imageborder"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView13">
@@ -126,7 +126,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvHome_RT"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
