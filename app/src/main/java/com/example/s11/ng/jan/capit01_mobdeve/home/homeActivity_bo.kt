@@ -103,6 +103,24 @@ class homeActivity_bo : AppCompatActivity(){
         teamMembersTV.text = teamMembersString
     }
 
+    fun noTeamData(){
+        var teamTitleTV : TextView = findViewById(R.id.teamDescriptionTitle_TV)
+        var teamTaskTV : TextView = findViewById(R.id.teamTask_TV)
+        var teamTask : TextView = findViewById(R.id.teamTask)
+        var teamMembersTV : TextView = findViewById(R.id.teamMembers_TV)
+        var teamMembers: TextView = findViewById(R.id.teamMembers)
+        var teamDescriptionTV : TextView = findViewById(R.id.task_description_TV)
+        var teamDescription : TextView = findViewById(R.id.task_description)
+
+        teamTitleTV.text = "No Team Found"
+        teamTaskTV.visibility = View.GONE
+        teamMembersTV.visibility = View.GONE
+        teamDescriptionTV.visibility = View.GONE
+        teamDescription.visibility = View.GONE
+        teamTask.visibility = View.GONE
+        teamMembers.visibility = View.GONE
+    }
+
     fun placePatrolData(patrolData: patrolsData){
         var patrolDescriptionTV : TextView = findViewById(R.id.task_description_TV)
 
@@ -146,13 +164,16 @@ class homeActivity_bo : AppCompatActivity(){
                             checkIfAllDataLoaded()
                             retrievePatrolData()
                         }
-                        //Toast.makeText(this@homeActivity_bo,"yehey " + teamData.teamMembers[0], Toast.LENGTH_SHORT).show()
                     } else {
+                        teamDataLoaded = true
+                        patrolDataLoaded = true
+                        checkIfAllDataLoaded()
+                        noTeamData()
                         Toast.makeText(this@homeActivity_bo, "Invalid username or password", Toast.LENGTH_SHORT).show()
                     }
+                } else {
                     teamDataLoaded = true
                     checkIfAllDataLoaded()
-                } else {
                     Log.e("Error", "Response code: ${response.code()}")
                     Log.e("Error", "Response error message: ${response.message()}")
                     Toast.makeText(this@homeActivity_bo, "Invalid username or password or NULL", Toast.LENGTH_SHORT).show()
@@ -199,9 +220,13 @@ class homeActivity_bo : AppCompatActivity(){
                         Log.d("patrolData", patrolData.toString())
                         Toast.makeText(this@homeActivity_bo,"yehey " + patrolData.patrolDescription, Toast.LENGTH_SHORT).show()
                     } else {
+                        patrolDataLoaded = true
+                        checkIfAllDataLoaded()
                         Toast.makeText(this@homeActivity_bo, "Invalid username or password", Toast.LENGTH_SHORT).show()
                     }
                 } else {
+                    patrolDataLoaded = true
+                    checkIfAllDataLoaded()
                     Log.e("Error", "Response code: ${response.code()}")
                     Log.e("Error", "Response error message: ${response.message()}")
                     Toast.makeText(this@homeActivity_bo, "Invalid username or password or NULL", Toast.LENGTH_SHORT).show()
