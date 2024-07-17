@@ -1,5 +1,6 @@
 package com.example.s11.ng.jan.capit01_mobdeve.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +11,9 @@ import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.adapter.AnnouncementAdapter
 import com.example.s11.ng.jan.capit01_mobdeve.adapter.modelPost
 import com.example.s11.ng.jan.capit01_mobdeve.fetchPost
+import com.example.s11.ng.jan.capit01_mobdeve.login.login_act
 import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.messaging.FirebaseMessaging
 
 
@@ -38,6 +41,11 @@ class homeActivity_rt : AppCompatActivity(), OnDataFetchedListener, SwipeRefresh
         val fetchPost = fetchPost(this)
         fetchPost.execute()
 
+        val logoutButton: FloatingActionButton = findViewById(R.id.logout_button_RT)
+        logoutButton.setOnClickListener{
+            logout()
+        }
+
         setupFooter_rt() // Call the footer setup function
     }
 
@@ -50,5 +58,20 @@ class homeActivity_rt : AppCompatActivity(), OnDataFetchedListener, SwipeRefresh
         val fetchPost = fetchPost(this)
         fetchPost.execute()
         swipeRefreshLayout.isRefreshing = false // Reset the refresh indicator
+    }
+
+    fun moveToLogin(){
+        val intent = Intent(applicationContext, login_act::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    fun logout(){
+        val sp = getSharedPreferences("userSession", MODE_PRIVATE)
+        val editor = sp.edit()
+
+        editor.clear()
+        editor.apply()
+        moveToLogin()
     }
 }

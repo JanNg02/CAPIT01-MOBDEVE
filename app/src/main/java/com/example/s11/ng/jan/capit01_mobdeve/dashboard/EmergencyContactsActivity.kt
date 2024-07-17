@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.s11.ng.jan.capit01_mobdeve.R
+import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
 
 class EmergencyContactsActivity : AppCompatActivity() {
 
@@ -47,8 +48,9 @@ class EmergencyContactsActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Permission denied. Cannot make call.", Toast.LENGTH_SHORT).show()
             }
-
         }
+
+        setupFooter_rt()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -57,7 +59,7 @@ class EmergencyContactsActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 makeCall(emergencyContacts)
             } else {
-                // Handle permission denial
+                Toast.makeText(this, "Permission denied. Cannot make call.", Toast.LENGTH_SHORT).show()
             }
         }
     }
