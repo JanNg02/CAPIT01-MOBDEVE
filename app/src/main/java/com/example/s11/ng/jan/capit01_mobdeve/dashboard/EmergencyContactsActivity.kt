@@ -33,9 +33,11 @@ class EmergencyContactsActivity : AppCompatActivity() {
             EmergencyContact("Emergency Services", "09190785452")
         )
 
+
         val adapter = ArrayAdapter<EmergencyContact>(
             this,
-            android.R.layout.simple_list_item_1,
+            R.layout.listviewtext,
+            R.id.text_view,
             emergencyContacts
         )
 
