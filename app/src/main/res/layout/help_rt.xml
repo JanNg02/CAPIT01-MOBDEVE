@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,13 +75,13 @@
             android:id="@+id/imageButton"
             android:layout_width="191sp"
             android:layout_height="160sp"
-            android:layout_marginStart="110sp"
-            android:layout_marginTop="182sp"
-            android:layout_marginEnd="110sp"
-            android:layout_marginBottom="237sp"
+            android:layout_marginStart="101dp"
+            android:layout_marginTop="209dp"
+            android:layout_marginEnd="101dp"
+            android:layout_marginBottom="313dp"
             android:background="@drawable/border"
             android:backgroundTint="@color/red"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
@@ -115,33 +115,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView14"
-            android:layout_width="38sp"
-            android:layout_height="34sp"
-            android:layout_marginStart="38sp"
-            android:layout_marginTop="47sp"
-            android:layout_marginEnd="335sp"
-            android:layout_marginBottom="101sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:srcCompat="@drawable/locationblack" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView14"-->
+<!--            android:layout_width="38sp"-->
+<!--            android:layout_height="34sp"-->
+<!--            android:layout_marginStart="38sp"-->
+<!--            android:layout_marginTop="47sp"-->
+<!--            android:layout_marginEnd="335sp"-->
+<!--            android:layout_marginBottom="101sp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/imageButton"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/imageView2"-->
+<!--            app:srcCompat="@drawable/locationblack" />-->
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="81sp"
-            android:layout_marginTop="54sp"
-            android:layout_marginEnd="226sp"
-            android:layout_marginBottom="109sp"
-            android:text="Current Location"
-            app:layout_constraintBottom_toTopOf="@+id/imageButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView9"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="81sp"-->
+<!--            android:layout_marginTop="54sp"-->
+<!--            android:layout_marginEnd="226sp"-->
+<!--            android:layout_marginBottom="109sp"-->
+<!--            android:text="Current Location"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/imageButton"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/imageView2" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

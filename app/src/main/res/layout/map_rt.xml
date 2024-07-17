@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -83,27 +83,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
-        <FrameLayout
-            android:layout_width="343sp"
-            android:layout_height="546sp"
-            android:layout_marginStart="34sp"
-            android:layout_marginTop="12sp"
-            android:layout_marginEnd="34sp"
-            android:layout_marginBottom="44sp"
-            android:background="@drawable/imageborder"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner">
-
-            <fragment
-                android:id="@+id/mapView"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </FrameLayout>
-
         <ImageView
             android:id="@+id/imageView12"
             android:layout_width="90sp"
@@ -112,6 +91,7 @@
             android:layout_marginTop="10sp"
             android:layout_marginEnd="300sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.692"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/rectangle" />
@@ -130,6 +110,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:layout_width="343sp"
+            android:layout_height="546sp"
+            android:layout_marginStart="25sp"
+            android:layout_marginTop="119sp"
+            android:layout_marginEnd="25sp"
+            android:layout_marginBottom="120sp"
+            android:background="@drawable/imageborder"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <fragment
+                android:id="@+id/mapView"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

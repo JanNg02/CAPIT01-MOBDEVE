@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".dashboard.EmergencyContactsActivity">
 
     <LinearLayout
         android:layout_width="369sp"
         android:layout_height="584sp"
-        android:layout_marginStart="21sp"
-        android:layout_marginTop="45sp"
-        android:layout_marginEnd="21sp"
-        android:layout_marginBottom="38sp"
-        android:orientation="vertical"
+        android:layout_marginStart="12sp"
+        android:layout_marginTop="31sp"
+        android:layout_marginEnd="12sp"
+        android:layout_marginBottom="104sp"
         android:background="@drawable/imageborder"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imageView16">
 
         <ListView
             android:id="@+id/emergency_contacts_list"
@@ -98,5 +98,33 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="148sp"
+        android:layout_height="50sp"
+        android:layout_marginStart="16sp"
+        android:layout_marginTop="16sp"
+        android:layout_marginEnd="229sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/rectangle" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="47sp"
+        android:layout_marginTop="27sp"
+        android:layout_marginEnd="265sp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Contacts"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
