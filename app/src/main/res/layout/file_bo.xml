@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -11,11 +11,9 @@
 
         <EditText
             android:id="@+id/detailsBO"
-            android:layout_width="match_parent"
-            android:layout_height="239sp"
-            android:layout_marginStart="16sp"
-            android:layout_marginTop="16sp"
-            android:layout_marginEnd="19sp"
+            android:layout_width="385sp"
+            android:layout_height="237sp"
+            android:layout_marginTop="20sp"
             android:background="@drawable/imageborder"
             android:ems="100"
             android:hint="Details"
@@ -24,17 +22,18 @@
             android:textSize="18sp"
             app:boxStrokeColor="#CCCCCC"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
         <ImageView
             android:id="@+id/imageView9"
-            android:layout_width="207dp"
-            android:layout_height="67dp"
+            android:layout_width="207sp"
+            android:layout_height="67sp"
             android:layout_marginStart="16sp"
             android:layout_marginTop="48sp"
             android:layout_marginEnd="127sp"
+            android:layout_marginBottom="616sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,32 +42,38 @@
 
         <ImageView
             android:id="@+id/imageView10"
-            android:layout_width="221sp"
-            android:layout_height="39sp"
+            android:layout_width="95sp"
+            android:layout_height="40sp"
             android:layout_marginStart="16sp"
             android:layout_marginTop="64sp"
             android:layout_marginEnd="174sp"
+            android:layout_marginBottom="513sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView9"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/rectangle" />
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="39sp"
-            android:layout_marginTop="72sp"
-            android:layout_marginEnd="303sp"
+            android:layout_marginStart="46sp"
+            android:layout_marginTop="71sp"
+            android:layout_marginEnd="310sp"
+            android:layout_marginBottom="30sp"
             android:text="Title"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/locationBO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView9"
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/locationBO"
@@ -77,6 +82,7 @@
             android:layout_marginStart="16sp"
             android:layout_marginTop="8sp"
             android:layout_marginEnd="22sp"
+            android:layout_marginBottom="446sp"
             android:background="@drawable/imageborder"
             android:ems="10"
             android:hint="Title of the Report"
@@ -84,6 +90,7 @@
             android:textColorHint="#666666"
             android:textSize="20sp"
             app:boxStrokeColor="#CCCCCC"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,6 +103,8 @@
             android:layout_marginStart="16sp"
             android:layout_marginTop="24sp"
             android:layout_marginEnd="174sp"
+            android:layout_marginBottom="383sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,12 +118,14 @@
             android:layout_marginStart="39sp"
             android:layout_marginTop="32sp"
             android:layout_marginEnd="191sp"
+            android:layout_marginBottom="390sp"
             android:text="Details of the situation"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.428"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/locationBO" />
 
@@ -123,12 +134,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="56sp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="68sp"
             android:layout_marginEnd="169sp"
+            android:layout_marginBottom="636sp"
             android:text="Tanod Report"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -140,6 +153,7 @@
             android:layout_height="49sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.529"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/rectanglesharp" />
 
@@ -209,12 +223,14 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
-            android:layout_width="406dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="5dp"
+            android:layout_width="406sp"
+            android:layout_height="47sp"
+            android:layout_marginTop="26sp"
+            android:layout_marginEnd="5sp"
+            android:layout_marginBottom="1sp"
             android:gravity="center_horizontal"
             android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailsBO">

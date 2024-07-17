@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -11,14 +11,15 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="384sp"
-            android:layout_height="571sp"
-            android:layout_marginTop="32sp"
-            android:layout_marginBottom="37sp"
+            android:layout_width="386sp"
+            android:layout_height="554sp"
+            android:layout_marginStart="3sp"
+            android:layout_marginTop="43sp"
+            android:layout_marginEnd="4sp"
+            android:layout_marginBottom="104dp"
             android:background="@drawable/imageborder"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView5">
@@ -105,7 +106,7 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="262sp"
+            android:layout_width="224sp"
             android:layout_height="56sp"
             android:layout_marginStart="16sp"
             android:layout_marginTop="28sp"
@@ -128,7 +129,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.684"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
