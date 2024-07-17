@@ -3,7 +3,8 @@ package com.example.s11.ng.jan.capit01_mobdeve
 import android.content.Intent
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
+import com.example.s11.ng.jan.capit01_mobdeve.dashboard.EmergencyContactsActivity
+//import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
@@ -27,7 +28,7 @@ fun AppCompatActivity.setupFooter_rt() {
 
     val dashbutton: ImageButton = findViewById(R.id.dashboard_RT)
     dashbutton.setOnClickListener {
-        navigateTo(dashboardActivity_rt::class.java)
+        navigateTo(EmergencyContactsActivity::class.java)
     }
 }
 

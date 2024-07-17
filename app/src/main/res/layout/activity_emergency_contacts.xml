@@ -2,70 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/dashboard_page"
-    android:layout_width="wrap_content"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#79FFFFFF"
-    android:backgroundTint="#8E8D8D"
-    android:foregroundTint="#79FFFFFF"
-    tools:context=".dashboard.dashboardActivity_rt">
+    tools:context=".dashboard.EmergencyContactsActivity">
 
-    <ImageView
-        android:id="@+id/Rectangle"
-        android:layout_width="410dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="1dp"
-        android:src="@drawable/rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/pic_RT"
-        android:layout_width="63dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="38dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/Rectangle"
-        app:layout_constraintEnd_toEndOf="@+id/Rectangle"
-        app:layout_constraintTop_toTopOf="@+id/Rectangle"
-        tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/usernameRT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="317dp"
-        android:layout_marginBottom="29dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/Rectangle"
-        app:layout_constraintEnd_toEndOf="@+id/Rectangle"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/Rectangle"
-        app:layout_constraintTop_toTopOf="@+id/Rectangle" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/emergency_contacts_recycler"
+    <LinearLayout
         android:layout_width="409dp"
-        android:layout_height="481dp"
-        android:layout_marginTop="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        android:layout_height="729dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rectangle" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/call_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Call"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ListView
+            android:id="@+id/emergency_contacts_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -157,14 +111,5 @@
             app:layout_constraintTop_toTopOf="@+id/Rectangle2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/logout_button_RT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/baseline_logout_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

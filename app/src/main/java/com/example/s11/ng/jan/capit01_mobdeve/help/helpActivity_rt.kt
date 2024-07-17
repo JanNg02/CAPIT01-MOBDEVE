@@ -17,7 +17,7 @@ import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
+//import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.file.Missing
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt

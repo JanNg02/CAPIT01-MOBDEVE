@@ -1,48 +1,59 @@
-package com.example.s11.ng.jan.capit01_mobdeve.dashboard
-
-import android.content.Intent
-import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
-import com.example.s11.ng.jan.capit01_mobdeve.R
-import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.login.login_act
-import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-
-class dashboardActivity_rt : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.dashboard_rt)
-
-        val missingPersonReportedButton: Button = findViewById(R.id.missingReported_button_rt)
-
-       missingPersonReportedButton.setOnClickListener{
-           val intent = Intent(applicationContext, reportedMissing_rt::class.java)
-           startActivity(intent)
-       }
-
-        val logoutButton: FloatingActionButton = findViewById(R.id.logout_button_RT)
-        logoutButton.setOnClickListener{
-            val sp = getSharedPreferences("userSession", MODE_PRIVATE)
-            val editor = sp.edit()
-
-            editor.clear()
-            editor.apply()
-            moveToLogin()
-        }
-
-        setupFooter_rt() // Call the footer setup function
-    }
-
-    fun moveToLogin(){
-        val intent = Intent(applicationContext, login_act::class.java)
-        startActivity(intent)
-        finish()
-    }
-}
+//import android.Manifest
+//import android.content.Intent
+//import android.content.pm.PackageManager
+//import android.net.Uri
+//import android.os.Bundle
+//import android.widget.Toast
+//import androidx.appcompat.app.AppCompatActivity
+//import androidx.core.app.ActivityCompat
+//import androidx.core.content.ContextCompat
+//import androidx.recyclerview.widget.LinearLayoutManager
+//import androidx.recyclerview.widget.RecyclerView
+//import com.example.s11.ng.jan.capit01_mobdeve.R
+//
+//class EmergencyContactsActivity : AppCompatActivity(), EmergencyContactAdapter.ItemClickListener {
+//
+//    private lateinit var recyclerView: RecyclerView
+//    private lateinit var adapter: EmergencyContactAdapter
+//    private val emergencyContacts = mutableListOf<EmergencyContact>()
+//
+//    private val REQUEST_CALL_PERMISSION = 1
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.dashboard_rt)
+//
+//        recyclerView = findViewById(R.id.emergency_contacts_recycler)
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//
+//        adapter = EmergencyContactAdapter(this)
+//        recyclerView.adapter = adapter
+//
+//        // Add some sample emergency contacts
+//        emergencyContacts.add(EmergencyContact("John Doe", "1234567890"))
+//        emergencyContacts.add(EmergencyContact("Jane Doe", "0987654321"))
+//        adapter.submitList(emergencyContacts)
+//    }
+//
+//    override fun onItemClick(emergencyContact: EmergencyContact) {
+//        val callIntent = Intent(Intent.ACTION_CALL)
+//        callIntent.data = Uri.parse("tel:${emergencyContact.phoneNumber}")
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+//            startActivity(callIntent)
+//        } else {
+//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), REQUEST_CALL_PERMISSION)
+//        }
+//    }
+//
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+//        if (requestCode == REQUEST_CALL_PERMISSION) {
+//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show()
+//            } else {
+//                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
+//}
+//
+//data class EmergencyContact(val name: String, val phoneNumber: String)

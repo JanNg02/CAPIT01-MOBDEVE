@@ -19,13 +19,6 @@ class homeActivity_bo : AppCompatActivity(){
 
     private lateinit var recyclerView: RecyclerView
 
-//    private val viewHomeLauncher = registerForActivityResult(
-//        ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-//        if (result.resultCode == RESULT_OK) {
-//
-//        }
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_bo)

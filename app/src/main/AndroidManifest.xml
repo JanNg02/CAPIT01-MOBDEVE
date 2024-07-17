@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -10,6 +14,8 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".MyApplication"
@@ -22,6 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CAPIT01MOBDEVE"
         tools:targetApi="31">
+        <activity
+            android:name=".dashboard.EmergencyContactsActivity"
+            android:exported="false" />
         <activity
             android:name=".dashboard.missingPersonReported_desc_rt"
             android:exported="false" />
