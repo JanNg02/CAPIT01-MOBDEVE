@@ -34,6 +34,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+import kotlin.reflect.typeOf
 
 data class teamData(
     @SerializedName("teamName") val teamName: String,
@@ -54,11 +55,10 @@ data class patrolsData(
 )
 
 data class securityData(
-    @SerializedName("patrolArea") val patrolArea: String,
-    @SerializedName("patrolDescription") val patrolDescription: String,
+    @SerializedName("evacuationSecurityID") val evacuationSecurityID: Int,
+    @SerializedName("evacuationSecurityArea") val evacuationSecurityArea: String,
+    @SerializedName("teamName") val teamName: List<String>,
     @SerializedName("dateCreated") val dateCreated: String,
-    @SerializedName("teamName") val teamName: String,
-    @SerializedName("patrolID") val patrolID: Int,
 )
 
 class homeActivity_bo : AppCompatActivity(){
@@ -73,6 +73,11 @@ class homeActivity_bo : AppCompatActivity(){
         fun getPatrolTasks(@Query("teamName") teamName: String): Call<patrolsData>
     }
 
+    interface securityAPI {
+        @GET("getSecurityTasks")
+        fun getSecurityTasks(@Query("evacuationSecurityID") evacuationSecurityID: String): Call<securityData>
+    }
+
     private lateinit var teamFound: teamData
     private lateinit var progressBar: ProgressBar
     private lateinit var loadingOverlay: View
@@ -83,6 +88,7 @@ class homeActivity_bo : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_bo)
 
+        //loading requirements
         loadingOverlay = findViewById(R.id.loading_overlay)
         progressBar = findViewById(R.id.loading_progress_bar)
         progressBar.visibility = View.VISIBLE
@@ -121,6 +127,13 @@ class homeActivity_bo : AppCompatActivity(){
         teamMembers.visibility = View.GONE
     }
 
+    fun placeSecurityData(securityData: securityData){
+        var securityDescriptionTV : TextView = findViewById(R.id.task_description_TV)
+
+        securityDescriptionTV.text =
+            "Standby and Secure " + securityData.evacuationSecurityArea
+    }
+
     fun placePatrolData(patrolData: patrolsData){
         var patrolDescriptionTV : TextView = findViewById(R.id.task_description_TV)
 
@@ -130,6 +143,7 @@ class homeActivity_bo : AppCompatActivity(){
     //Check Team
     fun retrieveTeamData() {
 
+        //loading requirements
         progressBar.visibility = View.VISIBLE
         loadingOverlay.visibility = View.VISIBLE
 
@@ -157,19 +171,22 @@ class homeActivity_bo : AppCompatActivity(){
 
                     if (teamData!= null) {
                         teamFound = teamData
-                        Log.d("teamData", teamData.toString())
                         //if team is a patrol team go to retrieve patrol data
                         if(teamData.teamTasks == "Patrol") {
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrievePatrolData()
+                        } else if (teamData.teamTasks == "Security") { //if team is part of security data
+                            teamDataLoaded = true
+                            checkIfAllDataLoaded()
+                            retrieveSecurityData()
                         }
                     } else {
                         teamDataLoaded = true
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
                         noTeamData()
-                        Toast.makeText(this@homeActivity_bo, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@homeActivity_bo, "Not Assigned to a Team", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     teamDataLoaded = true
@@ -192,6 +209,7 @@ class homeActivity_bo : AppCompatActivity(){
     //Patrol Data to be Retrieved
     fun retrievePatrolData() {
 
+        //loading requirements
         progressBar.visibility = View.VISIBLE
         loadingOverlay.visibility = View.VISIBLE
 
@@ -213,23 +231,22 @@ class homeActivity_bo : AppCompatActivity(){
                 if (response.isSuccessful) {
                     val patrolData = response.body();
                     if (patrolData!= null) {
-                        placeTeamData()
-                        placePatrolData(patrolData)
+                        placeTeamData() //place the team ata on the screen
+                        placePatrolData(patrolData) //place the patrol data on the screen
+                        //checks for loading
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
-                        Log.d("patrolData", patrolData.toString())
-                        Toast.makeText(this@homeActivity_bo,"yehey " + patrolData.patrolDescription, Toast.LENGTH_SHORT).show()
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
-                        Toast.makeText(this@homeActivity_bo, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@homeActivity_bo, "You are not in Patrol", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     patrolDataLoaded = true
                     checkIfAllDataLoaded()
                     Log.e("Error", "Response code: ${response.code()}")
                     Log.e("Error", "Response error message: ${response.message()}")
-                    Toast.makeText(this@homeActivity_bo, "Invalid username or password or NULL", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@homeActivity_bo, "Response is not successful", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -242,7 +259,59 @@ class homeActivity_bo : AppCompatActivity(){
         })
     }
 
-    private fun checkIfAllDataLoaded() {
+    fun retrieveSecurityData() {
+
+        //loading requirements
+        progressBar.visibility = View.VISIBLE
+        loadingOverlay.visibility = View.VISIBLE
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val securityAPI = retrofit.create(securityAPI::class.java)
+
+        val baseUrl = retrofit.baseUrl().toString()
+        Log.d("Base URL", baseUrl)
+
+        val call = securityAPI.getSecurityTasks(teamFound.currentAssignment)
+        Log.d("UserString", call.toString())
+
+        call.enqueue(object : Callback<securityData> {
+            override fun onResponse(call: Call<securityData>, response: Response<securityData>) {
+                if (response.isSuccessful) {
+                    val securityData = response.body();
+                    if (securityData!= null) {
+                        placeTeamData() //place the team ata on the screen
+                        placeSecurityData(securityData) //place the patrol data on the screen
+                        //checks for loading
+                        patrolDataLoaded = true
+                        checkIfAllDataLoaded()
+                    } else {
+                        patrolDataLoaded = true
+                        checkIfAllDataLoaded()
+                        Toast.makeText(this@homeActivity_bo, "You are not in Security", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    patrolDataLoaded = true
+                    checkIfAllDataLoaded()
+                    Log.e("Error", "Response code: ${response.code()}")
+                    Log.e("Error", "Response error message: ${response.message()}")
+                    Toast.makeText(this@homeActivity_bo, "Response is not successful", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<securityData>, t: Throwable) {
+                Log.e("Error", "Error: ${t.message}")
+                Toast.makeText(this@homeActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                patrolDataLoaded = true
+                checkIfAllDataLoaded()
+            }
+        })
+    }
+
+    private fun checkIfAllDataLoaded() { //checks if loading is done
         if (teamDataLoaded && patrolDataLoaded) {
             progressBar.visibility = View.GONE
             loadingOverlay.visibility = View.GONE
