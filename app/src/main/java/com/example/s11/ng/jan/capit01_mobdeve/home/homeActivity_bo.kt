@@ -79,6 +79,21 @@ data class dispatchData(
     @SerializedName("itemsOversawBy") val itemsOversawBy: String,
 )
 
+data class missingPersonData(
+    @SerializedName("age") val age : Int,
+    @SerializedName("areaLastSeen") val areaLastSeen : String,
+    @SerializedName("contactNum") val contactNum : String,
+    @SerializedName("dateSubmitted") val dateSubmitted : String,
+    @SerializedName("description") val description : String,
+    @SerializedName("filedBy") val filedBy : String,
+    @SerializedName("isFound") val isFound : Boolean,
+    @SerializedName("missingFullName") val missingFullName : String,
+    @SerializedName("sex") val sex : String,
+    @SerializedName("teamdID") val teamID : String,
+    @SerializedName("timeLastSeen") val timeLastSeen : String,
+    @SerializedName("miaID") val miaID : String,
+)
+
 class homeActivity_bo : AppCompatActivity(){
 
     interface teamDataAPI {
@@ -99,6 +114,11 @@ class homeActivity_bo : AppCompatActivity(){
     interface dispatchAPI {
         @GET("getDispatchData")
         fun getDispatchData(@Query("currentAssignment") currentAssignment: String): Call<dispatchData>
+    }
+
+    interface missingPersonTaskAPI {
+        @GET("getMissingPersonTaskData")
+        fun getMissingPersonTaskData(@Query("currentAssignment") currentAssignment: String): Call<missingPersonData>
     }
 
     private lateinit var teamFound: teamData
@@ -179,6 +199,21 @@ class homeActivity_bo : AppCompatActivity(){
 
         dispatchDescriptionTV.text = formattedText.toString()
     }
+
+    fun placeMissingPersonsData(missingPersonData: missingPersonData){
+        var missingPersonDescriptionTV : TextView = findViewById(R.id.task_description_TV)
+
+        val formattedText = StringBuilder()
+        formattedText.append(" Find the following missing person: ${missingPersonData.missingFullName}\n") // Start with the evacName
+        formattedText.append("Last found at ${missingPersonData.areaLastSeen} on ${missingPersonData.timeLastSeen}\n\n")
+        formattedText.append("Sex: ${missingPersonData.sex} \n")
+        formattedText.append("Age: ${missingPersonData.age} \n\n")
+        formattedText.append("Description:\n")
+        formattedText.append("${missingPersonData.description}\n")
+
+
+        missingPersonDescriptionTV.text = formattedText.toString()
+    }
     //Check Team
     fun retrieveTeamData() {
 
@@ -223,7 +258,11 @@ class homeActivity_bo : AppCompatActivity(){
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveDispatchData()
-                        }//if team is part of dispatch data)
+                        } else if (teamData.teamTasks == "Search and Rescue") {
+                            teamDataLoaded = true
+                            checkIfAllDataLoaded()
+                            retrieveMissingPersonTaskData()
+                        }
                     } else {
                         teamDataLoaded = true
                         patrolDataLoaded = true
@@ -397,6 +436,57 @@ class homeActivity_bo : AppCompatActivity(){
             }
 
             override fun onFailure(call: Call<dispatchData>, t: Throwable) {
+                Log.e("Error", "Error: ${t.message}")
+                Toast.makeText(this@homeActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                patrolDataLoaded = true
+                checkIfAllDataLoaded()
+            }
+        })
+    }
+
+    fun retrieveMissingPersonTaskData() {
+        //loading requirements
+        progressBar.visibility = View.VISIBLE
+        loadingOverlay.visibility = View.VISIBLE
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val missingPersonTaskAPI = retrofit.create(missingPersonTaskAPI::class.java)
+
+        val baseUrl = retrofit.baseUrl().toString()
+        Log.d("Base URL", baseUrl)
+
+        val call = missingPersonTaskAPI.getMissingPersonTaskData(teamFound.currentAssignment)
+        Log.d("UserString", call.toString())
+
+        call.enqueue(object : Callback<missingPersonData> {
+            override fun onResponse(call: Call<missingPersonData>, response: Response<missingPersonData>) {
+                if (response.isSuccessful) {
+                    val missingPersonTaskData = response.body();
+                    if (missingPersonTaskData!= null) {
+                        placeTeamData() //place the team ata on the screen
+                        placeMissingPersonsData(missingPersonTaskData) //place the patrol data on the screen
+                        //checks for loading
+                        patrolDataLoaded = true
+                        checkIfAllDataLoaded()
+                    } else {
+                        patrolDataLoaded = true
+                        checkIfAllDataLoaded()
+                        Toast.makeText(this@homeActivity_bo, "You are not in DisptachTeam", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    patrolDataLoaded = true
+                    checkIfAllDataLoaded()
+                    Log.e("Error", "Response code: ${response.code()}")
+                    Log.e("Error", "Response error message: ${response.message()}")
+                    Toast.makeText(this@homeActivity_bo, "Response is not successful", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<missingPersonData>, t: Throwable) {
                 Log.e("Error", "Error: ${t.message}")
                 Toast.makeText(this@homeActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 patrolDataLoaded = true
