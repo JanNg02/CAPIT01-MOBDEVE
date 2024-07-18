@@ -61,6 +61,24 @@ data class securityData(
     @SerializedName("dateCreated") val dateCreated: String,
 )
 
+data class evacInventoryRequested(
+    @SerializedName("itemID") val itemID: String,
+    @SerializedName("evacInventoryName") val evacInventoryName: String,
+    @SerializedName("evacInventoryQuantity") val evacInventoryQuantity: String,
+    @SerializedName("itemReceived") val itemReceived: String,
+    @SerializedName("evacInventoryCategory") val evacInventoryCategory: String,
+)
+
+data class dispatchData(
+    @SerializedName("dispatchID") val dispatchID: String,
+    @SerializedName("evacName") val evacName: String,
+    @SerializedName("evacInventoryRequested") val evacInventoryRequested: List<evacInventoryRequested>,
+    @SerializedName("dispatchStatus") val dispatchStatus: String,
+    @SerializedName("dateRequested") val dateRequested: String,
+    @SerializedName("teamAssigned") val teamAssigned: String,
+    @SerializedName("itemsOversawBy") val itemsOversawBy: String,
+)
+
 class homeActivity_bo : AppCompatActivity(){
 
     interface teamDataAPI {
@@ -76,6 +94,11 @@ class homeActivity_bo : AppCompatActivity(){
     interface securityAPI {
         @GET("getSecurityTasks")
         fun getSecurityTasks(@Query("evacuationSecurityID") evacuationSecurityID: String): Call<securityData>
+    }
+
+    interface dispatchAPI {
+        @GET("getDispatchData")
+        fun getDispatchData(@Query("currentAssignment") currentAssignment: String): Call<dispatchData>
     }
 
     private lateinit var teamFound: teamData
@@ -131,15 +154,31 @@ class homeActivity_bo : AppCompatActivity(){
         var securityDescriptionTV : TextView = findViewById(R.id.task_description_TV)
 
         securityDescriptionTV.text =
-            "Standby and Secure " + securityData.evacuationSecurityArea
+            "Standby and provide security to " + securityData.evacuationSecurityArea
     }
 
-    fun placePatrolData(patrolData: patrolsData){
+    fun placePatrolData(patrolsData: patrolsData){
         var patrolDescriptionTV : TextView = findViewById(R.id.task_description_TV)
 
-        patrolDescriptionTV.text = patrolData.patrolDescription
+        patrolDescriptionTV.text = patrolsData.patrolDescription
     }
 
+    fun placedispatchData(dispatchData: dispatchData){
+        var dispatchDescriptionTV : TextView = findViewById(R.id.task_description_TV)
+
+        val evacName = dispatchData.evacName
+        val inventoryRequests = dispatchData.evacInventoryRequested
+
+        // Create a formatted string
+        val formattedText = StringBuilder()
+        formattedText.append("Deliver the Requested Items to $evacName\n\n") // Start with the evacName
+        formattedText.append("The Items are: \n")
+        inventoryRequests.forEach { request ->
+            formattedText.append("  - Item: ${request.evacInventoryName}, Quantity: ${request.evacInventoryQuantity}\n")
+        }
+
+        dispatchDescriptionTV.text = formattedText.toString()
+    }
     //Check Team
     fun retrieveTeamData() {
 
@@ -180,7 +219,11 @@ class homeActivity_bo : AppCompatActivity(){
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveSecurityData()
-                        }
+                        } else if (teamData.teamTasks == "Delivery") {
+                            teamDataLoaded = true
+                            checkIfAllDataLoaded()
+                            retrieveDispatchData()
+                        }//if team is part of dispatch data)
                     } else {
                         teamDataLoaded = true
                         patrolDataLoaded = true
@@ -303,6 +346,57 @@ class homeActivity_bo : AppCompatActivity(){
             }
 
             override fun onFailure(call: Call<securityData>, t: Throwable) {
+                Log.e("Error", "Error: ${t.message}")
+                Toast.makeText(this@homeActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                patrolDataLoaded = true
+                checkIfAllDataLoaded()
+            }
+        })
+    }
+    fun retrieveDispatchData() {
+
+        //loading requirements
+        progressBar.visibility = View.VISIBLE
+        loadingOverlay.visibility = View.VISIBLE
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val dispatchAPI = retrofit.create(dispatchAPI::class.java)
+
+        val baseUrl = retrofit.baseUrl().toString()
+        Log.d("Base URL", baseUrl)
+
+        val call = dispatchAPI.getDispatchData(teamFound.currentAssignment)
+        Log.d("UserString", call.toString())
+
+        call.enqueue(object : Callback<dispatchData> {
+            override fun onResponse(call: Call<dispatchData>, response: Response<dispatchData>) {
+                if (response.isSuccessful) {
+                    val dispatchData = response.body();
+                    if (dispatchData!= null) {
+                        placeTeamData() //place the team ata on the screen
+                        placedispatchData(dispatchData) //place the patrol data on the screen
+                        //checks for loading
+                        patrolDataLoaded = true
+                        checkIfAllDataLoaded()
+                    } else {
+                        patrolDataLoaded = true
+                        checkIfAllDataLoaded()
+                        Toast.makeText(this@homeActivity_bo, "You are not in DisptachTeam", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    patrolDataLoaded = true
+                    checkIfAllDataLoaded()
+                    Log.e("Error", "Response code: ${response.code()}")
+                    Log.e("Error", "Response error message: ${response.message()}")
+                    Toast.makeText(this@homeActivity_bo, "Response is not successful", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<dispatchData>, t: Throwable) {
                 Log.e("Error", "Error: ${t.message}")
                 Toast.makeText(this@homeActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 patrolDataLoaded = true
