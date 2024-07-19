@@ -19,8 +19,10 @@ import com.example.s11.ng.jan.capit01_mobdeve.missing.missingActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.fingerprint.fingerprintActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.help.SOS
 import com.example.s11.ng.jan.capit01_mobdeve.login.loginAPI
+import com.example.s11.ng.jan.capit01_mobdeve.login.login_act
 import com.example.s11.ng.jan.capit01_mobdeve.login.userInfo
 import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_bo
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
@@ -153,6 +155,11 @@ class homeActivity_bo : AppCompatActivity(){
         progressBar.visibility = View.VISIBLE
 
         retrieveTeamData()
+
+        val logoutButton: FloatingActionButton = findViewById(R.id.logout_button_BO)
+        logoutButton.setOnClickListener{
+            logout()
+        }
 
         setupFooter_bo() // Call the footer setup function
     }
@@ -587,5 +594,20 @@ class homeActivity_bo : AppCompatActivity(){
         val editor = sp.edit()
         editor.putString("teamName", teamFound.teamName)
         editor.apply()
+    }
+
+    fun moveToLogin(){
+        val intent = Intent(applicationContext, login_act::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    fun logout(){
+        val sp = getSharedPreferences("userSession", MODE_PRIVATE)
+        val editor = sp.edit()
+
+        editor.clear()
+        editor.apply()
+        moveToLogin()
     }
 }

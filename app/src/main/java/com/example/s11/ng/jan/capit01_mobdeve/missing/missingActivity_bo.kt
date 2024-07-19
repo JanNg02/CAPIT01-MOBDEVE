@@ -78,11 +78,6 @@ class missingActivity_bo : AppCompatActivity(){
             adapter.notifyDataSetChanged() // Notify the adapter that the data has changed
         }
 
-        val logoutButton: FloatingActionButton = findViewById(R.id.logout_button_BO)
-        logoutButton.setOnClickListener{
-            logout()
-        }
-
         setupFooter_bo() // Call the footer setup function
     }
 
@@ -135,18 +130,4 @@ class missingActivity_bo : AppCompatActivity(){
         }
     }
 
-    fun moveToLogin(){
-        val intent = Intent(applicationContext, login_act::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun logout(){
-        val sp = getSharedPreferences("userSession", MODE_PRIVATE)
-        val editor = sp.edit()
-
-        editor.clear()
-        editor.apply()
-        moveToLogin()
-    }
 }
