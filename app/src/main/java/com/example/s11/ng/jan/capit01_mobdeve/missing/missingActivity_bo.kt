@@ -3,7 +3,9 @@ package com.example.s11.ng.jan.capit01_mobdeve.missing
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +14,7 @@ import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.fingerprint.fingerprintActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_bo
+import com.example.s11.ng.jan.capit01_mobdeve.home.teamData
 import com.example.s11.ng.jan.capit01_mobdeve.login.loginAPI
 import com.example.s11.ng.jan.capit01_mobdeve.login.login_act
 import com.example.s11.ng.jan.capit01_mobdeve.login.userInfo
@@ -52,9 +55,18 @@ class missingActivity_bo : AppCompatActivity(){
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MissingPersonAdapter
 
+    private lateinit var progressBar: ProgressBar
+    private lateinit var loadingOverlay: View
+
+    private var missingDataLoaded = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.missing_bo)
+
+        loadingOverlay = findViewById(R.id.loading_overlay_missingBO)
+        progressBar = findViewById(R.id.loading_progress_bar_missingBO)
+        progressBar.visibility = View.VISIBLE
 
         recyclerView = findViewById(R.id.getMissingPersons_RV)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -75,6 +87,10 @@ class missingActivity_bo : AppCompatActivity(){
     }
 
     fun retrieveData(callback: (List<missingPersonData>) -> Unit) {
+
+        progressBar.visibility = View.VISIBLE
+        loadingOverlay.visibility = View.VISIBLE
+
         val retrofit = Retrofit.Builder()
             .baseUrl("https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -92,6 +108,8 @@ class missingActivity_bo : AppCompatActivity(){
                 if (response.isSuccessful) {
                     val missingPersonData = response.body()
                     if (missingPersonData != null) {
+                        missingDataLoaded = true
+                        checkIfAllDataLoaded()
                         callback(missingPersonData)
                     } else {
                         Toast.makeText(this@missingActivity_bo, "Invalid username or password", Toast.LENGTH_SHORT).show()
@@ -108,6 +126,13 @@ class missingActivity_bo : AppCompatActivity(){
                 Toast.makeText(this@missingActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun checkIfAllDataLoaded() {
+        if (missingDataLoaded) {
+            progressBar.visibility = View.GONE
+            loadingOverlay.visibility = View.GONE
+        }
     }
 
     fun moveToLogin(){
