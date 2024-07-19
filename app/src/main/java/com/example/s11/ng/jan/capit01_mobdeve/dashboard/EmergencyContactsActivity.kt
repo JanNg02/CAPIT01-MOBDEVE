@@ -27,10 +27,12 @@ class EmergencyContactsActivity : AppCompatActivity() {
         emergencyContactsList = findViewById(R.id.emergency_contacts_list)
 
         val emergencyContacts = listOf(
-            EmergencyContact("Police", "911"),
-            EmergencyContact("Ambulance", "112"),
-            EmergencyContact("Fire Department", "101"),
-            EmergencyContact("Emergency Services", "09190785452")
+            EmergencyContact("BRGY. SAN ANTONIO", "8935-3071"),
+            EmergencyContact("OFFICE OF THE SECOND DISTRICT REPRESENTATIVE", "8951-1936"),
+            EmergencyContact("PARAÑAQUE FIRE DEPARTMENT", "8826-9131"),
+            EmergencyContact("PRECINCT 5 BF Homes/San Antonio", "8809-3604"),
+            EmergencyContact("OSPITAL NG PARAÑAQUE", "8825-4902"),
+            EmergencyContact("Test", "09190785452")
         )
 
 
