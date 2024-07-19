@@ -26,13 +26,17 @@ class EmergencyContactsActivity : AppCompatActivity() {
 
         emergencyContactsList = findViewById(R.id.emergency_contacts_list)
 
+        val sp = getSharedPreferences("userSession", MODE_PRIVATE)
+        val emergencyName = sp.getString("residentEmergencyContactName", "null")
+        val emergencyNumber= sp.getString("residentEmergencyContactNumber", "null")
+
         val emergencyContacts = listOf(
             EmergencyContact("BRGY. SAN ANTONIO", "8935-3071"),
             EmergencyContact("OFFICE OF THE SECOND DISTRICT REPRESENTATIVE", "8951-1936"),
             EmergencyContact("PARAÑAQUE FIRE DEPARTMENT", "8826-9131"),
             EmergencyContact("PRECINCT 5 BF Homes/San Antonio", "8809-3604"),
             EmergencyContact("OSPITAL NG PARAÑAQUE", "8825-4902"),
-            EmergencyContact("Test", "09190785452")
+            EmergencyContact(emergencyName.toString(), emergencyNumber.toString())
         )
 
 
