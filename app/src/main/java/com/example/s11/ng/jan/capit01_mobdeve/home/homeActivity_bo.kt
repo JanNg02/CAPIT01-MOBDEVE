@@ -347,7 +347,7 @@ class homeActivity_bo : AppCompatActivity(){
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
-                        Toast.makeText(this@homeActivity_bo, "You are not in Patrol", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@homeActivity_bo, "No Patrol Task Found", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     patrolDataLoaded = true
@@ -450,7 +450,7 @@ class homeActivity_bo : AppCompatActivity(){
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
-                        Toast.makeText(this@homeActivity_bo, "You are not in DisptachTeam", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@homeActivity_bo, "No Task Assigned to your team", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     patrolDataLoaded = true
@@ -501,7 +501,7 @@ class homeActivity_bo : AppCompatActivity(){
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
-                        Toast.makeText(this@homeActivity_bo, "You are not in DisptachTeam", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@homeActivity_bo, "No Missing Person to look for assigned to your team", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     patrolDataLoaded = true
@@ -551,7 +551,7 @@ class homeActivity_bo : AppCompatActivity(){
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
-                        Toast.makeText(this@homeActivity_bo, "You are not in SOS Response", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@homeActivity_bo, "No SOS request assigned to your team", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     patrolDataLoaded = true
