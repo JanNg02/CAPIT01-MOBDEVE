@@ -104,13 +104,14 @@ class fileActivity_bo : AppCompatActivity() {
                 //get the current Session or current User from shared preference
                 val sp = getSharedPreferences("userSession", MODE_PRIVATE)
                 val fullNameData = sp.getString("residentFullName", "null")
+                val teamName = sp.getString("teamName", "null")
 
                 val dateSubmitted = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(
                     Date()
                 )
                 val ID = 0
                 val filedBy = fullNameData.toString() //Add Sessioned User
-                val teamID = "None"
+                val teamID = teamName.toString()
 
                 if (locationText.isEmpty() ||descriptionText.isEmpty()) {
                     Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()

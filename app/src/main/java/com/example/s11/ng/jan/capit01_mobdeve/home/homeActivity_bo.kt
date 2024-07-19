@@ -344,6 +344,7 @@ class homeActivity_bo : AppCompatActivity(){
                         //checks for loading
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
+                        saveTeamName(teamFound)
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
@@ -396,6 +397,7 @@ class homeActivity_bo : AppCompatActivity(){
                         //checks for loading
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
+                        saveTeamName(teamFound)
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
@@ -447,6 +449,7 @@ class homeActivity_bo : AppCompatActivity(){
                         //checks for loading
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
+                        saveTeamName(teamFound)
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
@@ -498,6 +501,7 @@ class homeActivity_bo : AppCompatActivity(){
                         //checks for loading
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
+                        saveTeamName(teamFound)
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
@@ -548,6 +552,7 @@ class homeActivity_bo : AppCompatActivity(){
                         //checks for loading
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
+                        saveTeamName(teamFound)
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
@@ -575,5 +580,12 @@ class homeActivity_bo : AppCompatActivity(){
             progressBar.visibility = View.GONE
             loadingOverlay.visibility = View.GONE
         }
+    }
+
+    private fun saveTeamName (team: teamData){
+        val sp = getSharedPreferences("userSession", MODE_PRIVATE)
+        val editor = sp.edit()
+        editor.putString("teamName", teamFound.teamName)
+        editor.apply()
     }
 }
