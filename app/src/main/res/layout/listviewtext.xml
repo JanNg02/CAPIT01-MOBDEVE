@@ -7,11 +7,14 @@
         android:id="@+id/text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:fontFamily="sans-serif-medium"
-        android:paddingTop="8sp"
+        android:fontFamily="@font/roboto"
+        android:paddingTop="15sp"
         android:paddingBottom="8sp"
-        android:textStyle="bold" />
+        android:paddingLeft="10sp"
+        android:textColor="#BF000000"
+        android:textSize="20sp"
+        android:drawableEnd="@drawable/baseline_call_24"
+        android:drawablePadding="15sp"
+        android:drawableTint="#EF5A5A"/>
 
 </RelativeLayout>
