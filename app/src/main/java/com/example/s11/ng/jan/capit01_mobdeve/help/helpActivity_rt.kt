@@ -1,25 +1,25 @@
 package com.example.s11.ng.jan.capit01_mobdeve.help
 
+//import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.CheckBox
+import android.widget.CompoundButton
+import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.s11.ng.jan.capit01_mobdeve.R
-import com.example.s11.ng.jan.capit01_mobdeve.map.mapActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.help.helpActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
-//import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
-import com.example.s11.ng.jan.capit01_mobdeve.file.Missing
-import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -29,21 +29,17 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.HeaderMap
-import retrofit2.http.Headers
 import retrofit2.http.POST
-import java.net.URLEncoder
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
 
 data class SOS(
     @SerializedName("fullName") val fullName: String,
@@ -79,7 +75,63 @@ class helpActivity_rt : AppCompatActivity() {
             }
         }
 
+        setCheckBoxes()
+
         setupFooter_rt() // Call the footer setup function
+    }
+
+    private fun setCheckBoxes(){
+        val pwdCheckbox: CheckBox = findViewById(R.id.pwd_checkbox)
+        val sickCheckbox: CheckBox = findViewById(R.id.sick_checkbox)
+        val pregnantCheckbox: CheckBox = findViewById(R.id.pregnant_checkbox)
+        val pwdDropdown: LinearLayout= findViewById(R.id.pwd_dropdown)
+        val sickDropdown: LinearLayout = findViewById(R.id.sick_dropdown)
+        val pregnantRadiogroup: RadioGroup = findViewById(R.id.pregnant_radiogroup)
+
+        pwdCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                pwdDropdown.setVisibility(View.VISIBLE)
+            } else {
+                pwdDropdown.setVisibility(View.GONE)
+                uncheckPwdCheckboxes()
+            }
+        }
+
+        sickCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                sickDropdown.setVisibility(View.VISIBLE)
+            } else {
+                sickDropdown.setVisibility(View.GONE)
+                uncheckSickCheckboxes()
+            }
+        }
+
+        pregnantCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                pregnantRadiogroup.setVisibility(View.VISIBLE)
+            } else {
+                pregnantRadiogroup.setVisibility(View.GONE)
+                uncheckPregnantRadiobuttons()
+            }
+        }
+    }
+
+    private fun uncheckPwdCheckboxes() {
+        findViewById<CheckBox>(R.id.hearing_impairment_checkbox).isChecked = false
+        findViewById<CheckBox>(R.id.vision_impairment_checkbox).isChecked = false
+        // Add more checkboxes for other PWD options
+    }
+
+    private fun uncheckSickCheckboxes() {
+        findViewById<CheckBox>(R.id.diabetes_checkbox).isChecked = false
+        findViewById<CheckBox>(R.id.heart_problems_checkbox).isChecked = false
+        // Add more checkboxes for other sick options
+
+        findViewById<EditText>(R.id.other_sick_edittext).text.clear()
+    }
+
+    private fun uncheckPregnantRadiobuttons() {
+        findViewById<RadioGroup>(R.id.pregnant_radiogroup).clearCheck()
     }
 
     private fun checkPermission(): Boolean {
