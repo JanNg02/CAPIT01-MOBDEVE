@@ -7,18 +7,25 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_rt
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -37,9 +44,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-
 
 data class SOS(
     @SerializedName("fullName") val fullName: String,
@@ -47,8 +54,13 @@ data class SOS(
     @SerializedName("currentAddress") val currentAddress: String,
     @SerializedName("dateLastSent") val dateLastSent: String,
     @SerializedName("age") val age: Int,
+    @SerializedName("sex") val sex: String,
     @SerializedName("teamID") val teamID: String,
-    @SerializedName("isFound") val isFound: Boolean
+    @SerializedName("isFound") val isFound: Boolean,
+    @SerializedName("pwd") val pwd: List<String>,
+    @SerializedName("sick") val sick: List<String>,
+    @SerializedName("pregnant") val pregnant: String,
+    @SerializedName("currentSituation") val currentSituation: String
 )
 
 class helpActivity_rt : AppCompatActivity() {
@@ -59,25 +71,63 @@ class helpActivity_rt : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    private var pwdCheckedBoxes = mutableListOf<String>()
+    private var sickCheckedBoxes = mutableListOf<String>()
+    private var pregnantTrimester = ""
+    private var currentSituation = ""
+    private var otherSickText = ""
+    private var isSickChecked = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.help_rt)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        setCheckBoxes()
+
+        // SOS Button
         var sosButton : ImageButton = findViewById(R.id.imageButton)
 
         sosButton.setOnClickListener{
             if (checkPermission()) {
+                if (isSickChecked && otherSickText.isNotEmpty() && !sickCheckedBoxes.contains(otherSickText)) {
+                    sickCheckedBoxes.add(otherSickText)
+                }
                 getCurrentLocation()
             } else {
                 requestPermission()
             }
         }
 
-        setCheckBoxes()
-
         setupFooter_rt() // Call the footer setup function
+    }
+
+    // A function to handle checkbox changes
+    private fun handleCheckboxChange(checkboxId: Int, list: MutableList<String>, text: String) {
+        findViewById<CheckBox>(checkboxId).setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                list.add(text)
+            } else {
+                list.remove(text)
+            }
+        }
+    }
+
+    // A function to handle radio button changes
+    private fun handleRadioButtonChange(radioButtonId: Int, text: String) {
+        findViewById<RadioButton>(radioButtonId).setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                pregnantTrimester = text
+            }
+        }
+    }
+
+    // A function to handle edit text changes
+    private fun handleEditTextChange(editTextId: Int, callback: (String) -> Unit) {
+        findViewById<EditText>(editTextId).addTextChangedListener { editable ->
+            callback(editable.toString())
+        }
     }
 
     private fun setCheckBoxes(){
@@ -86,7 +136,13 @@ class helpActivity_rt : AppCompatActivity() {
         val pregnantCheckbox: CheckBox = findViewById(R.id.pregnant_checkbox)
         val pwdDropdown: LinearLayout= findViewById(R.id.pwd_dropdown)
         val sickDropdown: LinearLayout = findViewById(R.id.sick_dropdown)
-        val pregnantRadiogroup: RadioGroup = findViewById(R.id.pregnant_radiogroup)
+        val pregnantRadioGroup: RadioGroup = findViewById(R.id.pregnant_radiogroup)
+
+        val sp = getSharedPreferences("userSession", MODE_PRIVATE)
+        val sex = sp.getString("residentSex", "null").toString()
+        if(sex == "Male") {
+            pregnantCheckbox.visibility = View.GONE
+        }
 
         pwdCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
@@ -98,6 +154,7 @@ class helpActivity_rt : AppCompatActivity() {
         }
 
         sickCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
+            isSickChecked = isChecked
             if (isChecked) {
                 sickDropdown.setVisibility(View.VISIBLE)
             } else {
@@ -108,12 +165,32 @@ class helpActivity_rt : AppCompatActivity() {
 
         pregnantCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                pregnantRadiogroup.setVisibility(View.VISIBLE)
-            } else {
-                pregnantRadiogroup.setVisibility(View.GONE)
+                pregnantRadioGroup.setVisibility(View.VISIBLE)
+            }
+            else {
+                pregnantRadioGroup.setVisibility(View.GONE)
                 uncheckPregnantRadiobuttons()
             }
         }
+
+        // PWD Checkboxes
+        handleCheckboxChange(R.id.hearing_impairment_checkbox, pwdCheckedBoxes, "Hearing Impairment")
+        handleCheckboxChange(R.id.vision_impairment_checkbox, pwdCheckedBoxes, "Vision Impairment")
+
+        // Sick Checkboxes
+        handleCheckboxChange(R.id.diabetes_checkbox, sickCheckedBoxes, "Diabetes")
+        handleCheckboxChange(R.id.heart_problems_checkbox, sickCheckedBoxes, "Heart Problems")
+
+        // Sick Other Edit Text
+        handleEditTextChange(R.id.other_sick_edittext) { otherSickText = it }
+
+        // Pregnant Radio Buttons
+        handleRadioButtonChange(R.id.first_trimester_radiobutton, "1st Trimester")
+        handleRadioButtonChange(R.id.second_trimester_radiobutton, "2nd Trimester")
+        handleRadioButtonChange(R.id.third_trimester_radiobutton, "3rd Trimester")
+
+        // Current Situation Checkboxes
+        handleEditTextChange(R.id.situation_edittext) { currentSituation = it }
     }
 
     private fun uncheckPwdCheckboxes() {
@@ -173,11 +250,35 @@ class helpActivity_rt : AppCompatActivity() {
                 val fullName = fullNameData.toString()
                 val email = residentEmail.toString()
                 val dateLastSent = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
-                val age = 10
+
+                val birthdateString = sp.getString("residentBirthDate", "null")
+                val birthdateCalendar = Calendar.getInstance()
+                birthdateCalendar.time = SimpleDateFormat("MM/dd/yyyy").parse(birthdateString)
+
+                val currentDateCalendar = Calendar.getInstance()
+
+                val year1 = birthdateCalendar.get(Calendar.YEAR)
+                val year2 = currentDateCalendar.get(Calendar.YEAR)
+                var age = year2 - year1
+
+                // adjust for months and days
+                val month1 = birthdateCalendar.get(Calendar.MONTH)
+                val month2 = currentDateCalendar.get(Calendar.MONTH)
+                if (month2 < month1) {
+                    age--
+                } else if (month2 == month1) {
+                    val day1 = birthdateCalendar.get(Calendar.DAY_OF_MONTH)
+                    val day2 = currentDateCalendar.get(Calendar.DAY_OF_MONTH)
+                    if (day2 < day1) {
+                        age--
+                    }
+                }
+
+                val sex = sp.getString("residentSex", "null").toString()
                 val teamID = "None"
                 val isFound = false
 
-                val sos = SOS(fullName, email, currentAddress, dateLastSent, age, teamID, isFound)
+                val sos = SOS(fullName, email, currentAddress, dateLastSent, age, sex, teamID, isFound, pwdCheckedBoxes, sickCheckedBoxes, pregnantTrimester, currentSituation)
                 val gson = Gson()
                 val json = gson.toJson(sos)
 
