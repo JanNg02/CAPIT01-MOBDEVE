@@ -140,9 +140,9 @@ class helpActivity_rt : AppCompatActivity() {
 
         val sp = getSharedPreferences("userSession", MODE_PRIVATE)
         val sex = sp.getString("residentSex", "null").toString()
-        if(sex == "Male") {
-            pregnantCheckbox.visibility = View.GONE
-        }
+//        if(sex == "Male") {
+//            pregnantCheckbox.visibility = View.GONE
+//        }
 
         pwdCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {

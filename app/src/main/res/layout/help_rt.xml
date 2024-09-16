@@ -13,13 +13,13 @@
             android:id="@+id/imageView6"
             android:layout_width="410sp"
             android:layout_height="60sp"
+            android:cropToPadding="true"
             android:padding="1sp"
-            android:paddingTop="1sp"
             android:paddingLeft="1sp"
 
-            android:paddingBottom="1sp"
+            android:paddingTop="1sp"
             android:paddingRight="1sp"
-            android:cropToPadding="true"
+            android:paddingBottom="1sp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,13 +86,14 @@
             android:layout_marginStart="101dp"
             android:layout_marginTop="209dp"
             android:layout_marginEnd="101dp"
-            android:layout_marginBottom="313dp"
+            android:layout_marginBottom="313sp"
             android:background="@drawable/border"
             android:backgroundTint="#EF5A5A"
             app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/baseline_sos_24" />
 
         <ImageView
@@ -125,43 +126,55 @@
 
         <LinearLayout
             android:id="@+id/condition_layout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="83sp"
+            android:layout_marginTop="90sp"
+            android:layout_marginEnd="83sp"
+            android:layout_marginBottom="111sp"
             android:orientation="vertical"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:layout_constraintBottom_toTopOf="@+id/situation_edittext"
+            android:background="@drawable/bg2"
+            app:layout_constraintBottom_toTopOf="@+id/imageButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
             <!-- PWD, Sick, Pregnant checkboxes -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/pwd_checkbox"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="2sp"
+                    android:paddingRight="2sp"
+                    android:layout_marginEnd="16dp"
                     android:layout_weight="1"
-                    android:text="PWD"
-                    android:layout_marginEnd="16dp" />
+                    android:fontFamily="@font/roboto"
+                    android:text="PWD" />
 
                 <CheckBox
                     android:id="@+id/sick_checkbox"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="2sp"
+                    android:paddingRight="2sp"
+                    android:layout_marginEnd="16dp"
                     android:layout_weight="1"
-                    android:text="Sick"
-                    android:layout_marginEnd="16dp" />
+                    android:fontFamily="@font/roboto"
+                    android:text="Sick" />
 
                 <CheckBox
                     android:id="@+id/pregnant_checkbox"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="2sp"
+                    android:paddingRight="2sp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
                     android:text="Pregnant" />
 
             </LinearLayout>
@@ -171,6 +184,7 @@
                 android:id="@+id/pwd_dropdown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg2"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -178,12 +192,14 @@
                     android:id="@+id/hearing_impairment_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
                     android:text="Hearing Impairment" />
 
                 <CheckBox
                     android:id="@+id/vision_impairment_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
                     android:text="Vision Impairment" />
 
                 <!-- Add more checkboxes for other PWD options -->
@@ -195,6 +211,7 @@
                 android:id="@+id/sick_dropdown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg2"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -202,12 +219,14 @@
                     android:id="@+id/diabetes_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
                     android:text="Diabetes" />
 
                 <CheckBox
                     android:id="@+id/heart_problems_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
                     android:text="Heart Problems" />
 
                 <!-- Add more checkboxes for other sick options -->
@@ -216,7 +235,10 @@
                     android:id="@+id/other_sick_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Other" />
+                    android:fontFamily="@font/roboto"
+                    android:hint="Other"
+                    android:paddingLeft="10sp"
+                    android:paddingBottom="5sp" />
 
             </LinearLayout>
 
@@ -225,6 +247,7 @@
                 android:id="@+id/pregnant_radiogroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg2"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -232,18 +255,21 @@
                     android:id="@+id/first_trimester_radiobutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
                     android:text="1st Trimester" />
 
                 <RadioButton
                     android:id="@+id/second_trimester_radiobutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
                     android:text="2nd Trimester" />
 
                 <RadioButton
                     android:id="@+id/third_trimester_radiobutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
                     android:text="3rd Trimester" />
 
             </RadioGroup>
@@ -252,13 +278,20 @@
 
         <EditText
             android:id="@+id/situation_edittext"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/condition_layout"
-            app:layout_constraintBottom_toTopOf="@+id/imageButton"
+            android:layout_marginStart="83dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="76dp"
+            android:layout_marginBottom="111dp"
+            android:background="@drawable/bg2"
+            android:fontFamily="@font/roboto"
+            android:hint="What is your current situation?"
+            android:paddingLeft="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:hint="What is your current situation?" />
+            app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
         <!--        <ImageView-->
         <!--            android:id="@+id/imageView14"-->
