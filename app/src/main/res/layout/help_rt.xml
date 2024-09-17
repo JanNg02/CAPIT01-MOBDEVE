@@ -16,7 +16,6 @@
             android:cropToPadding="true"
             android:padding="1sp"
             android:paddingLeft="1sp"
-
             android:paddingTop="1sp"
             android:paddingRight="1sp"
             android:paddingBottom="1sp"

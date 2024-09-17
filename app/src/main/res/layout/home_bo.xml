@@ -15,30 +15,37 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28sp"
             android:layout_marginEnd="13sp"
-            android:background="@drawable/imageborder"
+            android:backgroundTint="@color/white"
+            android:foregroundTint="@color/gray"
             android:clickable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:rippleColor="#D52F2F"
             app:srcCompat="@drawable/baseline_logout_24" />
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="410sp"
-            android:layout_height="49sp"
+            android:layout_height="60sp"
+            android:cropToPadding="true"
+            android:padding="1sp"
+            android:paddingLeft="1sp"
+            android:paddingTop="1sp"
+            android:paddingRight="1sp"
+            android:paddingBottom="1sp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/rectanglesharp" />
+            app:srcCompat="@drawable/navbarbg" />
 
         <ImageButton
             android:id="@+id/missing_BO"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:layout_marginStart="106sp"
             android:layout_marginEnd="267sp"
             android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
+            android:background="@color/white"
             android:src="@drawable/baseline_people_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,12 +53,12 @@
 
         <ImageButton
             android:id="@+id/fingerprint_BO"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:layout_marginStart="338sp"
             android:layout_marginEnd="35sp"
             android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
+            android:background="@color/white"
             android:src="@drawable/baseline_fingerprint_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,12 +66,12 @@
 
         <ImageButton
             android:id="@+id/filearea_BO"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:layout_marginStart="186sp"
             android:layout_marginEnd="187sp"
             android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
+            android:background="@color/white"
             android:src="@drawable/baseline_report_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,12 +79,12 @@
 
         <ImageButton
             android:id="@+id/file_RT"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:layout_marginStart="263sp"
             android:layout_marginEnd="110sp"
             android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
+            android:background="@color/white"
             android:src="@drawable/baseline_person_search_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,12 +92,12 @@
 
         <ImageButton
             android:id="@+id/response_BO"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:layout_marginStart="26sp"
             android:layout_marginEnd="347sp"
             android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
+            android:background="@color/white"
             android:src="@drawable/baseline_view_list_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -115,9 +122,9 @@
             android:layout_marginStart="35dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="251dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/roboto_bold"
             android:text="Ongoing Task"
-            android:textColor="@color/white"
+            android:textColor="#F2FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -132,7 +139,7 @@
             android:layout_marginTop="43dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="95dp"
-            android:background="@drawable/imageborder"
+            android:background="@drawable/bg2"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -148,9 +155,11 @@
 
             <TextView
                 android:id="@+id/teamDescriptionTitle_TV"
+                android:paddingLeft="15sp"
+                android:paddingTop="15sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/roboto_bold"
                 android:text="TeamName"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -169,6 +178,9 @@
                     android:id="@+id/teamTask"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:paddingLeft="15sp"
+                    android:paddingTop="15sp"
                     android:text="Team Task: "
                     android:textSize="16sp"
                     android:textStyle="bold|italic" />
@@ -181,6 +193,9 @@
                     android:id="@+id/teamTask_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:paddingLeft="15sp"
+                    android:paddingTop="15sp"
                     android:text="task"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -199,6 +214,9 @@
                     android:id="@+id/teamMembers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:paddingLeft="15sp"
+                    android:paddingTop="15sp"
                     android:text="Team Members: "
                     android:textSize="16sp"
                     android:textStyle="bold|italic" />
@@ -211,6 +229,9 @@
                     android:id="@+id/teamMembers_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:paddingLeft="15sp"
+                    android:paddingTop="15sp"
                     android:text="members"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -229,6 +250,9 @@
                     android:id="@+id/task_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="15sp"
+                    android:paddingTop="15sp"
+                    android:fontFamily="@font/roboto"
                     android:text="Task Description:"
                     android:textSize="20sp"
                     android:textStyle="bold|italic" />
@@ -241,6 +265,9 @@
                     android:id="@+id/task_description_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="15sp"
+                    android:paddingTop="15sp"
+                    android:fontFamily="@font/roboto"
                     android:text="description"
                     android:textSize="16sp" />
             </LinearLayout>
