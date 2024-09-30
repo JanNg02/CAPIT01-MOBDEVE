@@ -1,5 +1,6 @@
 package com.example.s11.ng.jan.capit01_mobdeve.adapter
 
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ class AnnouncementAdapter(private var data: MutableList<modelPost>, homeactivity
         val view = inflater.inflate(R.layout.posthome_rt, parent, false)
 
         return AnnouncementAdapter.AnnouncementViewHolder(view)
+
     }
 
     override fun onBindViewHolder(holder: AnnouncementViewHolder, position: Int) {
@@ -28,6 +30,7 @@ class AnnouncementAdapter(private var data: MutableList<modelPost>, homeactivity
         val announcementContent: TextView = itemView.findViewById(R.id.caption_post)
         val announcementTitle: TextView = itemView.findViewById(R.id.title_RT)
         val announcementUploadDate: TextView = itemView.findViewById(R.id.date_RT)
+
 
         fun bindData(data: modelPost) {
             announcementAuthor.text = data.announcementAuthor
