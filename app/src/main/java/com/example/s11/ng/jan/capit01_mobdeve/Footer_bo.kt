@@ -8,7 +8,7 @@ import com.example.s11.ng.jan.capit01_mobdeve.file.fileActivity_rt
 import com.example.s11.ng.jan.capit01_mobdeve.fingerprint.fingerprintActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.missing.missingActivity_bo
-import com.example.s11.ng.jan.capit01_mobdeve.update.updateact
+import com.example.s11.ng.jan.capit01_mobdeve.update.update_bo
 
 fun AppCompatActivity.setupFooter_bo() {
     val responsebutton: ImageButton = findViewById(R.id.response_BO)
@@ -34,11 +34,6 @@ fun AppCompatActivity.setupFooter_bo() {
     val filebutton: ImageButton = findViewById(R.id.file_RT)
     filebutton.setOnClickListener {
         navigateTo(fileActivity_rt::class.java)
-    }
-
-    val updatebutton: ImageButton = findViewById(R.id.update_BO)
-    updatebutton.setOnClickListener{
-        navigateTo(updateact::class.java)
     }
 }
 private fun AppCompatActivity.navigateTo(destinationActivity: Class<*>) {

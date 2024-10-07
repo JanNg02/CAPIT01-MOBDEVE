@@ -75,6 +75,7 @@
         <activity android:name=".missing.missingActivity_bo" />
         <activity android:name=".file.fileActivity_bo" />
         <activity android:name=".fingerprint.fingerprintActivity_bo" />
+        <activity android:name=".update.update_bo" />
     </application>
 
 </manifest>

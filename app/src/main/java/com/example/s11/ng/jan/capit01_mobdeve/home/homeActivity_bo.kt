@@ -22,6 +22,7 @@ import com.example.s11.ng.jan.capit01_mobdeve.login.loginAPI
 import com.example.s11.ng.jan.capit01_mobdeve.login.login_act
 import com.example.s11.ng.jan.capit01_mobdeve.login.userInfo
 import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_bo
+import com.example.s11.ng.jan.capit01_mobdeve.update.update_bo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
@@ -162,6 +163,10 @@ class homeActivity_bo : AppCompatActivity(){
         }
 
         setupFooter_bo() // Call the footer setup function
+        val updatebutton: ImageButton = findViewById(R.id.update_BO)
+        updatebutton.setOnClickListener{
+            navigateTo(update_bo::class.java)
+        }
     }
 
     fun placeTeamData(){
@@ -609,5 +614,12 @@ class homeActivity_bo : AppCompatActivity(){
         editor.clear()
         editor.apply()
         moveToLogin()
+    }
+}
+private fun AppCompatActivity.navigateTo(destinationActivity: Class<*>) {
+    if (this::class.java != destinationActivity) {
+        val intent = Intent(applicationContext, destinationActivity)
+        startActivity(intent)
+        finish()
     }
 }

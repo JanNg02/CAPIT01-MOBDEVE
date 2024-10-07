@@ -13,12 +13,14 @@
             android:id="@+id/logout_button_BO"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="342dp"
             android:layout_marginTop="28sp"
             android:layout_marginEnd="13sp"
             android:backgroundTint="@color/white"
-            android:foregroundTint="@color/gray"
             android:clickable="true"
+            android:foregroundTint="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_logout_24" />
 
@@ -42,8 +44,8 @@
             android:id="@+id/missing_BO"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_marginStart="82dp"
-            android:layout_marginEnd="279dp"
+            android:layout_marginStart="105dp"
+            android:layout_marginEnd="256dp"
             android:layout_marginBottom="6dp"
             android:background="@color/white"
             android:src="@drawable/baseline_people_24"
@@ -55,8 +57,8 @@
             android:id="@+id/fingerprint_BO"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_marginStart="345dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="332dp"
+            android:layout_marginEnd="29dp"
             android:layout_marginBottom="6dp"
             android:background="@color/white"
             android:src="@drawable/baseline_fingerprint_24"
@@ -68,8 +70,8 @@
             android:id="@+id/filearea_BO"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_marginStart="146dp"
-            android:layout_marginEnd="215dp"
+            android:layout_marginStart="180dp"
+            android:layout_marginEnd="181dp"
             android:layout_marginBottom="6dp"
             android:background="@color/white"
             android:src="@drawable/baseline_report_24"
@@ -81,8 +83,8 @@
             android:id="@+id/file_RT"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_marginStart="213dp"
-            android:layout_marginEnd="148dp"
+            android:layout_marginStart="256dp"
+            android:layout_marginEnd="105dp"
             android:layout_marginBottom="6dp"
             android:background="@color/white"
             android:src="@drawable/baseline_person_search_24"
@@ -94,8 +96,8 @@
             android:id="@+id/response_BO"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="345dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginEnd="335dp"
             android:layout_marginBottom="6dp"
             android:background="@color/white"
             android:src="@drawable/baseline_view_list_24"
@@ -103,25 +105,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageButton
-            android:id="@+id/update_BO"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_marginStart="279dp"
-            android:layout_marginEnd="82dp"
-            android:layout_marginBottom="6dp"
-            android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/baseline_update_24" />
-
         <ImageView
             android:id="@+id/imageView7"
             android:layout_width="165sp"
             android:layout_height="61sp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="230dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -168,11 +157,11 @@
 
             <TextView
                 android:id="@+id/teamDescriptionTitle_TV"
-                android:paddingLeft="15sp"
-                android:paddingTop="15sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
+                android:paddingLeft="15sp"
+                android:paddingTop="15sp"
                 android:text="TeamName"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -263,9 +252,9 @@
                     android:id="@+id/task_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
                     android:paddingLeft="15sp"
                     android:paddingTop="15sp"
-                    android:fontFamily="@font/roboto"
                     android:text="Task Description:"
                     android:textSize="20sp"
                     android:textStyle="bold|italic" />
@@ -278,9 +267,9 @@
                     android:id="@+id/task_description_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
                     android:paddingLeft="15sp"
                     android:paddingTop="15sp"
-                    android:fontFamily="@font/roboto"
                     android:text="description"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -297,6 +286,20 @@
             app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
             app:layout_constraintStart_toStartOf="@+id/linearLayout2"
             app:layout_constraintTop_toTopOf="@+id/linearLayout2" />
+
+        <ImageButton
+            android:id="@+id/update_BO"
+            android:layout_width="57dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="79dp"
+            android:background="@drawable/bg2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_add_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
