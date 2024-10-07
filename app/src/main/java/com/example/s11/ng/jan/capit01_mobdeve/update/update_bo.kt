@@ -74,8 +74,6 @@ class update_bo : AppCompatActivity() {
             }
         }
 
-        setupFooter_bo() // Call the footer setup function
-
         val backbutton: ImageButton = findViewById(R.id.updateBack)
         backbutton.setOnClickListener{
             navigateTo(homeActivity_bo::class.java)
