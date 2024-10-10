@@ -102,7 +102,7 @@ class update_bo : AppCompatActivity() {
 
                 //get the current Session or current User from shared preference
                 val sp = getSharedPreferences("userSession", MODE_PRIVATE)
-                val fullNameData = sp.getString("tanodFullName", "null")
+                val fullNameData = sp.getString("residentFullName", "null")
 
                 val dateSubmitted = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(
                     Date()

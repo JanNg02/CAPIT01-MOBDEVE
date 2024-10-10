@@ -13,10 +13,7 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="update_bo">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="fileActivity_bo">
+      <SelectionState runConfigName="homeActivity_bo">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
