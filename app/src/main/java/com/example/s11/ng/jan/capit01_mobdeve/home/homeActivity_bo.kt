@@ -45,9 +45,14 @@ data class teamData(
     @SerializedName("teamMembers") val teamMembers: List<String>,
     @SerializedName("teamStatus") val teamStatus: Boolean ,
     @SerializedName("teamTasks") val teamTasks: String,
-    @SerializedName("currentAssignment") val currentAssignment: String,
+    @SerializedName("currentAssignment") val currentAssignment: List<currentAssignment>,
     @SerializedName("teamArea") val teamArea: String,
     @SerializedName("teamID") val teamID: Int
+)
+
+data class currentAssignment(
+    @SerializedName("assignmentID") val assignmentID: String,
+    @SerializedName("assignmentDetails") val assignmentDetails: String
 )
 
 data class patrolsData(
@@ -55,7 +60,7 @@ data class patrolsData(
     @SerializedName("patrolDescription") val patrolDescription: String,
     @SerializedName("dateCreated") val dateCreated: String,
     @SerializedName("teamName") val teamName: String,
-    @SerializedName("patrolID") val patrolID: Int,
+    @SerializedName("patrolID") val patrolID: String,
 )
 
 data class securityData(
@@ -292,7 +297,7 @@ class homeActivity_bo : AppCompatActivity(){
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveDispatchData()
-                        }else if(teamData.currentAssignment.lowercase().contains("sos")) {
+                        }else if(teamData.currentAssignment[0].assignmentID.contains("sos")) {
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveSOSTaskData()
@@ -353,6 +358,9 @@ class homeActivity_bo : AppCompatActivity(){
                     if (patrolData!= null) {
                         placeTeamData() //place the team ata on the screen
                         placePatrolData(patrolData) //place the patrol data on the screen
+                        saveTaskID(patrolData.patrolID)//save the taskID
+                        Log.d("TASKID", patrolData.patrolID)
+
                         //checks for loading
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
@@ -396,7 +404,7 @@ class homeActivity_bo : AppCompatActivity(){
         val baseUrl = retrofit.baseUrl().toString()
         Log.d("Base URL", baseUrl)
 
-        val call = securityAPI.getSecurityTasks(teamFound.currentAssignment)
+        val call = securityAPI.getSecurityTasks(teamFound.currentAssignment[0].assignmentID)
         Log.d("UserString", call.toString())
 
         call.enqueue(object : Callback<securityData> {
@@ -448,7 +456,7 @@ class homeActivity_bo : AppCompatActivity(){
         val baseUrl = retrofit.baseUrl().toString()
         Log.d("Base URL", baseUrl)
 
-        val call = dispatchAPI.getDispatchData(teamFound.currentAssignment)
+        val call = dispatchAPI.getDispatchData(teamFound.currentAssignment[0].assignmentID)
         Log.d("UserString", call.toString())
 
         call.enqueue(object : Callback<dispatchData> {
@@ -500,7 +508,7 @@ class homeActivity_bo : AppCompatActivity(){
         val baseUrl = retrofit.baseUrl().toString()
         Log.d("Base URL", baseUrl)
 
-        val call = missingPersonTaskAPI.getMissingPersonTaskData(teamFound.currentAssignment)
+        val call = missingPersonTaskAPI.getMissingPersonTaskData(teamFound.currentAssignment[0].assignmentID)
         Log.d("UserString", call.toString())
 
         call.enqueue(object : Callback<missingPersonData> {
@@ -551,7 +559,7 @@ class homeActivity_bo : AppCompatActivity(){
         val baseUrl = retrofit.baseUrl().toString()
         Log.d("Base URL", baseUrl)
 
-        val call = sosTaskAPI.getSOSDataTask(teamFound.currentAssignment)
+        val call = sosTaskAPI.getSOSDataTask(teamFound.currentAssignment[0].assignmentID)
         Log.d("UserString", call.toString())
 
         call.enqueue(object : Callback<SOSData> {
@@ -614,6 +622,13 @@ class homeActivity_bo : AppCompatActivity(){
         editor.clear()
         editor.apply()
         moveToLogin()
+    }
+
+    fun saveTaskID(taskID: String){
+        val sp = getSharedPreferences("saveTaskID", MODE_PRIVATE)
+        val editor = sp.edit()
+        editor.putString("taskID", taskID)
+        editor.apply()
     }
 }
 private fun AppCompatActivity.navigateTo(destinationActivity: Class<*>) {

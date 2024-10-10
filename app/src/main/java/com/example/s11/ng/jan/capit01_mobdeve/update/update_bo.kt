@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment.SavedState
 import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.home.homeActivity_bo
 import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_bo
@@ -63,6 +64,10 @@ class update_bo : AppCompatActivity() {
         setContentView(R.layout.update_bo)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        val spTask = getSharedPreferences("saveTaskID", MODE_PRIVATE)
+        val savedTaskID = spTask.getString("taskID", "null")
+        Log.d("TaskIDUpdates", savedTaskID.toString())
 
         submitButton = findViewById(R.id.updatesubmit)
 
