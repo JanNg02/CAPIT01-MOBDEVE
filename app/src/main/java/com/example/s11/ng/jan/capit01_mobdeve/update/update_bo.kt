@@ -39,7 +39,7 @@ import java.util.Date
 import java.util.Locale
 
 data class updateReport(
-    @SerializedName("updateReportID") val reportID: Int,
+    @SerializedName("updateReportID") val reportID: String,
     @SerializedName("updateTitle") val reportTitle: String,
     @SerializedName("updateDetails") val reportDetails: String,
     @SerializedName("dateSubmitted") val dateSubmitted: String,
@@ -109,10 +109,13 @@ class update_bo : AppCompatActivity() {
                 val sp = getSharedPreferences("userSession", MODE_PRIVATE)
                 val fullNameData = sp.getString("residentFullName", "null")
 
+                val spTask = getSharedPreferences("saveTaskID", MODE_PRIVATE)
+                val savedTaskID = spTask.getString("taskID", "null")
+
                 val dateSubmitted = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(
                     Date()
                 )
-                val ID = 0
+                val ID = savedTaskID.toString()
                 val filedBy = fullNameData.toString() //Add Sessioned User
 
                 if (updateText.isEmpty() ||detailsText.isEmpty()) {
