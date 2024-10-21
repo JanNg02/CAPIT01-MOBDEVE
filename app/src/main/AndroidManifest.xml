@@ -76,6 +76,7 @@
         <activity android:name=".file.fileActivity_bo" />
         <activity android:name=".fingerprint.fingerprintActivity_bo" />
         <activity android:name=".update.update_bo" />
+        <activity android:name=".home.currentassignmentBO"/>
     </application>
 
 </manifest>

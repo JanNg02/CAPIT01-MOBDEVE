@@ -2,20 +2,13 @@ package com.example.s11.ng.jan.capit01_mobdeve.home
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.s11.ng.jan.capit01_mobdeve.R
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
-import android.widget.ListView
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.example.s11.ng.jan.capit01_mobdeve.R
-import com.example.s11.ng.jan.capit01_mobdeve.adapter.homeBOadapter
-import com.example.s11.ng.jan.capit01_mobdeve.login.login_act
-import com.example.s11.ng.jan.capit01_mobdeve.setupFooter_bo
-import com.example.s11.ng.jan.capit01_mobdeve.update.update_bo
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-data class teamData(
+data class teamsData(
     @SerializedName("teamName") val teamName: String,
     @SerializedName("teamMembers") val teamMembers: List<String>,
     @SerializedName("teamStatus") val teamStatus: Boolean ,
@@ -35,19 +28,75 @@ data class teamData(
     @SerializedName("teamID") val teamID: Int
 )
 
-data class currentAssignment(
+data class currentAssignments(
     @SerializedName("assignmentID") val assignmentID: String,
     @SerializedName("assignmentDetails") val assignmentDetails: String
 )
 
+data class patrolsData(
+    @SerializedName("patrolArea") val patrolArea: String,
+    @SerializedName("patrolDescription") val patrolDescription: String,
+    @SerializedName("dateCreated") val dateCreated: String,
+    @SerializedName("teamName") val teamName: String,
+    @SerializedName("patrolID") val patrolID: String,
+)
 
-class homeActivity_bo : AppCompatActivity(){
+data class securityData(
+    @SerializedName("evacuationSecurityID") val evacuationSecurityID: Int,
+    @SerializedName("evacuationSecurityArea") val evacuationSecurityArea: String,
+    @SerializedName("teamName") val teamName: List<String>,
+    @SerializedName("dateCreated") val dateCreated: String,
+)
 
-    private lateinit var listView: ListView
+data class evacInventoryRequested(
+    @SerializedName("itemID") val itemID: String,
+    @SerializedName("evacInventoryName") val evacInventoryName: String,
+    @SerializedName("evacInventoryQuantity") val evacInventoryQuantity: String,
+    @SerializedName("itemReceived") val itemReceived: String,
+    @SerializedName("evacInventoryCategory") val evacInventoryCategory: String,
+)
+
+data class dispatchData(
+    @SerializedName("dispatchID") val dispatchID: String,
+    @SerializedName("evacName") val evacName: String,
+    @SerializedName("evacInventoryRequested") val evacInventoryRequested: List<evacInventoryRequested>,
+    @SerializedName("dispatchStatus") val dispatchStatus: String,
+    @SerializedName("dateRequested") val dateRequested: String,
+    @SerializedName("teamAssigned") val teamAssigned: String,
+    @SerializedName("itemsOversawBy") val itemsOversawBy: String,
+)
+
+data class missingPersonData(
+    @SerializedName("age") val age : Int,
+    @SerializedName("areaLastSeen") val areaLastSeen : String,
+    @SerializedName("contactNum") val contactNum : String,
+    @SerializedName("dateSubmitted") val dateSubmitted : String,
+    @SerializedName("description") val description : String,
+    @SerializedName("filedBy") val filedBy : String,
+    @SerializedName("isFound") val isFound : Boolean,
+    @SerializedName("missingFullName") val missingFullName : String,
+    @SerializedName("sex") val sex : String,
+    @SerializedName("teamdID") val teamID : String,
+    @SerializedName("timeLastSeen") val timeLastSeen : String,
+    @SerializedName("miaID") val miaID : String,
+)
+
+data class SOSData(
+    @SerializedName("fullName") val fullName: String,
+    @SerializedName("email") val email: String,
+    @SerializedName("currentAddress") val currentAddress: String,
+    @SerializedName("dateLastSent") val dateLastSent: String,
+    @SerializedName("age") val age: Int,
+    @SerializedName("teamID") val teamID: String,
+    @SerializedName("isFound") val isFound: Boolean
+)
+
+
+class currentassignmentBO : AppCompatActivity() {
 
     interface teamDataAPI {
         @GET("getTeamTasks")
-        fun getTeamTasks(@Query("userName") userName: String): Call<teamData>
+        fun getTeamTasks(@Query("userName") userName: String): Call<teamsData>
     }
 
     interface patrolTaskAPI {
@@ -75,56 +124,39 @@ class homeActivity_bo : AppCompatActivity(){
         fun getSOSDataTask(@Query("currentAssignment") currentAssignment: String): Call<SOSData>
     }
 
-    private lateinit var teamFound: teamData
-    private lateinit var progressBar: ProgressBar
+    private lateinit var teamFound: teamsData
     private lateinit var loadingOverlay: View
     private var teamDataLoaded = false
     private var patrolDataLoaded = false
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.home_bo)
+        setContentView(R.layout.currentassignment)
 
-        listView = findViewById<ListView>(R.id.lvHome_BO)
-
-        //loading requirements
         loadingOverlay = findViewById(R.id.loading_overlay)
-        progressBar = findViewById(R.id.loading_progress_bar)
-        progressBar.visibility = View.VISIBLE
-
-
-
 
         retrieveTeamData()
 
-        val logoutButton: FloatingActionButton = findViewById(R.id.logout_button_BO)
-        logoutButton.setOnClickListener{
-            logout()
+        val backbutton: ImageButton = findViewById(R.id.assignmentBack)
+        backbutton.setOnClickListener{
+            navigateTo(homeActivity_bo::class.java)
         }
 
-        setupFooter_bo() // Call the footer setup function
-        val updatebutton: ImageButton = findViewById(R.id.update_BO)
-        updatebutton.setOnClickListener{
-            navigateTo(update_bo::class.java)
-        }
+        val assignmentID = intent.getStringExtra("assignmentID")
+
     }
 
+
+
     fun placeTeamData(){
-        val items: List<currentAssignment> = teamFound.currentAssignment
-        val adapter = homeBOadapter(this, items)
+        val teamMembersString = teamFound.teamMembers.joinToString(", ")
+        var teamTitleTV : TextView = findViewById(R.id.teamDescriptionTitle_TV)
+        var teamTaskTV : TextView = findViewById(R.id.teamTask_TV)
+        var teamMembersTV : TextView = findViewById(R.id.teamMembers_TV)
 
-        listView.adapter = adapter
-
-
-        listView.setOnItemClickListener { parent, view, position, id ->
-
-            val clickedAssignment = items[position]
-
-
-            val intent = Intent(this, currentassignmentBO::class.java)
-            intent.putExtra("assignmentID", clickedAssignment.assignmentID)
-            startActivity(intent)
-        }
+        teamTitleTV.text = "Team Name: "+teamFound.teamName
+        teamTaskTV.text = teamFound.teamTasks + " " + teamFound.teamArea
+        teamMembersTV.text = teamMembersString
     }
 
     fun noTeamData(){
@@ -153,14 +185,7 @@ class homeActivity_bo : AppCompatActivity(){
     }
 
     fun placePatrolData(patrolsData: patrolsData){
-        // Check if the TextView ID is correct
-        val patrolDescriptionTV: TextView? = findViewById(R.id.task_description_TV)
-
-        // Check if patrolDescriptionTV is null before using it
-        if (patrolDescriptionTV == null) {
-            Log.e("Error", "patrolDescriptionTV is null. Check the ID in your XML layout.")
-            return // Exit the function if the view is null
-        }
+        var patrolDescriptionTV : TextView = findViewById(R.id.task_description_TV)
 
         patrolDescriptionTV.text = patrolsData.patrolDescription
     }
@@ -206,7 +231,6 @@ class homeActivity_bo : AppCompatActivity(){
     fun retrieveTeamData() {
 
         //loading requirements
-        progressBar.visibility = View.VISIBLE
         loadingOverlay.visibility = View.VISIBLE
 
         val retrofit = Retrofit.Builder()
@@ -225,32 +249,32 @@ class homeActivity_bo : AppCompatActivity(){
         val call = teamAPI.getTeamTasks(fullNameData.toString())
         Log.d("TeamString", call.toString())
 
-        call.enqueue(object : Callback<teamData> {
-            override fun onResponse(call: Call<teamData>, response: Response<teamData>) {
+        call.enqueue(object : Callback<teamsData> {
+            override fun onResponse(call: Call<teamsData>, response: Response<teamsData>) {
                 if (response.isSuccessful) {
 
-                    val teamData = response.body();
+                    val teamsData = response.body();
 
-                    if (teamData!= null) {
-                        teamFound = teamData
+                    if (teamsData!= null) {
+                        teamFound = teamsData
                         //if team is a patrol team go to retrieve patrol data
-                        if(teamData.teamTasks == "Patrol") {
+                        if(teamsData.teamTasks == "Patrol") {
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrievePatrolData()
-                        } else if (teamData.teamTasks == "Security") { //if team is part of security data
+                        } else if (teamsData.teamTasks == "Security") { //if team is part of security data
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveSecurityData()
-                        } else if (teamData.teamTasks == "Delivery") {
+                        } else if (teamsData.teamTasks == "Delivery") {
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveDispatchData()
-                        }else if(teamData.currentAssignment[0].assignmentID.contains("sos")) {
+                        }else if(teamsData.currentAssignment[0].assignmentID.contains("sos")) {
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveSOSTaskData()
-                        } else if (teamData.teamTasks == "Search and Rescue") {
+                        } else if (teamsData.teamTasks == "Search and Rescue") {
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveMissingPersonTaskData()
@@ -260,20 +284,20 @@ class homeActivity_bo : AppCompatActivity(){
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
                         noTeamData()
-                        Toast.makeText(this@homeActivity_bo, "Not Assigned to a Team", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@currentassignmentBO, "Not Assigned to a Team", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     teamDataLoaded = true
                     checkIfAllDataLoaded()
                     Log.e("Error", "Response code: ${response.code()}")
                     Log.e("Error", "Response error message: ${response.message()}")
-                    Toast.makeText(this@homeActivity_bo, "Invalid username or password or NULL", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@currentassignmentBO, "Invalid username or password or NULL", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<teamData>, t: Throwable) {
+            override fun onFailure(call: Call<teamsData>, t: Throwable) {
                 Log.e("Error", "Error: ${t.message}")
-                Toast.makeText(this@homeActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@currentassignmentBO, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 teamDataLoaded = true
                 checkIfAllDataLoaded()
             }
@@ -284,7 +308,6 @@ class homeActivity_bo : AppCompatActivity(){
     fun retrievePatrolData() {
 
         //loading requirements
-        progressBar.visibility = View.VISIBLE
         loadingOverlay.visibility = View.VISIBLE
 
         val retrofit = Retrofit.Builder()
@@ -317,20 +340,20 @@ class homeActivity_bo : AppCompatActivity(){
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
-                        Toast.makeText(this@homeActivity_bo, "No Patrol Task Found", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@currentassignmentBO, "No Patrol Task Found", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     patrolDataLoaded = true
                     checkIfAllDataLoaded()
                     Log.e("Error", "Response code: ${response.code()}")
                     Log.e("Error", "Response error message: ${response.message()}")
-                    Toast.makeText(this@homeActivity_bo, "Response is not successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@currentassignmentBO, "Response is not successful", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<patrolsData>, t: Throwable) {
                 Log.e("Error", "Error: ${t.message}")
-                Toast.makeText(this@homeActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@currentassignmentBO, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 patrolDataLoaded = true
                 checkIfAllDataLoaded()
             }
@@ -340,7 +363,6 @@ class homeActivity_bo : AppCompatActivity(){
     fun retrieveSecurityData() {
 
         //loading requirements
-        progressBar.visibility = View.VISIBLE
         loadingOverlay.visibility = View.VISIBLE
 
         val retrofit = Retrofit.Builder()
@@ -370,20 +392,20 @@ class homeActivity_bo : AppCompatActivity(){
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
-                        Toast.makeText(this@homeActivity_bo, "You are not in Security", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@currentassignmentBO, "You are not in Security", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     patrolDataLoaded = true
                     checkIfAllDataLoaded()
                     Log.e("Error", "Response code: ${response.code()}")
                     Log.e("Error", "Response error message: ${response.message()}")
-                    Toast.makeText(this@homeActivity_bo, "Response is not successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@currentassignmentBO, "Response is not successful", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<securityData>, t: Throwable) {
                 Log.e("Error", "Error: ${t.message}")
-                Toast.makeText(this@homeActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@currentassignmentBO, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 patrolDataLoaded = true
                 checkIfAllDataLoaded()
             }
@@ -392,7 +414,6 @@ class homeActivity_bo : AppCompatActivity(){
     fun retrieveDispatchData() {
 
         //loading requirements
-        progressBar.visibility = View.VISIBLE
         loadingOverlay.visibility = View.VISIBLE
 
         val retrofit = Retrofit.Builder()
@@ -422,20 +443,20 @@ class homeActivity_bo : AppCompatActivity(){
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
-                        Toast.makeText(this@homeActivity_bo, "No Task Assigned to your team", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@currentassignmentBO, "No Task Assigned to your team", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     patrolDataLoaded = true
                     checkIfAllDataLoaded()
                     Log.e("Error", "Response code: ${response.code()}")
                     Log.e("Error", "Response error message: ${response.message()}")
-                    Toast.makeText(this@homeActivity_bo, "Response is not successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@currentassignmentBO, "Response is not successful", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<dispatchData>, t: Throwable) {
                 Log.e("Error", "Error: ${t.message}")
-                Toast.makeText(this@homeActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@currentassignmentBO, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 patrolDataLoaded = true
                 checkIfAllDataLoaded()
             }
@@ -444,7 +465,6 @@ class homeActivity_bo : AppCompatActivity(){
 
     fun retrieveMissingPersonTaskData() {
         //loading requirements
-        progressBar.visibility = View.VISIBLE
         loadingOverlay.visibility = View.VISIBLE
 
         val retrofit = Retrofit.Builder()
@@ -474,20 +494,20 @@ class homeActivity_bo : AppCompatActivity(){
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
-                        Toast.makeText(this@homeActivity_bo, "No Missing Person to look for assigned to your team", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@currentassignmentBO, "No Missing Person to look for assigned to your team", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     patrolDataLoaded = true
                     checkIfAllDataLoaded()
                     Log.e("Error", "Response code: ${response.code()}")
                     Log.e("Error", "Response error message: ${response.message()}")
-                    Toast.makeText(this@homeActivity_bo, "Response is not successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@currentassignmentBO, "Response is not successful", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<missingPersonData>, t: Throwable) {
                 Log.e("Error", "Error: ${t.message}")
-                Toast.makeText(this@homeActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@currentassignmentBO, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 patrolDataLoaded = true
                 checkIfAllDataLoaded()
             }
@@ -495,7 +515,6 @@ class homeActivity_bo : AppCompatActivity(){
     }
     fun retrieveSOSTaskData() {
         //loading requirements
-        progressBar.visibility = View.VISIBLE
         loadingOverlay.visibility = View.VISIBLE
 
         val retrofit = Retrofit.Builder()
@@ -525,20 +544,20 @@ class homeActivity_bo : AppCompatActivity(){
                     } else {
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
-                        Toast.makeText(this@homeActivity_bo, "No SOS request assigned to your team", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@currentassignmentBO, "No SOS request assigned to your team", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     patrolDataLoaded = true
                     checkIfAllDataLoaded()
                     Log.e("Error", "Response code: ${response.code()}")
                     Log.e("Error", "Response error message: ${response.message()}")
-                    Toast.makeText(this@homeActivity_bo, "Response is not successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@currentassignmentBO, "Response is not successful", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<SOSData>, t: Throwable) {
                 Log.e("Error", "Error: ${t.message}")
-                Toast.makeText(this@homeActivity_bo, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@currentassignmentBO, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 patrolDataLoaded = true
                 checkIfAllDataLoaded()
             }
@@ -546,31 +565,15 @@ class homeActivity_bo : AppCompatActivity(){
     }
     private fun checkIfAllDataLoaded() { //checks if loading is done
         if (teamDataLoaded && patrolDataLoaded) {
-            progressBar.visibility = View.GONE
             loadingOverlay.visibility = View.GONE
         }
     }
 
-    private fun saveTeamName (team: teamData){
+    private fun saveTeamName (team: teamsData){
         val sp = getSharedPreferences("userSession", MODE_PRIVATE)
         val editor = sp.edit()
         editor.putString("teamName", teamFound.teamName)
         editor.apply()
-    }
-
-    fun moveToLogin(){
-        val intent = Intent(applicationContext, login_act::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun logout(){
-        val sp = getSharedPreferences("userSession", MODE_PRIVATE)
-        val editor = sp.edit()
-
-        editor.clear()
-        editor.apply()
-        moveToLogin()
     }
 
     fun saveTaskID(taskID: String){
@@ -579,11 +582,12 @@ class homeActivity_bo : AppCompatActivity(){
         editor.putString("taskID", taskID)
         editor.apply()
     }
-}
-private fun AppCompatActivity.navigateTo(destinationActivity: Class<*>) {
-    if (this::class.java != destinationActivity) {
-        val intent = Intent(applicationContext, destinationActivity)
-        startActivity(intent)
-        finish()
+
+    private fun AppCompatActivity.navigateTo(destinationActivity: Class<*>) {
+        if (this::class.java != destinationActivity) {
+            val intent = Intent(applicationContext, destinationActivity)
+            startActivity(intent)
+            finish()
+        }
     }
 }
