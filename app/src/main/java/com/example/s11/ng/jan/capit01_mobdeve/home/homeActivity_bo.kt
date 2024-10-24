@@ -77,17 +77,18 @@ class homeActivity_bo : AppCompatActivity(){
     }
 
     fun placeTeamData(){
-        val items: List<currentAssignment> = teamFound.currentAssignment
+        val items: List<String> = teamFound.currentAssignment.map { it.assignmentDetails }
         val adapter = homeBOadapter(this, items)
 
         listView.adapter = adapter
 
         listView.setOnItemClickListener { parent, view, position, id ->
 
-            val clickedAssignment = items[position]
+            //val clickedAssignment = items[position]
+            val assignmentID = teamFound.currentAssignment[position].assignmentID
+            saveCurrentAssignment(assignmentID)
 
             val intent = Intent(this, currentassignmentBO::class.java)
-            intent.putExtra("assignmentID", clickedAssignment.assignmentID)
             startActivity(intent)
         }
     }
@@ -198,10 +199,10 @@ class homeActivity_bo : AppCompatActivity(){
         moveToLogin()
     }
 
-    fun saveTaskID(taskID: String){
-        val sp = getSharedPreferences("saveTaskID", MODE_PRIVATE)
+    fun saveCurrentAssignment(taskID: String){
+        val sp = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
         val editor = sp.edit()
-        editor.putString("taskID", taskID)
+        editor.putString("assignmentID", taskID)
         editor.apply()
     }
 }

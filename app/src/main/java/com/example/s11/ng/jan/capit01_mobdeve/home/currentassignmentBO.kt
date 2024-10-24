@@ -92,7 +92,6 @@ data class SOSData(
     @SerializedName("isFound") val isFound: Boolean
 )
 
-
 class currentassignmentBO : AppCompatActivity() {
 
     interface teamDataAPI {
@@ -136,6 +135,10 @@ class currentassignmentBO : AppCompatActivity() {
 
         loadingOverlay = findViewById(R.id.loading_overlay)
 
+        val spTask = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
+        val savedAssignmentID = spTask.getString("assignmentID", "null")
+        Log.d("CurrentAssignment", savedAssignmentID.toString())
+
         val updatebutton: ImageButton = findViewById(R.id.update_BO)
         updatebutton.setOnClickListener{
             navigateTo(update_bo::class.java)
@@ -148,7 +151,7 @@ class currentassignmentBO : AppCompatActivity() {
             navigateTo(homeActivity_bo::class.java)
         }
 
-        val assignmentID = intent.getStringExtra("assignmentID")
+        //val assignmentID = intent.getStringExtra("assignmentID")
 
     }
 
