@@ -17,7 +17,7 @@
             android:layout_height="571sp"
             android:layout_marginTop="32sp"
             android:layout_marginBottom="37sp"
-            android:background="@drawable/imageborder"
+            android:background="@drawable/bg2"
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView6"
@@ -30,18 +30,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Title: "
+                android:fontFamily="@font/roboto"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/missingFullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Full Name: "
+                android:fontFamily="@font/roboto"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -49,7 +52,8 @@
                 android:id="@+id/fullNameReported_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="fullName" />
+                android:text="fullName"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/age"
@@ -57,13 +61,15 @@
                 android:layout_height="wrap_content"
                 android:text="Age: "
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/ageReported_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="age" />
+                android:text="age"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/sex"
@@ -71,13 +77,15 @@
                 android:layout_height="wrap_content"
                 android:text="Sex: "
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/sexReported_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="sex" />
+                android:text="sex"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/areaLastSeen"
@@ -85,13 +93,15 @@
                 android:layout_height="wrap_content"
                 android:text="Area Last Seen: "
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/areaLastSeenReported_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/description"
@@ -99,17 +109,20 @@
                 android:layout_height="wrap_content"
                 android:text="Description: "
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/description_missing_Reported_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="description" />
+                android:text="description"
+                android:fontFamily="@font/roboto"/>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="25dp" />
+                android:layout_height="25dp"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/reportedBy"
@@ -117,11 +130,13 @@
                 android:layout_height="wrap_content"
                 android:text="Reported By:"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto"/>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp" />
+                android:layout_height="10dp"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/filedBy_Reported_TV"
@@ -129,7 +144,8 @@
                 android:layout_height="wrap_content"
                 android:text="File By: "
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/contactNumber"
@@ -137,34 +153,42 @@
                 android:layout_height="wrap_content"
                 android:text="Emergency Contact Number: "
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto"/>
 
             <TextView
                 android:id="@+id/ContactNumberReported_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:fontFamily="@font/roboto"/>
 
         </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="410sp"
-            android:layout_height="49sp"
-            android:layout_marginStart="1dp"
+            android:layout_height="60sp"
+            android:cropToPadding="true"
+            android:padding="1sp"
+            android:paddingLeft="1sp"
+            android:paddingTop="1sp"
+            android:paddingRight="1sp"
+            android:paddingBottom="1sp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/rectanglesharp" />
+            app:srcCompat="@drawable/navbarbg" />
 
         <ImageButton
             android:id="@+id/missing_BO"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_marginStart="106sp"
-            android:layout_marginEnd="267sp"
-            android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="105dp"
+            android:layout_marginEnd="256dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/white"
             android:src="@drawable/baseline_people_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -172,12 +196,12 @@
 
         <ImageButton
             android:id="@+id/fingerprint_BO"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_marginStart="338sp"
-            android:layout_marginEnd="35sp"
-            android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="332dp"
+            android:layout_marginEnd="29dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/white"
             android:src="@drawable/baseline_fingerprint_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -185,12 +209,12 @@
 
         <ImageButton
             android:id="@+id/filearea_BO"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_marginStart="186sp"
-            android:layout_marginEnd="187sp"
-            android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="180dp"
+            android:layout_marginEnd="181dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/white"
             android:src="@drawable/baseline_report_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -198,12 +222,12 @@
 
         <ImageButton
             android:id="@+id/file_RT"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_marginStart="263sp"
-            android:layout_marginEnd="110sp"
-            android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="256dp"
+            android:layout_marginEnd="105dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/white"
             android:src="@drawable/baseline_person_search_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -211,12 +235,12 @@
 
         <ImageButton
             android:id="@+id/response_BO"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_marginStart="26sp"
-            android:layout_marginEnd="347sp"
-            android:layout_marginBottom="6sp"
-            android:background="@drawable/imageborder"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="26dp"
+            android:layout_marginEnd="335dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/white"
             android:src="@drawable/baseline_view_list_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -244,9 +268,9 @@
             android:layout_marginTop="44sp"
             android:layout_marginEnd="161sp"
             android:layout_marginBottom="660dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/roboto_bold"
             android:text="Missing Person Details"
-            android:textColor="@color/white"
+            android:textColor="#F2FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -263,8 +287,9 @@
             android:layout_marginStart="342dp"
             android:layout_marginTop="28sp"
             android:layout_marginEnd="13sp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/imageborder"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/white"
+            android:foregroundTint="@color/gray"
             android:clickable="true"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
