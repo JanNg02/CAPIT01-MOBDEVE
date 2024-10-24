@@ -135,11 +135,6 @@ class currentassignmentBO : AppCompatActivity() {
 
         loadingOverlay = findViewById(R.id.loading_overlay)
 
-        val spTask = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
-        val savedAssignmentID = spTask.getString("assignmentID", "null")
-        Log.d("CurrentAssignment", savedAssignmentID.toString())
-
-
         val updatebutton: ImageButton = findViewById(R.id.update_BO)
         updatebutton.setOnClickListener{
             navigateTo(update_bo::class.java)
@@ -495,6 +490,8 @@ class currentassignmentBO : AppCompatActivity() {
                     if (missingPersonTaskData!= null) {
                         placeTeamData() //place the team ata on the screen
                         placeMissingPersonsData(missingPersonTaskData) //place the patrol data on the screen
+                        saveTaskID(missingPersonTaskData.miaID)//save the taskID
+                        Log.d("TASKID", missingPersonTaskData.miaID)
                         //checks for loading
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()

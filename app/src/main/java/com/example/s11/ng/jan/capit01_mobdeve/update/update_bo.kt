@@ -54,7 +54,6 @@ class update_bo : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-
     interface updateTanodsAPI {
         @POST("updateTanods")
         fun updateTanods(@Body requestBody: RequestBody): Call<ResponseBody>
@@ -111,6 +110,7 @@ class update_bo : AppCompatActivity() {
 
                 val spTask = getSharedPreferences("saveTaskID", MODE_PRIVATE)
                 val savedTaskID = spTask.getString("taskID", "null")
+                Log.d("TaskIDUpdates", savedTaskID.toString())
 
                 val dateSubmitted = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(
                     Date()
@@ -122,6 +122,7 @@ class update_bo : AppCompatActivity() {
                     Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 }
 
+                //DATA SET TO BE SENT
                 val report = updateReport(ID,updateText,detailsText,dateSubmitted,filedBy)
                 val gson = Gson()
                 val json = gson.toJson(report)
