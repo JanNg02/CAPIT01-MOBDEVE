@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import com.example.s11.ng.jan.capit01_mobdeve.update.update_bo
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.Callback
@@ -135,6 +136,11 @@ class currentassignmentBO : AppCompatActivity() {
 
         loadingOverlay = findViewById(R.id.loading_overlay)
 
+        val updatebutton: ImageButton = findViewById(R.id.update_BO)
+        updatebutton.setOnClickListener{
+            navigateTo(update_bo::class.java)
+        }
+
         retrieveTeamData()
 
         val backbutton: ImageButton = findViewById(R.id.assignmentBack)
@@ -145,8 +151,6 @@ class currentassignmentBO : AppCompatActivity() {
         val assignmentID = intent.getStringExtra("assignmentID")
 
     }
-
-
 
     fun placeTeamData(){
         val teamMembersString = teamFound.teamMembers.joinToString(", ")

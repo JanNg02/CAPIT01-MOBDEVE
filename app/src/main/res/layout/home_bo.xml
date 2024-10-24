@@ -178,19 +178,5 @@
             app:layout_constraintStart_toStartOf="@+id/linearLayout2"
             app:layout_constraintTop_toTopOf="@+id/linearLayout2" />
 
-        <ImageButton
-            android:id="@+id/update_BO"
-            android:layout_width="57dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="270dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="79dp"
-            android:background="@drawable/bg2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_add_24" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

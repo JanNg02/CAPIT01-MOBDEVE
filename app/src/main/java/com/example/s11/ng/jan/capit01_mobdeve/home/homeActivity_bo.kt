@@ -40,7 +40,6 @@ data class currentAssignment(
     @SerializedName("assignmentDetails") val assignmentDetails: String
 )
 
-
 class homeActivity_bo : AppCompatActivity(){
 
     private lateinit var listView: ListView
@@ -92,9 +91,6 @@ class homeActivity_bo : AppCompatActivity(){
         progressBar = findViewById(R.id.loading_progress_bar)
         progressBar.visibility = View.VISIBLE
 
-
-
-
         retrieveTeamData()
 
         val logoutButton: FloatingActionButton = findViewById(R.id.logout_button_BO)
@@ -103,10 +99,6 @@ class homeActivity_bo : AppCompatActivity(){
         }
 
         setupFooter_bo() // Call the footer setup function
-        val updatebutton: ImageButton = findViewById(R.id.update_BO)
-        updatebutton.setOnClickListener{
-            navigateTo(update_bo::class.java)
-        }
     }
 
     fun placeTeamData(){
@@ -115,11 +107,9 @@ class homeActivity_bo : AppCompatActivity(){
 
         listView.adapter = adapter
 
-
         listView.setOnItemClickListener { parent, view, position, id ->
 
             val clickedAssignment = items[position]
-
 
             val intent = Intent(this, currentassignmentBO::class.java)
             intent.putExtra("assignmentID", clickedAssignment.assignmentID)
