@@ -203,6 +203,7 @@ class homeActivity_bo : AppCompatActivity(){
         val sp = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
         val editor = sp.edit()
         editor.putString("assignmentID", taskID)
+        editor.putInt("teamID", teamFound.teamID)
         editor.apply()
     }
 }

@@ -139,6 +139,7 @@ class currentassignmentBO : AppCompatActivity() {
         val savedAssignmentID = spTask.getString("assignmentID", "null")
         Log.d("CurrentAssignment", savedAssignmentID.toString())
 
+
         val updatebutton: ImageButton = findViewById(R.id.update_BO)
         updatebutton.setOnClickListener{
             navigateTo(update_bo::class.java)
@@ -150,9 +151,6 @@ class currentassignmentBO : AppCompatActivity() {
         backbutton.setOnClickListener{
             navigateTo(homeActivity_bo::class.java)
         }
-
-        //val assignmentID = intent.getStringExtra("assignmentID")
-
     }
 
     fun placeTeamData(){
@@ -224,7 +222,6 @@ class currentassignmentBO : AppCompatActivity() {
         formattedText.append("Age: ${missingPersonData.age} \n\n")
         formattedText.append("Description:\n")
         formattedText.append("${missingPersonData.description}\n")
-
 
         missingPersonDescriptionTV.text = formattedText.toString()
     }
@@ -484,7 +481,11 @@ class currentassignmentBO : AppCompatActivity() {
         val baseUrl = retrofit.baseUrl().toString()
         Log.d("Base URL", baseUrl)
 
-        val call = missingPersonTaskAPI.getMissingPersonTaskData(teamFound.currentAssignment[0].assignmentID)
+        val spTask = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
+        val savedAssignmentID = spTask.getString("assignmentID", "null")
+        Log.d("CurrentAssignment", savedAssignmentID.toString())
+
+        val call = missingPersonTaskAPI.getMissingPersonTaskData(savedAssignmentID.toString())
         Log.d("UserString", call.toString())
 
         call.enqueue(object : Callback<missingPersonData> {
