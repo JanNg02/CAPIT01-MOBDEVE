@@ -94,21 +94,17 @@ class homeActivity_bo : AppCompatActivity(){
     }
 
     fun noTeamData(){
-        var teamTitleTV : TextView = findViewById(R.id.teamDescriptionTitle_TV)
-        var teamTaskTV : TextView = findViewById(R.id.teamTask_TV)
-        var teamTask : TextView = findViewById(R.id.teamTask)
-        var teamMembersTV : TextView = findViewById(R.id.teamMembers_TV)
-        var teamMembers: TextView = findViewById(R.id.teamMembers)
-        var teamDescriptionTV : TextView = findViewById(R.id.task_description_TV)
-        var teamDescription : TextView = findViewById(R.id.task_description)
 
-        teamTitleTV.text = "No Team Found"
-        teamTaskTV.visibility = View.GONE
-        teamMembersTV.visibility = View.GONE
-        teamDescriptionTV.visibility = View.GONE
-        teamDescription.visibility = View.GONE
-        teamTask.visibility = View.GONE
-        teamMembers.visibility = View.GONE
+        val items = listOf("no team assigned")
+        val adapter = homeBOadapter(this, items)
+
+        listView.adapter = adapter
+
+        listView.setOnItemClickListener { parent, view, position, id ->
+
+            val intent = Intent(this, currentassignmentBO::class.java)
+            startActivity(intent)
+        }
     }
 
     //Check Team
