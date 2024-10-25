@@ -99,12 +99,6 @@ class homeActivity_bo : AppCompatActivity(){
         val adapter = homeBOadapter(this, items)
 
         listView.adapter = adapter
-
-        listView.setOnItemClickListener { parent, view, position, id ->
-
-            val intent = Intent(this, currentassignmentBO::class.java)
-            startActivity(intent)
-        }
     }
 
     //Check Team

@@ -254,6 +254,10 @@ class currentassignmentBO : AppCompatActivity() {
 
                     val teamsData = response.body();
 
+                    val spTask = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
+                    val checkAssignmentID = spTask.getString("assignmentID", "null")
+                    Log.d("CurrentAssignment", checkAssignmentID.toString())
+
                     if (teamsData!= null) {
                         teamFound = teamsData
                         //if team is a patrol team go to retrieve patrol data
@@ -269,7 +273,7 @@ class currentassignmentBO : AppCompatActivity() {
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveDispatchData()
-                        }else if(teamsData.currentAssignment[0].assignmentID.contains("sos")) {
+                        }else if(checkAssignmentID.toString().contains("sos")) {
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveSOSTaskData()
