@@ -425,7 +425,11 @@ class currentassignmentBO : AppCompatActivity() {
         val baseUrl = retrofit.baseUrl().toString()
         Log.d("Base URL", baseUrl)
 
-        val call = dispatchAPI.getDispatchData(teamFound.currentAssignment[0].assignmentID)
+        val spTask = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
+        val savedAssignmentID = spTask.getString("assignmentID", "null")
+        Log.d("CurrentAssignment", savedAssignmentID.toString())
+
+        val call = dispatchAPI.getDispatchData(savedAssignmentID.toString())
         Log.d("UserString", call.toString())
 
         call.enqueue(object : Callback<dispatchData> {
@@ -532,7 +536,11 @@ class currentassignmentBO : AppCompatActivity() {
         val baseUrl = retrofit.baseUrl().toString()
         Log.d("Base URL", baseUrl)
 
-        val call = sosTaskAPI.getSOSDataTask(teamFound.currentAssignment[0].assignmentID)
+        val spTask = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
+        val savedAssignmentID = spTask.getString("assignmentID", "null")
+        Log.d("CurrentAssignment", savedAssignmentID.toString())
+
+        val call = sosTaskAPI.getSOSDataTask(savedAssignmentID.toString())
         Log.d("UserString", call.toString())
 
         call.enqueue(object : Callback<SOSData> {
