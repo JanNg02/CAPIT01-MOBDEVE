@@ -170,32 +170,36 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
 
         if (::destination.isInitialized && ::currentLocation.isInitialized) {
             val url = "https://maps.googleapis.com/maps/api/directions/json" +
-                    "?origin=" + currentLocation.latitude + "," + currentLocation.longitude +
-                    "&destination=" + destination.latitude + "," + destination.longitude +
+                    "?origin=${currentLocation.latitude},${currentLocation.longitude}" +
+                    "&destination=${destination.latitude},${destination.longitude}" +
                     "&mode=driving" +
-                    "&key=AIzaSyDaka3Pso7shUImAerJ8SvrrmUSHsvmSXE"
+                    "&key=AIzaSyDaka3Pso7shUImAerJ8SvrrmUSHsvmSXE" // Replace with your actual API key
 
             val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
                 val routes = response.getJSONArray("routes")
-                val route = routes.getJSONObject(0)
-                val overviewPolyline = route.getJSONObject("overview_polyline")
-                val polylineString = overviewPolyline.getString("points")
+                if (routes.length() > 0) {
+                    val route = routes.getJSONObject(0)
+                    val overviewPolyline = route.getJSONObject("overview_polyline")
+                    val polylineString = overviewPolyline.getString("points")
 
-                val polylineList = PolyUtil.decode(polylineString)
-                val polylineOptions = PolylineOptions()
-                polylineOptions.color(Color.BLUE)
-                polylineOptions.width(10f)
+                    val polylineList = PolyUtil.decode(polylineString)
+                    val polylineOptions = PolylineOptions()
+                    polylineOptions.color(Color.BLUE)
+                    polylineOptions.width(10f)
 
-                for (point in polylineList) {
-                    polylineOptions.add(point)
-                }
+                    for (point in polylineList) {
+                        polylineOptions.add(point)
+                    }
 
-                // Add the polyline to the map on the main thread
-                runOnUiThread {
-                    navigationPolyline = mMap.addPolyline(polylineOptions)
+                    // Add the polyline to the map on the main thread
+                    runOnUiThread {
+                        navigationPolyline = mMap.addPolyline(polylineOptions)
+                    }
+                } else {
+                    Toast.makeText(this, "No routes found", Toast.LENGTH_SHORT).show()
                 }
             }, { error ->
-                Toast.makeText(this, "Error drawing navigation route", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error drawing navigation route: ${error.message}", Toast.LENGTH_SHORT).show()
             })
 
             // Execute the request on a background thread
