@@ -163,6 +163,11 @@
                 android:text="TextView"
                 android:fontFamily="@font/roboto"/>
 
+            <ImageView
+                android:id = "@+id/missingPersonImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <ImageView
