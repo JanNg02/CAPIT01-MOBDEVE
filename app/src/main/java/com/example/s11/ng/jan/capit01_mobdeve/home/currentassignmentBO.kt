@@ -106,7 +106,7 @@ class currentassignmentBO : AppCompatActivity() {
 
     interface patrolTaskAPI {
         @GET("getPatrolTasks")
-        fun getPatrolTasks(@Query("teamName") teamName: String): Call<patrolsData>
+        fun getPatrolTasks(@Query("patrolID") patrolID: String): Call<patrolsData>
     }
 
     interface securityAPI {
