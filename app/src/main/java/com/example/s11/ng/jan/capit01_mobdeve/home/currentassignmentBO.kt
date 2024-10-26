@@ -47,7 +47,7 @@ data class patrolsData(
 )
 
 data class securityData(
-    @SerializedName("evacuationSecurityID") val evacuationSecurityID: Int,
+    @SerializedName("evacuationSecurityID") val evacuationSecurityID: String,
     @SerializedName("evacuationSecurityArea") val evacuationSecurityArea: String,
     @SerializedName("teamName") val teamName: List<String>,
     @SerializedName("dateCreated") val dateCreated: String,
@@ -390,6 +390,7 @@ class currentassignmentBO : AppCompatActivity() {
 
         val baseUrl = retrofit.baseUrl().toString()
         Log.d("Base URL", baseUrl)
+        Log.d("Assignment ID", teamFound.currentAssignment[0].assignmentID)
 
         val call = securityAPI.getSecurityTasks(teamFound.currentAssignment[0].assignmentID)
         Log.d("UserString", call.toString())
