@@ -1,12 +1,15 @@
 package com.example.s11.ng.jan.capit01_mobdeve.home
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import androidx.appcompat.app.AppCompatActivity
 import com.example.s11.ng.jan.capit01_mobdeve.R
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.s11.ng.jan.capit01_mobdeve.update.update_bo
@@ -18,6 +21,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.io.Serial
 
 data class teamsData(
     @SerializedName("teamName") val teamName: String,
@@ -80,6 +84,7 @@ data class missingPersonData(
     @SerializedName("teamdID") val teamID : String,
     @SerializedName("timeLastSeen") val timeLastSeen : String,
     @SerializedName("miaID") val miaID : String,
+    @SerializedName("missingPersonImage") val missingPersonImage : String? = ""
 )
 
 data class SOSData(
@@ -219,6 +224,14 @@ class currentassignmentBO : AppCompatActivity() {
         formattedText.append("${missingPersonData.description}\n")
 
         missingPersonDescriptionTV.text = formattedText.toString()
+
+        var missingPersonImageView : ImageView = findViewById(R.id.taskImage_IV)
+
+        if (!missingPersonData.missingPersonImage.isNullOrBlank()) {
+            val imgBytes = Base64.decode(missingPersonData.missingPersonImage, Base64.DEFAULT)
+            val decodedImg = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.size)
+            missingPersonImageView.setImageBitmap(decodedImg)
+        }
     }
 
     fun placeSOSData(SOSData: SOSData){
