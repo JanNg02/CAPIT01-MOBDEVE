@@ -336,7 +336,11 @@ class currentassignmentBO : AppCompatActivity() {
         val baseUrl = retrofit.baseUrl().toString()
         Log.d("Base URL", baseUrl)
 
-        val call = patrolAPI.getPatrolTasks(teamFound.teamName)
+        val patrolTask = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
+        val savedAssignmentID = patrolTask.getString("assignmentID", "null")
+        Log.d("CurrentAssignment", savedAssignmentID.toString())
+
+        val call = patrolAPI.getPatrolTasks(savedAssignmentID.toString())
         Log.d("UserString", call.toString())
 
         call.enqueue(object : Callback<patrolsData> {
@@ -390,9 +394,12 @@ class currentassignmentBO : AppCompatActivity() {
 
         val baseUrl = retrofit.baseUrl().toString()
         Log.d("Base URL", baseUrl)
-        Log.d("Assignment ID", teamFound.currentAssignment[0].assignmentID)
 
-        val call = securityAPI.getSecurityTasks(teamFound.currentAssignment[0].assignmentID)
+        val secTask = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
+        val savedAssignmentID = secTask.getString("assignmentID", "null")
+        Log.d("CurrentAssignment", savedAssignmentID.toString())
+
+        val call = securityAPI.getSecurityTasks(savedAssignmentID.toString())
         Log.d("UserString", call.toString())
 
         call.enqueue(object : Callback<securityData> {
