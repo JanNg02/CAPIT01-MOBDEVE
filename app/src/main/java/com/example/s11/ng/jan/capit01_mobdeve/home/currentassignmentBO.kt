@@ -92,6 +92,27 @@ data class SOSData(
     @SerializedName("isFound") val isFound: Boolean
 )
 
+data class pickUpRequestData(
+    @SerializedName("pickUpRequestID") val pickUpRequestID: String,
+    @SerializedName("evacToDeliver") val evacToDeliver: List<evacToDeliver>,
+    @SerializedName("donorName") val donorName: String,
+    @SerializedName("donorAddress") val donorAddress: String,
+    @SerializedName("resourcesPickedUp") val resourcesPickedUp: List<resourcesPickedUp>,
+    @SerializedName("pickUpStatus") val pickUpStatus: String,
+    @SerializedName("dateRequested") val dateRequested: String,
+    @SerializedName("teamAssigned") val teamAssigned: String
+)
+
+data class evacToDeliver(
+    @SerializedName("evacName") val evacName: String,
+    @SerializedName("status") val status: String,
+)
+
+data class resourcesPickedUp(
+    @SerializedName("evacInventoryName") val evacInventoryName: String,
+    @SerializedName("evacInventoryQuantity") val evacInventoryQuantity: Int,
+)
+
 class currentassignmentBO : AppCompatActivity() {
 
     interface teamDataAPI {
@@ -101,7 +122,7 @@ class currentassignmentBO : AppCompatActivity() {
 
     interface patrolTaskAPI {
         @GET("getPatrolTasks")
-        fun getPatrolTasks(@Query("teamName") teamName: String): Call<patrolsData>
+        fun getPatrolTasks(@Query("patrolID") patrolID: String): Call<patrolsData>
     }
 
     interface securityAPI {
@@ -323,7 +344,11 @@ class currentassignmentBO : AppCompatActivity() {
         val baseUrl = retrofit.baseUrl().toString()
         Log.d("Base URL", baseUrl)
 
-        val call = patrolAPI.getPatrolTasks(teamFound.teamName)
+        val spTask = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
+        val savedAssignmentID = spTask.getString("assignmentID", "null")
+        Log.d("CurrentAssignment", savedAssignmentID.toString())
+
+        val call = patrolAPI.getPatrolTasks(savedAssignmentID.toString())
         Log.d("UserString", call.toString())
 
         call.enqueue(object : Callback<patrolsData> {
@@ -414,6 +439,7 @@ class currentassignmentBO : AppCompatActivity() {
             }
         })
     }
+
     fun retrieveDispatchData() {
 
         //loading requirements
