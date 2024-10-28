@@ -28,7 +28,7 @@ data class teamsData(
     @SerializedName("teamMembers") val teamMembers: List<String>,
     @SerializedName("teamStatus") val teamStatus: Boolean ,
     @SerializedName("teamTasks") val teamTasks: String,
-    @SerializedName("currentAssignment") val currentAssignment: List<currentAssignment>,
+    @SerializedName("currentAssignment") val currentAssignment: List<currentAssignments>,
     @SerializedName("teamArea") val teamArea: String,
     @SerializedName("teamID") val teamID: Int
 )
@@ -110,12 +110,12 @@ data class pickUpRequestData(
 
 data class evacToDeliver(
     @SerializedName("evacName") val evacName: String,
-    @SerializedName("status") val status: String,
+    @SerializedName("status") val status: String
 )
 
 data class resourcesPickedUp(
-    @SerializedName("evacInventoryName") val evacInventoryName: String,
-    @SerializedName("evacInventoryQuantity") val evacInventoryQuantity: Int,
+    @SerializedName("itemName") val evacInventoryName: String,
+    @SerializedName("quantity") val evacInventoryQuantity: Int,
 )
 
 class currentassignmentBO : AppCompatActivity() {
@@ -148,6 +148,11 @@ class currentassignmentBO : AppCompatActivity() {
     interface sosTaskAPI {
         @GET("getSOSDataTask")
         fun getSOSDataTask(@Query("currentAssignment") currentAssignment: String): Call<SOSData>
+    }
+
+    interface pickUpAPI {
+        @GET("getPickUpTask")
+        fun getPickUpTask(@Query("currentAssignment") currentAssignment: String): Call<pickUpRequestData>
     }
 
     private lateinit var teamFound: teamsData
@@ -233,6 +238,26 @@ class currentassignmentBO : AppCompatActivity() {
         dispatchDescriptionTV.text = formattedText.toString()
     }
 
+    fun placePickUpData(pickUpData: pickUpRequestData){
+        var dispatchDescriptionTV : TextView = findViewById(R.id.task_description_TV)
+
+        val donorName = pickUpData.donorName
+        val donorAddress = pickUpData.donorAddress
+        val resourcesToPickUp = pickUpData.resourcesPickedUp
+
+        Log.d("resourcesPickedUp", resourcesToPickUp.toString())
+
+        // Create a formatted string
+        val formattedText = StringBuilder()
+        formattedText.append("Get the Donoated items from $donorName at $donorAddress\n\n") // Start with the evacName
+        formattedText.append("The Items are: \n")
+        resourcesToPickUp.forEach { request ->
+            formattedText.append("  - Item: ${request.evacInventoryName}, Quantity: ${request.evacInventoryQuantity}\n")
+        }
+
+        dispatchDescriptionTV.text = formattedText.toString()
+    }
+
     fun placeMissingPersonsData(missingPersonData: missingPersonData){
         var missingPersonDescriptionTV : TextView = findViewById(R.id.task_description_TV)
 
@@ -303,11 +328,15 @@ class currentassignmentBO : AppCompatActivity() {
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveSecurityData()
+                        }else if (checkAssignmentID.toString().contains("pu")){
+                            teamDataLoaded = true
+                            checkIfAllDataLoaded()
+                            retrievePickUpData()
                         } else if (teamsData.teamTasks == "Delivery") {
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveDispatchData()
-                        }else if(checkAssignmentID.toString().contains("sos")) {
+                        } else if(checkAssignmentID.toString().contains("sos")) {
                             teamDataLoaded = true
                             checkIfAllDataLoaded()
                             retrieveSOSTaskData()
@@ -619,6 +648,62 @@ class currentassignmentBO : AppCompatActivity() {
             }
         })
     }
+
+    fun retrievePickUpData() {
+        //loading requirements
+        loadingOverlay.visibility = View.VISIBLE
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val pickUpAPI = retrofit.create(pickUpAPI::class.java)
+
+        val baseUrl = retrofit.baseUrl().toString()
+        Log.d("Base URL", baseUrl)
+
+        val spTask = getSharedPreferences("saveCurrentAssignment", MODE_PRIVATE)
+        val savedAssignmentID = spTask.getString("assignmentID", "null")
+        Log.d("CurrentAssignmentPickUp", savedAssignmentID.toString())
+
+        val call = pickUpAPI.getPickUpTask(savedAssignmentID.toString())
+        Log.d("UserString", call.toString())
+
+        call.enqueue(object : Callback<pickUpRequestData> {
+            override fun onResponse(call: Call<pickUpRequestData>, response: Response<pickUpRequestData>) {
+                if (response.isSuccessful) {
+                    val pickUpData = response.body();
+                    if (pickUpData!= null) {
+                        placeTeamData() //place the team ata on the screen
+                        placePickUpData(pickUpData) //place the patrol data on the screen
+                        //checks for loading
+                        patrolDataLoaded = true
+                        checkIfAllDataLoaded()
+                        saveTeamName(teamFound)
+                    } else {
+                        patrolDataLoaded = true
+                        checkIfAllDataLoaded()
+                        Toast.makeText(this@currentassignmentBO, "No Task Assigned to your team", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    patrolDataLoaded = true
+                    checkIfAllDataLoaded()
+                    Log.e("Error", "Response code: ${response.code()}")
+                    Log.e("Error", "Response error message: ${response.message()}")
+                    Toast.makeText(this@currentassignmentBO, "Response is not successful", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<pickUpRequestData>, t: Throwable) {
+                Log.e("Error", "Error: ${t.message}")
+                Toast.makeText(this@currentassignmentBO, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                patrolDataLoaded = true
+                checkIfAllDataLoaded()
+            }
+        })
+    }
+
     private fun checkIfAllDataLoaded() { //checks if loading is done
         if (teamDataLoaded && patrolDataLoaded) {
             loadingOverlay.visibility = View.GONE
