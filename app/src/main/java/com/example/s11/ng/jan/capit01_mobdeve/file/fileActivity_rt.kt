@@ -1,12 +1,17 @@
 package com.example.s11.ng.jan.capit01_mobdeve.file
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.s11.ng.jan.capit01_mobdeve.R
@@ -24,6 +29,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -39,7 +45,8 @@ data class Missing(
     @SerializedName("filedBy") val filedBy: String,
     @SerializedName("contactNum") val contactNum: String,
     @SerializedName("teamID") val teamID: String,
-    @SerializedName("isFound") val isFound: Boolean
+    @SerializedName("isFound") val isFound: Boolean,
+    @SerializedName("missingPersonImage") val imageString: String
 )
 
 class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
@@ -52,7 +59,10 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
     private lateinit var sexRadioGroup: RadioGroup
     private lateinit var maleRadioButton: RadioButton
     private lateinit var femaleRadioButton: RadioButton
+    private lateinit var imageButton: Button
     private lateinit var submitButton: Button
+
+    private lateinit var imageString: String
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
@@ -73,6 +83,25 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
         setupFooter_bo() // Call the footer setup function
     }
 
+    private val pickImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            val data = it.data
+            val imgUri = data?.data
+
+            if (imgUri == null) {
+                return@registerForActivityResult
+            }
+
+            try {
+                val bytes = contentResolver.openInputStream(imgUri)?.readBytes()
+                imageString = Base64.encodeToString(bytes, Base64.DEFAULT)
+
+            } catch (error: IOException) {
+                error.printStackTrace()
+            }
+        }
+    }
+
     private fun fileMissingPerson() {
         fullNameEditText = findViewById(R.id.missingFullName)
         descriptionEditText = findViewById(R.id.description)
@@ -83,6 +112,14 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
         sexRadioGroup = findViewById(R.id.sexRadioGroup)
         maleRadioButton = findViewById(R.id.maleRadioButton)
         femaleRadioButton = findViewById(R.id.femaleRadioButton)
+
+        imageButton = findViewById(R.id.addImageRT)
+        imageString = "";
+
+        imageButton.setOnClickListener {
+            val galleryPick = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            pickImage.launch(galleryPick)
+        }
 
         val editTexts = listOf(fullNameEditText, descriptionEditText, areaLastSeenEditText, timeLastSeenEditText, ageEditText)
 
@@ -107,7 +144,7 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
             val teamID = "None"
             val isFound = false
 
-            if (fullName.isEmpty() || description.isEmpty() || areaLastSeen.isEmpty() || timeLastSeen.isEmpty() || age == null) {
+            if (fullName.isEmpty() || description.isEmpty() || areaLastSeen.isEmpty() || timeLastSeen.isEmpty() || age == null || imageString.isBlank()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -121,7 +158,7 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
                 }
             }
 
-            val missing = Missing(fullName, description, areaLastSeen, timeLastSeen, age, sex, dateSubmitted, filedBy, contactNum, teamID, isFound)
+            val missing = Missing(fullName, description, areaLastSeen, timeLastSeen, age, sex, dateSubmitted, filedBy, contactNum, teamID, isFound, imageString)
             val gson = Gson()
             val json = gson.toJson(missing)
 
@@ -176,6 +213,8 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
 
         maleRadioButton.isChecked = false
         femaleRadioButton.isChecked = false
+
+        imageString = ""
 
         swipeRefreshLayout.isRefreshing = false // Reset the refresh indicator
     }

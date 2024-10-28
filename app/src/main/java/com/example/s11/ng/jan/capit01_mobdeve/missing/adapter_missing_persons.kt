@@ -34,6 +34,13 @@ class MissingPersonAdapter(private val missingPersonData: List<missingPersonData
             intent.putExtra("filedBy", missingPerson.filedBy)
             intent.putExtra("dateSubmitted", missingPerson.dateSubmitted)
             intent.putExtra("contactNum", missingPerson.contactNum)
+
+            var missingPersonImageStr = missingPerson.missingPersonImage
+            if (missingPersonImageStr.isNullOrBlank()) {
+                missingPersonImageStr = ""
+            }
+
+            intent.putExtra("missingPersonImage", missingPersonImageStr)
             holder.itemView.context.startActivity(intent)
         }
     }

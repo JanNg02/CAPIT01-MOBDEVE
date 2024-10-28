@@ -43,6 +43,7 @@ data class missingPersonData(
     @SerializedName("teamdID") val teamID : String,
     @SerializedName("timeLastSeen") val timeLastSeen : String,
     @SerializedName("miaID") val miaID : String,
+    @SerializedName("missingPersonImage") val missingPersonImage : String? = ""
 )
 
 interface getMissingPersonAPI {

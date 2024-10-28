@@ -1,6 +1,9 @@
 package com.example.s11.ng.jan.capit01_mobdeve.missing
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.s11.ng.jan.capit01_mobdeve.R
@@ -21,6 +24,7 @@ class missing_descp : AppCompatActivity() {
         val descriptionTextView = findViewById<TextView>(R.id.description_missing_Reported_TV)
         val areaLastSeenTextView = findViewById<TextView>(R.id.areaLastSeenReported_TV)
         val contactNumTextView = findViewById<TextView>(R.id.ContactNumberReported_TV)
+        val missingPersonImageView = findViewById<ImageView>(R.id.missingPersonImage)
 
         val intent = intent
         val extras = intent.extras
@@ -35,6 +39,7 @@ class missing_descp : AppCompatActivity() {
             val filedBy = it.getString("filedBy")
             val dateSubmitted = it.getString("dateSubmitted")
             val contactNum = it.getString("contactNum")
+            val missingPersonImage = it.getString("missingPersonImage")
 
             titleTextView.text = title
             fullNameTextView.text = missingFullName
@@ -44,6 +49,12 @@ class missing_descp : AppCompatActivity() {
             sexTextView.text = sex
             filedByTextView.text = "Filed By: " + filedBy + " on " + dateSubmitted
             contactNumTextView.text = contactNum
+
+            if (!missingPersonImage.isNullOrBlank()) {
+                val imgBytes = Base64.decode(missingPersonImage, Base64.DEFAULT)
+                val decodedImg = BitmapFactory.decodeByteArray(imgBytes, 0, imgBytes.size)
+                missingPersonImageView.setImageBitmap(decodedImg)
+            }
         }
 
         setupFooter_bo()
