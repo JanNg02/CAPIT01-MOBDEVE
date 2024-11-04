@@ -18,6 +18,8 @@ import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        Log.d("MyFirebaseMessaging", "From: ${remoteMessage.from}")
+
         // Check if the message is a data message
         if (remoteMessage.data.isNotEmpty()) {
             // Handle data message
@@ -38,6 +40,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 notificationManager.createNotificationChannel(channel)
             }
             notificationManager.notify(12345, notification)
+        }
+
+        // Check if the message contains a notification payload
+        if (remoteMessage.notification != null) {
+            Log.d("MyFirebaseMessaging", "Message Notification Body: ${remoteMessage.notification?.body}")
         }
     }
 

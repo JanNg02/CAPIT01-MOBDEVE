@@ -1,6 +1,8 @@
 package com.example.s11.ng.jan.capit01_mobdeve
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.os.Build
 import android.util.Log
 import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
@@ -11,7 +13,18 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
+
         Log.d("MyApplication", "FirebaseApp initialized")
+
         Firebase.messaging.subscribeToTopic("announcements")
+            .addOnCompleteListener { task ->
+                var msg = "Subscribed to announcements"
+                if (!task.isSuccessful) {
+                    msg = "Subscription failed"
+                }
+                Log.d("MyApplication", msg)
+            }
+
+
     }
 }
