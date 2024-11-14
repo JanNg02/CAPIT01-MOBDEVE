@@ -46,6 +46,22 @@ data class updateReport(
     @SerializedName("filedBy") val filedBy: String
 )
 
+data class updateSOScase(
+    @SerializedName("updateSosID") val reportID: String,
+    @SerializedName("updateTitle") val reportTitle: String,
+    @SerializedName("updateDetails") val reportDetails: String,
+    @SerializedName("dateSubmitted") val dateSubmitted: String,
+    @SerializedName("filedBy") val filedBy: String
+)
+
+data class updateMissin(
+    @SerializedName("updateMiaID") val reportID: String,
+    @SerializedName("updateTitle") val reportTitle: String,
+    @SerializedName("updateDetails") val reportDetails: String,
+    @SerializedName("dateSubmitted") val dateSubmitted: String,
+    @SerializedName("filedBy") val filedBy: String
+)
+
 class update_bo : AppCompatActivity() {
 
     private lateinit var updateTitleBO_ET: EditText
@@ -58,6 +74,17 @@ class update_bo : AppCompatActivity() {
         @POST("updateTanods")
         fun updateTanods(@Body requestBody: RequestBody): Call<ResponseBody>
     }
+
+    interface updateSOSAPI {
+        @POST("updateSOS")
+        fun updateSOSc(@Body requestBody: RequestBody): Call<ResponseBody>
+    }
+
+    interface updateMissingAPI{
+        @POST("updateMissing")
+        fun updateMissings(@Body requestBody: RequestBody): Call<ResponseBody>
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.update_bo)
@@ -72,7 +99,7 @@ class update_bo : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             if (checkPermission()) {
-                updateReport()
+                updateMissingReport()
             } else {
                 requestPermission()
             }
@@ -127,6 +154,7 @@ class update_bo : AppCompatActivity() {
                 val gson = Gson()
                 val json = gson.toJson(report)
 
+
                 val requestBody = json.toRequestBody("application/json".toMediaType())
 
 
@@ -141,6 +169,99 @@ class update_bo : AppCompatActivity() {
                 editTexts.forEach { it.text.clear() }
 
                 val call = updateTanodAPI.updateTanods(requestBody)
+                call.enqueue(object : Callback<ResponseBody> {
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        // handle failure
+                        Log.e("Error", t.message.toString())
+                    }
+
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        if (response.isSuccessful) {
+                            val responseBody = response.body()
+                            if (responseBody != null) {
+                                Log.d("Response", responseBody.toString())
+                            } else {
+                                Log.w("Response", "Response body is null")
+                            }
+                        } else {
+                            Log.e("Error", "Response code: ${response.code()}")
+                            Log.e("Error", "Response error message: ${response.message()}")
+                            if (response.errorBody() != null) {
+                                Log.e(
+                                    "Error",
+                                    "Response error body: ${response.errorBody()!!.string()}"
+                                )
+                            }
+                        }
+                    }
+                })
+            } else {
+                Toast.makeText(this, "Unable to get current location", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun updateMissingReport(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return
+        }
+        fusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
+            val location: Location? = task.result
+            if (location != null) {
+                val geocoder = Geocoder(this, Locale.getDefault())
+                val addresses: List<Address> =
+                    geocoder.getFromLocation(location.latitude, location.longitude, 1)!!
+                val currentAddress = addresses[0].getAddressLine(0)
+                updateTitleBO_ET = findViewById(R.id.updateTitleBO)
+                updateDetailsBO_ET = findViewById(R.id.updateDetailsBO)
+
+                val editTexts = listOf(updateTitleBO_ET, updateDetailsBO_ET)
+
+                //get the information from the input fields
+                val updateText = updateTitleBO_ET.text.toString()
+                val detailsText = updateDetailsBO_ET.text.toString()
+
+                //get the current Session or current User from shared preference
+                val sp = getSharedPreferences("userSession", MODE_PRIVATE)
+                val fullNameData = sp.getString("residentFullName", "null")
+
+                val spTask = getSharedPreferences("saveTaskID", MODE_PRIVATE)
+                val savedTaskID = spTask.getString("taskID", "null")
+                Log.d("TaskIDUpdates", savedTaskID.toString())
+
+                val dateSubmitted = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(
+                    Date()
+                )
+                val ID = savedTaskID.toString()
+                val filedBy = fullNameData.toString() //Add Sessioned User
+
+                if (updateText.isEmpty() ||detailsText.isEmpty()) {
+                    Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                }
+
+                //DATA SET TO BE SENT
+                val report = updateMissin(ID,updateText,detailsText,dateSubmitted,filedBy)
+                val gson = Gson()
+                val json = gson.toJson(report)
+
+
+                val requestBody = json.toRequestBody("application/json".toMediaType())
+
+
+                val retrofit = Retrofit.Builder()
+                    .baseUrl("https://asia-south1.gcp.data.mongodb-api.com/app/mobile_bdrss-fcluenw/endpoint/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+
+                val updateMissingAPI = retrofit.create(updateMissingAPI::class.java)
+
+                Toast.makeText(this, "Update Sent", Toast.LENGTH_SHORT).show()
+                editTexts.forEach { it.text.clear() }
+
+                val call = updateMissingAPI.updateMissings(requestBody)
                 call.enqueue(object : Callback<ResponseBody> {
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                         // handle failure
