@@ -1,9 +1,6 @@
 package com.example.s11.ng.jan.capit01_mobdeve.file
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.widget.Button
@@ -11,6 +8,7 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -83,23 +81,19 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
         setupFooter_bo() // Call the footer setup function
     }
 
-    private val pickImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == Activity.RESULT_OK) {
-            val data = it.data
-            val imgUri = data?.data
-
-            if (imgUri == null) {
-                return@registerForActivityResult
-            }
-
-            try {
-                val bytes = contentResolver.openInputStream(imgUri)?.readBytes()
-                imageString = Base64.encodeToString(bytes, Base64.DEFAULT)
-
-            } catch (error: IOException) {
-                error.printStackTrace()
-            }
+    private val pickImage = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri == null) {
+            return@registerForActivityResult
         }
+        try {
+            val bytes = contentResolver.openInputStream(uri)?.readBytes()
+            imageString = Base64.encodeToString(bytes, Base64.DEFAULT)
+
+        } catch (error: IOException) {
+            error.printStackTrace()
+        }
+
+
     }
 
     private fun fileMissingPerson() {
@@ -117,8 +111,8 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
         imageString = "";
 
         imageButton.setOnClickListener {
-            val galleryPick = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            pickImage.launch(galleryPick)
+
+            pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
         val editTexts = listOf(fullNameEditText, descriptionEditText, areaLastSeenEditText, timeLastSeenEditText, ageEditText)
