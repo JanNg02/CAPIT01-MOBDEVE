@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="#F0F0F0"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -135,6 +136,7 @@
             android:fontFamily="@font/roboto"
             android:hint="What is your current situation?"
             android:paddingLeft="10sp"
+            android:paddingRight="10sp"
             app:layout_constraintBottom_toTopOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -145,7 +147,7 @@
             android:layout_height="160dp"
             android:layout_marginStart="28dp"
             android:layout_marginTop="9dp"
-            android:layout_marginEnd="273dp"
+            android:layout_marginEnd="280sp"
             android:layout_marginBottom="40dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/imageButton"
@@ -164,29 +166,64 @@
                 android:fontFamily="@font/roboto"
                 android:text="PWD" />
 
-            <LinearLayout
-                android:id="@+id/pwd_dropdown"
+            <ScrollView
+                android:id="@+id/pwd_dropdown_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg2"
-                android:orientation="vertical"
                 android:visibility="gone">
 
-                <CheckBox
-                    android:id="@+id/hearing_impairment_checkbox"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/pwd_dropdown"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="Hearing Impairment" />
+                    android:paddingTop="2sp"
+                    android:paddingBottom="2sp"
+                    android:paddingLeft="1sp"
+                    android:paddingRight="1sp"
+                    android:background="@drawable/bg2"
+                    android:orientation="vertical">
 
-                <CheckBox
-                    android:id="@+id/vision_impairment_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="Vision Impairment" />
-            </LinearLayout>
+                    <CheckBox
+                        android:id="@+id/hearing_impairment_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="3sp"
+                        android:paddingTop="2sp"
+                        android:paddingBottom="2sp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Hearing" />
 
+                    <CheckBox
+                        android:id="@+id/vision_impairment_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="1sp"
+                        android:paddingTop="2sp"
+                        android:paddingBottom="2sp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Vision" />
+
+                    <CheckBox
+                        android:id="@+id/mental_disability_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:paddingRight="1sp"
+                        android:paddingTop="2sp"
+                        android:paddingBottom="2sp"
+                        android:text="Mental" />
+
+                    <CheckBox
+                        android:id="@+id/mobility_disability_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="3sp"
+                        android:paddingTop="2sp"
+                        android:paddingBottom="2sp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Mobility" />
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
 
         <LinearLayout
@@ -213,37 +250,57 @@
                 android:fontFamily="@font/roboto"
                 android:text="Sick" />
 
-            <LinearLayout
-                android:id="@+id/sick_dropdown"
+            <ScrollView
+                android:id="@+id/sick_dropdown_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg2"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="gone">  <!-- Initially hidden -->
 
-                <CheckBox
-                    android:id="@+id/diabetes_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="Diabetes" />
-
-                <CheckBox
-                    android:id="@+id/heart_problems_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="Heart Problems" />
-
-                <EditText
-                    android:id="@+id/other_sick_edittext"
+                <LinearLayout
+                    android:id="@+id/sick_dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:hint="Other"
-                    android:paddingLeft="10sp"
-                    android:paddingBottom="5sp" />
-            </LinearLayout>
+                    android:background="@drawable/bg2"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/flu_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="Flu" />
+
+                    <CheckBox
+                        android:id="@+id/diabetes_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="Diabetes" />
+
+                    <CheckBox
+                        android:id="@+id/heart_problems_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="Heart Problems" />
+
+                    <CheckBox
+                        android:id="@+id/stroke_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="Stroke" />
+
+                    <EditText
+                        android:id="@+id/other_sick_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:hint="Other"
+                        android:paddingLeft="10sp"
+                        android:paddingBottom="5sp" />
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
 
         <LinearLayout
@@ -269,36 +326,42 @@
                 android:fontFamily="@font/roboto"
                 android:text="Pregnant" />
 
-            <RadioGroup
-                android:id="@+id/pregnant_radiogroup"
+            <ScrollView
+                android:id="@+id/pregnant_scrollview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg2"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="gone">  <!-- Initially hidden -->
 
-                <RadioButton
-                    android:id="@+id/first_trimester_radiobutton"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:id="@+id/pregnant_radiogroup"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="1st Trimester" />
+                    android:background="@drawable/bg2"
+                    android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/second_trimester_radiobutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="2nd Trimester" />
+                    <RadioButton
+                        android:id="@+id/first_trimester_radiobutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="1st Trimester" />
 
-                <RadioButton
-                    android:id="@+id/third_trimester_radiobutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="3rd Trimester" />
+                    <RadioButton
+                        android:id="@+id/second_trimester_radiobutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="2nd Trimester" />
 
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/third_trimester_radiobutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="3rd Trimester" />
+
+                </RadioGroup>
+            </ScrollView>
         </LinearLayout>
 
         <!--        <ImageView-->

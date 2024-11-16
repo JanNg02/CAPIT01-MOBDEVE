@@ -20,6 +20,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -137,6 +138,9 @@ class helpActivity_rt : AppCompatActivity() {
         val pwdDropdown: LinearLayout= findViewById(R.id.pwd_dropdown)
         val sickDropdown: LinearLayout = findViewById(R.id.sick_dropdown)
         val pregnantRadioGroup: RadioGroup = findViewById(R.id.pregnant_radiogroup)
+        val pwdDropdownScroll : ScrollView = findViewById(R.id.pwd_dropdown_scroll)
+        val sickDropdownScroll : ScrollView = findViewById(R.id.sick_dropdown_scroll)
+        val pregnantDropdownScroll : ScrollView = findViewById(R.id.pregnant_scrollview)
 
         val sp = getSharedPreferences("userSession", MODE_PRIVATE)
         val sex = sp.getString("residentSex", "null").toString()
@@ -146,8 +150,10 @@ class helpActivity_rt : AppCompatActivity() {
 
         pwdCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
+                pwdDropdownScroll.setVisibility(View.VISIBLE);
                 pwdDropdown.setVisibility(View.VISIBLE)
             } else {
+                pwdDropdownScroll.setVisibility(View.GONE);
                 pwdDropdown.setVisibility(View.GONE)
                 uncheckPwdCheckboxes()
             }
@@ -156,8 +162,10 @@ class helpActivity_rt : AppCompatActivity() {
         sickCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
             isSickChecked = isChecked
             if (isChecked) {
+                sickDropdownScroll.setVisibility(View.VISIBLE);
                 sickDropdown.setVisibility(View.VISIBLE)
             } else {
+                sickDropdownScroll.setVisibility(View.GONE);
                 sickDropdown.setVisibility(View.GONE)
                 uncheckSickCheckboxes()
             }
@@ -165,9 +173,11 @@ class helpActivity_rt : AppCompatActivity() {
 
         pregnantCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
+                pregnantDropdownScroll.setVisibility(View.VISIBLE);
                 pregnantRadioGroup.setVisibility(View.VISIBLE)
             }
             else {
+                pregnantDropdownScroll.setVisibility(View.GONE);
                 pregnantRadioGroup.setVisibility(View.GONE)
                 uncheckPregnantRadiobuttons()
             }
@@ -176,10 +186,14 @@ class helpActivity_rt : AppCompatActivity() {
         // PWD Checkboxes
         handleCheckboxChange(R.id.hearing_impairment_checkbox, pwdCheckedBoxes, "Hearing Impairment")
         handleCheckboxChange(R.id.vision_impairment_checkbox, pwdCheckedBoxes, "Vision Impairment")
+        handleCheckboxChange(R.id.mental_disability_checkbox, pwdCheckedBoxes, "Mental Disability")
+        handleCheckboxChange(R.id.mobility_disability_checkbox, pwdCheckedBoxes, "Mobility Disability")
 
         // Sick Checkboxes
         handleCheckboxChange(R.id.diabetes_checkbox, sickCheckedBoxes, "Diabetes")
         handleCheckboxChange(R.id.heart_problems_checkbox, sickCheckedBoxes, "Heart Problems")
+        handleCheckboxChange(R.id.flu_checkbox, sickCheckedBoxes, "Flu")
+        handleCheckboxChange(R.id.stroke_checkbox, sickCheckedBoxes, "Stroke")
 
         // Sick Other Edit Text
         handleEditTextChange(R.id.other_sick_edittext) { otherSickText = it }
@@ -196,12 +210,16 @@ class helpActivity_rt : AppCompatActivity() {
     private fun uncheckPwdCheckboxes() {
         findViewById<CheckBox>(R.id.hearing_impairment_checkbox).isChecked = false
         findViewById<CheckBox>(R.id.vision_impairment_checkbox).isChecked = false
+        findViewById<CheckBox>(R.id.mobility_disability_checkbox).isChecked = false
+        findViewById<CheckBox>(R.id.mental_disability_checkbox).isChecked = false
         // Add more checkboxes for other PWD options
     }
 
     private fun uncheckSickCheckboxes() {
         findViewById<CheckBox>(R.id.diabetes_checkbox).isChecked = false
         findViewById<CheckBox>(R.id.heart_problems_checkbox).isChecked = false
+        findViewById<CheckBox>(R.id.flu_checkbox).isChecked = false
+        findViewById<CheckBox>(R.id.stroke_checkbox).isChecked = false
         // Add more checkboxes for other sick options
 
         findViewById<EditText>(R.id.other_sick_edittext).text.clear()
