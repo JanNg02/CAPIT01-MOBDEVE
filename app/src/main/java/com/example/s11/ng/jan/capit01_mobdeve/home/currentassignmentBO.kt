@@ -94,6 +94,7 @@ data class SOSData(
     @SerializedName("dateLastSent") val dateLastSent: String,
     @SerializedName("age") val age: Int,
     @SerializedName("teamID") val teamID: String,
+    @SerializedName("sosID") val sosID : String,
     @SerializedName("isFound") val isFound: Boolean
 )
 
@@ -623,6 +624,7 @@ class currentassignmentBO : AppCompatActivity() {
                         placeTeamData() //place the team ata on the screen
                         placeSOSData(SOSTaskData) //place the patrol data on the screen
                         //checks for loading
+                        saveTaskID(SOSTaskData.sosID)
                         patrolDataLoaded = true
                         checkIfAllDataLoaded()
                         saveTeamName(teamFound)
