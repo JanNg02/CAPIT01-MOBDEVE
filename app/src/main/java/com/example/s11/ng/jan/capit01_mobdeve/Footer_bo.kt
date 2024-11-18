@@ -26,11 +26,6 @@ fun AppCompatActivity.setupFooter_bo() {
         navigateTo(fileActivity_bo::class.java)
     }
 
-    val fingerprintbutton: ImageButton = findViewById(R.id.fingerprint_BO)
-    fingerprintbutton.setOnClickListener{
-        navigateTo(fingerprintActivity_bo::class.java)
-    }
-
     val filebutton: ImageButton = findViewById(R.id.file_RT)
     filebutton.setOnClickListener {
         navigateTo(fileActivity_rt::class.java)

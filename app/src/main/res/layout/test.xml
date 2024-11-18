@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="#F0F0F0"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,327 +27,56 @@
             app:srcCompat="@drawable/navbarbg" />
 
         <ImageButton
-            android:id="@+id/pna_RT"
+            android:id="@+id/missing_BO"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_marginStart="55sp"
-            android:layout_marginEnd="321sp"
-            android:layout_marginBottom="6sp"
+            android:layout_marginStart="138dp"
+            android:layout_marginEnd="223dp"
+            android:layout_marginBottom="6dp"
             android:background="@color/white"
-            android:src="@drawable/outline_article_24"
+            android:src="@drawable/baseline_people_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/map_RT"
+            android:id="@+id/filearea_BO"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_marginStart="100sp"
-            android:layout_marginEnd="187sp"
-            android:layout_marginBottom="6sp"
+            android:layout_marginStart="223dp"
+            android:layout_marginEnd="138dp"
+            android:layout_marginBottom="6dp"
             android:background="@color/white"
-            android:src="@drawable/baseline_map_24"
+            android:src="@drawable/baseline_report_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/dashboard_RT"
+            android:id="@+id/file_RT"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_marginStart="200sp"
-            android:layout_marginEnd="110sp"
-            android:layout_marginBottom="6sp"
+            android:layout_marginStart="301dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="6dp"
             android:background="@color/white"
-            android:src="@drawable/baseline_call_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-        <ImageButton
-            android:id="@+id/help_RT"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_marginStart="319sp"
-            android:layout_marginEnd="57sp"
-            android:layout_marginBottom="6sp"
-            android:background="@color/white"
-            android:src="@drawable/baseline_emergency_share_24"
+            android:src="@drawable/baseline_person_search_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="191sp"
-            android:layout_height="160sp"
-            android:layout_marginStart="101dp"
-            android:layout_marginTop="209dp"
-            android:layout_marginEnd="101dp"
-            android:layout_marginBottom="313sp"
-            android:background="@drawable/border"
-            android:backgroundTint="#EF5A5A"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            android:id="@+id/response_BO"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="59dp"
+            android:layout_marginEnd="302dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/white"
+            android:src="@drawable/baseline_view_list_24"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/baseline_sos_24" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="356sp"
-            android:layout_height="78sp"
-            android:layout_marginStart="28sp"
-            android:layout_marginTop="25sp"
-            android:layout_marginEnd="27sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/rectangle" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="62sp"
-            android:layout_marginTop="47sp"
-            android:layout_marginEnd="63sp"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Press the button to call for help"
-            android:textColor="#F2FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/situation_edittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="83dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="76dp"
-            android:layout_marginBottom="111dp"
-            android:background="@drawable/bg2"
-            android:fontFamily="@font/roboto"
-            android:hint="What is your current situation?"
-            android:paddingLeft="10sp"
-            android:paddingRight="10sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="150sp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="280sp"
-            android:layout_marginBottom="40dp"
-            android:orientation="vertical"
-            android:paddingTop="2sp"
-            android:paddingBottom="2sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2">
-
-            <CheckBox
-                android:id="@+id/pwd_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="2sp"
-                android:paddingRight="2sp"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/roboto"
-                android:text="PWD" />
-
-            <LinearLayout
-                android:id="@+id/pwd_dropdown"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="2sp"
-                android:paddingBottom="2sp"
-                android:background="@drawable/bg2"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <CheckBox
-                    android:id="@+id/hearing_impairment_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="Hearing Impairment" />
-
-                <CheckBox
-                    android:id="@+id/vision_impairment_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="Vision Impairment" />
-
-                <CheckBox
-                    android:id="@+id/mental_disability_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="Mental Disability" />
-
-                <CheckBox
-                    android:id="@+id/orthopedic_disability_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="Mobility Disability" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="110dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="151dp"
-            android:layout_marginBottom="40dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/imageButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2">
-
-            <CheckBox
-                android:id="@+id/sick_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="2sp"
-                android:paddingRight="2sp"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/roboto"
-                android:text="Sick" />
-
-            <LinearLayout
-                android:id="@+id/sick_dropdown"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg2"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <CheckBox
-                    android:id="@+id/diabetes_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="Diabetes" />
-
-                <CheckBox
-                    android:id="@+id/heart_problems_checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="Heart Problems" />
-
-                <EditText
-                    android:id="@+id/other_sick_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:hint="Other"
-                    android:paddingLeft="10sp"
-                    android:paddingBottom="5sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="110dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="272dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="29dp"
-            android:layout_marginBottom="40dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/imageButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2">
-
-            <CheckBox
-                android:id="@+id/pregnant_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="2sp"
-                android:paddingRight="2sp"
-                android:layout_weight="1"
-                android:fontFamily="@font/roboto"
-                android:text="Pregnant" />
-
-            <RadioGroup
-                android:id="@+id/pregnant_radiogroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg2"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <RadioButton
-                    android:id="@+id/first_trimester_radiobutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="1st Trimester" />
-
-                <RadioButton
-                    android:id="@+id/second_trimester_radiobutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="2nd Trimester" />
-
-                <RadioButton
-                    android:id="@+id/third_trimester_radiobutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:text="3rd Trimester" />
-
-            </RadioGroup>
-        </LinearLayout>
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/imageView14"-->
-        <!--            android:layout_width="38sp"-->
-        <!--            android:layout_height="34sp"-->
-        <!--            android:layout_marginStart="38sp"-->
-        <!--            android:layout_marginTop="47sp"-->
-        <!--            android:layout_marginEnd="335sp"-->
-        <!--            android:layout_marginBottom="101sp"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/imageButton"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/imageView2"-->
-        <!--            app:srcCompat="@drawable/locationblack" />-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView9"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="81sp"-->
-        <!--            android:layout_marginTop="54sp"-->
-        <!--            android:layout_marginEnd="226sp"-->
-        <!--            android:layout_marginBottom="109sp"-->
-        <!--            android:text="Current Location"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/imageButton"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/imageView2" />-->
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
