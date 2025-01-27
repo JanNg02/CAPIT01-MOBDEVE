@@ -81,42 +81,31 @@
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="191sp"
-            android:layout_height="160sp"
-            android:layout_marginStart="101dp"
-            android:layout_marginTop="209dp"
-            android:layout_marginEnd="101dp"
-            android:layout_marginBottom="313sp"
-            android:background="@drawable/border"
-            android:backgroundTint="#EF5A5A"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            android:layout_width="128dp"
+            android:layout_height="122dp"
+            android:layout_marginStart="141dp"
+            android:layout_marginEnd="142dp"
+            android:layout_marginBottom="34dp"
+            android:background="@drawable/sosbg"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/baseline_sos_24" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="356sp"
-            android:layout_height="78sp"
-            android:layout_marginStart="28sp"
-            android:layout_marginTop="25sp"
-            android:layout_marginEnd="27sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/rectangle" />
-
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="62sp"
-            android:layout_marginTop="47sp"
-            android:layout_marginEnd="63sp"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Press the button to call for help"
+            android:layout_marginStart="47dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="48dp"
+            android:background="@drawable/rectangle"
+            android:fontFamily="@font/roboto"
+            android:paddingLeft="10sp"
+            android:paddingTop="10sp"
+            android:paddingRight="10sp"
+            android:paddingBottom="10sp"
+            android:text="Click the SOS button to send help"
             android:textColor="#F2FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -126,44 +115,45 @@
 
         <EditText
             android:id="@+id/situation_edittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="83dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="76dp"
-            android:layout_marginBottom="111dp"
+            android:layout_width="314dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="67dp"
+            android:layout_marginTop="108dp"
+            android:layout_marginEnd="67dp"
+            android:layout_marginBottom="82dp"
             android:background="@drawable/bg2"
             android:fontFamily="@font/roboto"
             android:hint="What is your current situation?"
             android:paddingLeft="10sp"
             android:paddingRight="10sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintBottom_toTopOf="@+id/imageButton"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+            app:layout_constraintVertical_bias="0.61" />
 
         <LinearLayout
             android:layout_width="110dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="280sp"
-            android:layout_marginBottom="40dp"
+            android:layout_height="197dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="15dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/imageButton"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2">
+            app:layout_constraintTop_toBottomOf="@+id/title">
 
             <CheckBox
                 android:id="@+id/pwd_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="2sp"
-                android:paddingRight="2sp"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto"
+                android:paddingLeft="2sp"
+                android:paddingRight="2sp"
                 android:text="PWD" />
 
             <ScrollView
@@ -176,31 +166,31 @@
                     android:id="@+id/pwd_dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="2sp"
-                    android:paddingBottom="2sp"
-                    android:paddingLeft="1sp"
-                    android:paddingRight="1sp"
                     android:background="@drawable/bg2"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingLeft="1sp"
+                    android:paddingTop="2sp"
+                    android:paddingRight="1sp"
+                    android:paddingBottom="2sp">
 
                     <CheckBox
                         android:id="@+id/hearing_impairment_checkbox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="3sp"
-                        android:paddingTop="2sp"
-                        android:paddingBottom="2sp"
                         android:fontFamily="@font/roboto"
+                        android:paddingTop="2sp"
+                        android:paddingRight="3sp"
+                        android:paddingBottom="2sp"
                         android:text="Hearing" />
 
                     <CheckBox
                         android:id="@+id/vision_impairment_checkbox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="1sp"
-                        android:paddingTop="2sp"
-                        android:paddingBottom="2sp"
                         android:fontFamily="@font/roboto"
+                        android:paddingTop="2sp"
+                        android:paddingRight="1sp"
+                        android:paddingBottom="2sp"
                         android:text="Vision" />
 
                     <CheckBox
@@ -208,8 +198,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
-                        android:paddingRight="1sp"
                         android:paddingTop="2sp"
+                        android:paddingRight="1sp"
                         android:paddingBottom="2sp"
                         android:text="Mental" />
 
@@ -217,37 +207,34 @@
                         android:id="@+id/mobility_disability_checkbox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="3sp"
-                        android:paddingTop="2sp"
-                        android:paddingBottom="2sp"
                         android:fontFamily="@font/roboto"
+                        android:paddingTop="2sp"
+                        android:paddingRight="3sp"
+                        android:paddingBottom="2sp"
                         android:text="Mobility" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout5"
             android:layout_width="110dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="151dp"
-            android:layout_marginBottom="40dp"
+            android:layout_height="197dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/imageButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2">
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
+            app:layout_constraintTop_toBottomOf="@+id/title">
 
             <CheckBox
                 android:id="@+id/sick_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="2sp"
-                android:paddingRight="2sp"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto"
+                android:paddingLeft="2sp"
+                android:paddingRight="2sp"
                 android:text="Sick" />
 
             <ScrollView
@@ -304,26 +291,23 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout6"
             android:layout_width="110dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="272dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="29dp"
-            android:layout_marginBottom="40dp"
+            android:layout_height="197dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/imageButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2">
+            app:layout_constraintTop_toBottomOf="@+id/title">
 
             <CheckBox
                 android:id="@+id/pregnant_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="2sp"
-                android:paddingRight="2sp"
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto"
+                android:paddingLeft="2sp"
+                android:paddingRight="2sp"
                 android:text="Pregnant" />
 
             <ScrollView

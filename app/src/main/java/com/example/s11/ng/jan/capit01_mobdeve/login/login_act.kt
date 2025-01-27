@@ -20,7 +20,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 data class userInfo(
-    //@SerializedName("_id") val _id : ObjectId,
     @SerializedName("residentID") val residentID : String,
     @SerializedName("residentFirstName") val residentFirstName: String,
     @SerializedName("residentLastName") val residentLastName: String,
@@ -35,7 +34,6 @@ data class userInfo(
     @SerializedName("residentEmergencyContactNumber") val residentEmergencyContactNumber: String,
     @SerializedName("residentIsActive") val residentIsActive: String,
     @SerializedName("typeOfUser") val typeOfUser: String,
-    //@SerializedName("__v") val __v : BsonInt32,
 )
 
 interface loginAPI {
