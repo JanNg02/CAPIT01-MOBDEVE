@@ -2,30 +2,23 @@ package com.example.s11.ng.jan.capit01_mobdeve.help
 
 //import com.example.s11.ng.jan.capit01_mobdeve.dashboard.dashboardActivity_rt
 import android.Manifest
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.ScrollView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.example.s11.ng.jan.capit01_mobdeve.map.OnDataFetchedListener
@@ -53,6 +46,8 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import android.graphics.Color
+import androidx.core.content.ContentProviderCompat.requireContext
 
 data class SOS(
     @SerializedName("fullName") val fullName: String,
@@ -65,7 +60,7 @@ data class SOS(
     @SerializedName("isFound") val isFound: Boolean,
     @SerializedName("pwd") val pwd: List<String>,
     @SerializedName("sick") val sick: List<String>,
-    @SerializedName("pregnant") val pregnant: String,
+    @SerializedName("pregnant") val pregnant: List<String>,
     @SerializedName("currentSituation") val currentSituation: String
 )
 
@@ -79,11 +74,18 @@ class helpActivity_rt : AppCompatActivity() {
 
     private var pwdCheckedBoxes = mutableListOf<String>()
     private var sickCheckedBoxes = mutableListOf<String>()
-    private var pregnantTrimester = ""
+    private var pregnantCheckedBoxes = mutableListOf<String>()
     private var currentSituation = ""
     private var otherSickText = ""
     private var isSickChecked = false
     private var evacuationCenters: List<modelEvacCenter> = emptyList()
+    private lateinit var openpwdModal : CheckBox
+    private lateinit var opensickModal : CheckBox
+    private lateinit var openpregnantModal : CheckBox
+    private lateinit var pwdsharedPreferences: SharedPreferences
+    private lateinit var sicksharedPreferences: SharedPreferences
+    private lateinit var pregnantsharedPreferences: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,12 +93,20 @@ class helpActivity_rt : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        openpwdModal = findViewById(R.id.pwd_button)
+        pwdsharedPreferences = getSharedPreferences("PwdModalPrefs", Context.MODE_PRIVATE)
+        opensickModal = findViewById(R.id.sick_button)
+        sicksharedPreferences = getSharedPreferences("SickModalPrefs", Context.MODE_PRIVATE)
+        openpregnantModal = findViewById(R.id.pregnant_button)
+        pregnantsharedPreferences = getSharedPreferences("PregnantModalPrefs", Context.MODE_PRIVATE)
+
         // Fetch evacuation centers
         getEvacCenter(object : OnDataFetchedListener {
             override fun onDataFetched(data: List<modelEvacCenter>) {
                 evacuationCenters = data
             }
         }).execute()
+
 
         setCheckBoxes()
 
@@ -117,6 +127,7 @@ class helpActivity_rt : AppCompatActivity() {
         setupFooter_rt() // Call the footer setup function
     }
 
+
     // A function to handle checkbox changes
     private fun handleCheckboxChange(checkboxId: Int, list: MutableList<String>, text: String) {
         findViewById<CheckBox>(checkboxId).setOnCheckedChangeListener { _, isChecked ->
@@ -128,15 +139,6 @@ class helpActivity_rt : AppCompatActivity() {
         }
     }
 
-    // A function to handle radio button changes
-    private fun handleRadioButtonChange(radioButtonId: Int, text: String) {
-        findViewById<RadioButton>(radioButtonId).setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                pregnantTrimester = text
-            }
-        }
-    }
-
     // A function to handle edit text changes
     private fun handleEditTextChange(editTextId: Int, callback: (String) -> Unit) {
         findViewById<EditText>(editTextId).addTextChangedListener { editable ->
@@ -144,79 +146,51 @@ class helpActivity_rt : AppCompatActivity() {
         }
     }
 
+
     private fun setCheckBoxes(){
-        val pwdCheckbox: CheckBox = findViewById(R.id.pwd_checkbox)
-        val sickCheckbox: CheckBox = findViewById(R.id.sick_checkbox)
-        val pregnantCheckbox: CheckBox = findViewById(R.id.pregnant_checkbox)
-        val pwdDropdown: LinearLayout= findViewById(R.id.pwd_dropdown)
-        val sickDropdown: LinearLayout = findViewById(R.id.sick_dropdown)
-        val pregnantRadioGroup: RadioGroup = findViewById(R.id.pregnant_radiogroup)
-        val pwdDropdownScroll : ScrollView = findViewById(R.id.pwd_dropdown_scroll)
-        val sickDropdownScroll : ScrollView = findViewById(R.id.sick_dropdown_scroll)
-        val pregnantDropdownScroll : ScrollView = findViewById(R.id.pregnant_scrollview)
+        val pwdButton: CheckBox = findViewById(R.id.pwd_button)
+        val sickButton: CheckBox = findViewById(R.id.sick_button)
+        val pregnantButton: CheckBox = findViewById(R.id.pregnant_button)
 
         val sp = getSharedPreferences("userSession", MODE_PRIVATE)
         val sex = sp.getString("residentSex", "null").toString()
         if(sex == "Male") {
-            pregnantCheckbox.visibility = View.GONE
+            pregnantButton.visibility = View.GONE
         }
 
-        pwdCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                pwdDropdownScroll.setVisibility(View.VISIBLE);
-                pwdDropdown.setVisibility(View.VISIBLE)
-            } else {
-                pwdDropdownScroll.setVisibility(View.GONE);
-                pwdDropdown.setVisibility(View.GONE)
-                uncheckPwdCheckboxes()
-            }
+        pwdButton.setOnClickListener {
+            val modalFragment = pwdDropdownModal()
+            modalFragment.setSelectionListener(object : pwdDropdownModal.PwdSelectionListener {
+                override fun onPwdSelection(selectedItems: List<String>) {
+                    pwdCheckedBoxes.clear()
+                    pwdCheckedBoxes.addAll(selectedItems)
+                }
+            })
+            modalFragment.show(supportFragmentManager, "DropdownModal")
         }
 
-        sickCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
-            isSickChecked = isChecked
-            if (isChecked) {
-                sickDropdownScroll.setVisibility(View.VISIBLE);
-                sickDropdown.setVisibility(View.VISIBLE)
-            } else {
-                sickDropdownScroll.setVisibility(View.GONE);
-                sickDropdown.setVisibility(View.GONE)
-                uncheckSickCheckboxes()
-            }
+        sickButton.setOnClickListener {
+            val modalFragment = sickDropdownModal()
+            modalFragment.setSelectionListener(object : sickDropdownModal.SickSelectionListener {
+                override fun onSickSelection(selectedItems: List<String>) {
+                    sickCheckedBoxes.clear()
+                    sickCheckedBoxes.addAll(selectedItems)
+                }
+            })
+            modalFragment.show(supportFragmentManager, "DropdownModal")
         }
 
-        pregnantCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                pregnantDropdownScroll.setVisibility(View.VISIBLE);
-                pregnantRadioGroup.setVisibility(View.VISIBLE)
-            }
-            else {
-                pregnantDropdownScroll.setVisibility(View.GONE);
-                pregnantRadioGroup.setVisibility(View.GONE)
-                uncheckPregnantRadiobuttons()
-            }
+        pregnantButton.setOnClickListener{
+            val modalFragment = pregnantDropdownModal()
+            modalFragment.setSelectionListener(object : pregnantDropdownModal.PregnantSelectionListener {
+                override fun onPregnantSelection(selectedItems: List<String>) {
+                    pregnantCheckedBoxes.clear()
+                    pregnantCheckedBoxes.addAll(selectedItems)
+                }
+            })
+            modalFragment.show(supportFragmentManager, "DropdownModal")
         }
 
-        // PWD Checkboxes
-        handleCheckboxChange(R.id.hearing_impairment_checkbox, pwdCheckedBoxes, "Hearing Impairment")
-        handleCheckboxChange(R.id.vision_impairment_checkbox, pwdCheckedBoxes, "Vision Impairment")
-        handleCheckboxChange(R.id.mental_disability_checkbox, pwdCheckedBoxes, "Mental Disability")
-        handleCheckboxChange(R.id.mobility_disability_checkbox, pwdCheckedBoxes, "Mobility Disability")
-
-        // Sick Checkboxes
-        handleCheckboxChange(R.id.diabetes_checkbox, sickCheckedBoxes, "Diabetes")
-        handleCheckboxChange(R.id.heart_problems_checkbox, sickCheckedBoxes, "Heart Problems")
-        handleCheckboxChange(R.id.flu_checkbox, sickCheckedBoxes, "Flu")
-        handleCheckboxChange(R.id.stroke_checkbox, sickCheckedBoxes, "Stroke")
-
-        // Sick Other Edit Text
-        handleEditTextChange(R.id.other_sick_edittext) { otherSickText = it }
-
-        // Pregnant Radio Buttons
-        handleRadioButtonChange(R.id.first_trimester_radiobutton, "1st Trimester")
-        handleRadioButtonChange(R.id.second_trimester_radiobutton, "2nd Trimester")
-        handleRadioButtonChange(R.id.third_trimester_radiobutton, "3rd Trimester")
-
-        // Current Situation Checkboxes
         handleEditTextChange(R.id.situation_edittext) { currentSituation = it }
     }
 
@@ -239,7 +213,9 @@ class helpActivity_rt : AppCompatActivity() {
     }
 
     private fun uncheckPregnantRadiobuttons() {
-        findViewById<RadioGroup>(R.id.pregnant_radiogroup).clearCheck()
+        findViewById<CheckBox>(R.id.first_trimester_checkbox).isChecked = false
+        findViewById<CheckBox>(R.id.second_trimester_checkbox).isChecked = false
+        findViewById<CheckBox>(R.id.third_trimester_checkbox).isChecked = false
     }
 
     private fun checkPermission(): Boolean {
@@ -358,7 +334,7 @@ class helpActivity_rt : AppCompatActivity() {
 
         val birthdateString = sp.getString("residentBirthDate", "null")
         val birthdateCalendar = Calendar.getInstance()
-        birthdateCalendar.time = SimpleDateFormat("MM/dd/yyyy").parse(birthdateString)
+        birthdateCalendar.time = SimpleDateFormat("yyyy-MM-dd").parse(birthdateString)
 
         val currentDateCalendar = Calendar.getInstance()
 
@@ -383,7 +359,7 @@ class helpActivity_rt : AppCompatActivity() {
         val teamID = "None"
         val isFound = false
 
-        val sos = SOS(fullName, email, currentAddress, dateLastSent, age, sex, teamID, isFound, pwdCheckedBoxes, sickCheckedBoxes, pregnantTrimester, currentSituation)
+        val sos = SOS(fullName, email, currentAddress, dateLastSent, age, sex, teamID, isFound, pwdCheckedBoxes, sickCheckedBoxes, pregnantCheckedBoxes, currentSituation)
         val gson = Gson()
         val json = gson.toJson(sos)
 

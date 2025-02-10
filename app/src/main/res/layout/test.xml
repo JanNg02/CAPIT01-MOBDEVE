@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#F0F0F0"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,56 +27,327 @@
             app:srcCompat="@drawable/navbarbg" />
 
         <ImageButton
-            android:id="@+id/missing_BO"
+            android:id="@+id/pna_RT"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_marginStart="138dp"
-            android:layout_marginEnd="223dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginStart="55sp"
+            android:layout_marginEnd="321sp"
+            android:layout_marginBottom="6sp"
             android:background="@color/white"
-            android:src="@drawable/baseline_people_24"
+            android:src="@drawable/outline_article_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/filearea_BO"
+            android:id="@+id/map_RT"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_marginStart="223dp"
-            android:layout_marginEnd="138dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginStart="100sp"
+            android:layout_marginEnd="187sp"
+            android:layout_marginBottom="6sp"
             android:background="@color/white"
-            android:src="@drawable/baseline_report_24"
+            android:src="@drawable/baseline_map_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/file_RT"
+            android:id="@+id/dashboard_RT"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_marginStart="301dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginStart="200sp"
+            android:layout_marginEnd="110sp"
+            android:layout_marginBottom="6sp"
             android:background="@color/white"
-            android:src="@drawable/baseline_person_search_24"
+            android:src="@drawable/baseline_call_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ImageButton
+            android:id="@+id/help_RT"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_marginStart="319sp"
+            android:layout_marginEnd="57sp"
+            android:layout_marginBottom="6sp"
+            android:background="@color/white"
+            android:src="@drawable/baseline_emergency_share_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/response_BO"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_marginStart="59dp"
-            android:layout_marginEnd="302dp"
-            android:layout_marginBottom="6dp"
-            android:background="@color/white"
-            android:src="@drawable/baseline_view_list_24"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/imageButton"
+            android:layout_width="128dp"
+            android:layout_height="122dp"
+            android:layout_marginStart="141dp"
+            android:layout_marginEnd="142dp"
+            android:layout_marginBottom="34dp"
+            android:background="@drawable/sosbg"
+            app:layout_constraintBottom_toTopOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/baseline_sos_24" />
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="48dp"
+            android:background="@drawable/rectangle"
+            android:fontFamily="@font/roboto"
+            android:paddingLeft="10sp"
+            android:paddingTop="10sp"
+            android:paddingRight="10sp"
+            android:paddingBottom="10sp"
+            android:text="Click the SOS button to send help"
+            android:textColor="#F2FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/situation_edittext"
+            android:layout_width="314dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="67dp"
+            android:layout_marginTop="108dp"
+            android:layout_marginEnd="67dp"
+            android:layout_marginBottom="82dp"
+            android:background="@drawable/bg2"
+            android:fontFamily="@font/roboto"
+            android:hint="What is your current situation?"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+            app:layout_constraintVertical_bias="0.61" />
+
+        <LinearLayout
+            android:layout_width="110dp"
+            android:layout_height="197dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <CheckBox
+                android:id="@+id/pwd_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:button="@null"
+                android:fontFamily="@font/roboto"
+                android:paddingLeft="2sp"
+                android:paddingRight="2sp"
+                android:text="PWD" />
+
+            <ScrollView
+                android:id="@+id/pwd_dropdown_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/pwd_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg2"
+                    android:orientation="vertical"
+                    android:paddingLeft="1sp"
+                    android:paddingTop="2sp"
+                    android:paddingRight="1sp"
+                    android:paddingBottom="2sp">
+
+                    <CheckBox
+                        android:id="@+id/hearing_impairment_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:paddingTop="2sp"
+                        android:paddingRight="3sp"
+                        android:paddingBottom="2sp"
+                        android:text="Hearing" />
+
+                    <CheckBox
+                        android:id="@+id/vision_impairment_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:paddingTop="2sp"
+                        android:paddingRight="1sp"
+                        android:paddingBottom="2sp"
+                        android:text="Vision" />
+
+                    <CheckBox
+                        android:id="@+id/mental_disability_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:paddingTop="2sp"
+                        android:paddingRight="1sp"
+                        android:paddingBottom="2sp"
+                        android:text="Mental" />
+
+                    <CheckBox
+                        android:id="@+id/mobility_disability_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:paddingTop="2sp"
+                        android:paddingRight="3sp"
+                        android:paddingBottom="2sp"
+                        android:text="Mobility" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="110dp"
+            android:layout_height="197dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <CheckBox
+                android:id="@+id/sick_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto"
+                android:paddingLeft="2sp"
+                android:paddingRight="2sp"
+                android:text="Sick" />
+
+            <ScrollView
+                android:id="@+id/sick_dropdown_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">  <!-- Initially hidden -->
+
+                <LinearLayout
+                    android:id="@+id/sick_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg2"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/flu_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="Flu" />
+
+                    <CheckBox
+                        android:id="@+id/diabetes_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="Diabetes" />
+
+                    <CheckBox
+                        android:id="@+id/heart_problems_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="Heart Problems" />
+
+                    <CheckBox
+                        android:id="@+id/stroke_checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="Stroke" />
+
+                    <EditText
+                        android:id="@+id/other_sick_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:hint="Other"
+                        android:paddingLeft="10sp"
+                        android:paddingBottom="5sp" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="110dp"
+            android:layout_height="197dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <CheckBox
+                android:id="@+id/pregnant_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto"
+                android:paddingLeft="2sp"
+                android:paddingRight="2sp"
+                android:text="Pregnant" />
+
+            <ScrollView
+                android:id="@+id/pregnant_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">  <!-- Initially hidden -->
+
+                <RadioGroup
+                    android:id="@+id/pregnant_radiogroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg2"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/first_trimester_radiobutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="1st Trimester" />
+
+                    <RadioButton
+                        android:id="@+id/second_trimester_radiobutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="2nd Trimester" />
+
+                    <RadioButton
+                        android:id="@+id/third_trimester_radiobutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="3rd Trimester" />
+
+                </RadioGroup>
+            </ScrollView>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

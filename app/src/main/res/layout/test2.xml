@@ -147,31 +147,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5">
 
-            <CheckBox
+            <Button
                 android:id="@+id/pwd_button"
                 android:layout_width="115dp"
                 android:layout_height="70dp"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
-                android:button="@null"
-                android:background="@drawable/rectanglecurvedblue"
+                android:backgroundTint="#355C7D"
                 android:drawableEnd="@drawable/baseline_accessible_forward_24"
                 android:fontFamily="@font/roboto_bold"
-                android:textColor="@color/white"
                 android:paddingLeft="15sp"
                 android:paddingRight="15sp"
                 android:text="PWD"
                 android:textSize="18sp" />
 
-            <CheckBox
+            <Button
                 android:id="@+id/sick_button"
                 android:layout_width="115dp"
                 android:layout_height="70dp"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
-                android:button="@null"
-                android:background="@drawable/rectanglecurvedblue"
-                android:textColor="@color/white"
+                android:backgroundTint="#355C7D"
                 android:drawableEnd="@drawable/baseline_sick_24"
                 android:fontFamily="@font/roboto_bold"
                 android:paddingLeft="15sp"
@@ -179,15 +175,13 @@
                 android:text="Sick"
                 android:textSize="18sp" />
 
-            <CheckBox
+            <Button
                 android:id="@+id/pregnant_button"
                 android:layout_width="115dp"
                 android:layout_height="70dp"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
-                android:button="@null"
-                android:background="@drawable/rectanglecurvedblue"
-                android:textColor="@color/white"
+                android:backgroundTint="#355C7D"
                 android:drawableEnd="@drawable/baseline_pregnant_woman_24"
                 android:fontFamily="@font/roboto_bold"
                 android:paddingLeft="5sp"
