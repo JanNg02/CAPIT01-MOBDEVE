@@ -31,8 +31,18 @@
         android:text="Mobility Disability" />
 
     <Button
+        android:id="@+id/clear_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue"
+        android:textColor="@color/white"
+        android:text="Clear All" />
+
+    <Button
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/blue"
         android:text="Close" />
 </LinearLayout>

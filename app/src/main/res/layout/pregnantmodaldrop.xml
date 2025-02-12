@@ -24,9 +24,12 @@
         android:layout_height="wrap_content"
         android:text="Third Trimester" />
 
+
     <Button
         android:id="@+id/close_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/blue"
         android:text="Close" />
 </LinearLayout>

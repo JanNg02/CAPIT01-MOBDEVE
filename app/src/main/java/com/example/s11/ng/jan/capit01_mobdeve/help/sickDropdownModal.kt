@@ -47,11 +47,14 @@ class sickDropdownModal : BottomSheetDialogFragment() {
             requireActivity().getSharedPreferences("SickModalPrefs", Context.MODE_PRIVATE)
 
         val closeButton = view.findViewById<Button>(R.id.close_button)
+        val clearButton = view.findViewById<Button>(R.id.clear_button)
         val flu = view.findViewById<CheckBox>(R.id.flu_checkbox)
         val diabetes = view.findViewById<CheckBox>(R.id.diabetes_checkbox)
         val heartProblems = view.findViewById<CheckBox>(R.id.heart_problems_checkbox)
         val stroke = view.findViewById<CheckBox>(R.id.stroke_checkbox)
         val otherSickness = view.findViewById<EditText>(R.id.other_sick_edittext)
+
+        val checkboxes = listOf(flu, diabetes, heartProblems, stroke)
 
         // Restore checkbox states
         flu.isChecked = sharedPreferences.getBoolean("flu", false)
@@ -61,6 +64,12 @@ class sickDropdownModal : BottomSheetDialogFragment() {
 
         // Restore text input
         otherSickness.setText(sharedPreferences.getString("other_sickness", ""))
+
+        clearButton.setOnClickListener {
+            checkboxes.forEach { it.isChecked = false }
+            otherSickness.setText("")
+            saveSelections(false, false, false, false, "")
+        }
 
         closeButton.setOnClickListener {
             val selectedItems = mutableListOf<String>()
@@ -83,6 +92,19 @@ class sickDropdownModal : BottomSheetDialogFragment() {
             }
             selectionListener?.onSickSelection(selectedItems)
             dismiss()
+        }
+    }
+
+    private fun saveSelections(
+        fluChecked: Boolean, diabetesChecked: Boolean, heartProblemsChecked: Boolean, strokeChecked: Boolean, otherText: String
+    ) {
+        with(sharedPreferences.edit()) {
+            putBoolean("flu", fluChecked)
+            putBoolean("diabetes", diabetesChecked)
+            putBoolean("heart_problems", heartProblemsChecked)
+            putBoolean("stroke", strokeChecked)
+            putString("other_sickness", otherText)
+            apply()
         }
     }
 }

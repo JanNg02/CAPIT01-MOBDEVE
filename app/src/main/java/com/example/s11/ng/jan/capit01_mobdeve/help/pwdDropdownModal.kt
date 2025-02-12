@@ -45,16 +45,24 @@ class pwdDropdownModal : BottomSheetDialogFragment() {
         sharedPreferences = requireActivity().getSharedPreferences("PwdModalPrefs", Context.MODE_PRIVATE)
 
         val closeButton = view.findViewById<Button>(R.id.close_button)
+        val clearButton = view.findViewById<Button>(R.id.clear_button)
         val hearingImpairment = view.findViewById<CheckBox>(R.id.hearing_impairment_checkbox)
         val visionImpairment = view.findViewById<CheckBox>(R.id.vision_impairment_checkbox)
         val mentalDisability = view.findViewById<CheckBox>(R.id.mental_disability_checkbox)
         val mobilityDisability = view.findViewById<CheckBox>(R.id.mobility_disability_checkbox)
+
+        val checkboxes = listOf(hearingImpairment, visionImpairment, mentalDisability, mobilityDisability)
 
         // Restore checkbox states
         hearingImpairment.isChecked = sharedPreferences.getBoolean("hearing_impairment", false)
         visionImpairment.isChecked = sharedPreferences.getBoolean("vision_impairment", false)
         mentalDisability.isChecked = sharedPreferences.getBoolean("mental_disability", false)
         mobilityDisability.isChecked = sharedPreferences.getBoolean("mobility_disability", false)
+
+        clearButton.setOnClickListener {
+            checkboxes.forEach { it.isChecked = false }
+            saveSelections(false, false, false, false)
+        }
 
         closeButton.setOnClickListener {
             // Collect selected checkboxes
@@ -77,6 +85,18 @@ class pwdDropdownModal : BottomSheetDialogFragment() {
             selectionListener?.onPwdSelection(selectedItems)
 
             dismiss()
+        }
+    }
+
+    private fun saveSelections(
+        hearingChecked: Boolean, visionChecked: Boolean, mentalChecked: Boolean, mobilityChecked: Boolean
+    ) {
+        with(sharedPreferences.edit()) {
+            putBoolean("hearing_impairment", hearingChecked)
+            putBoolean("vision_impairment", visionChecked)
+            putBoolean("mental_disability", mentalChecked)
+            putBoolean("mobility_disability", mobilityChecked)
+            apply()
         }
     }
 }
