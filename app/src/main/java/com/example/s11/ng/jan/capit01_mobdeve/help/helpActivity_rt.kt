@@ -347,7 +347,7 @@ class helpActivity_rt : AppCompatActivity() {
 
         val birthdateString = sp.getString("residentBirthDate", "null")
         val birthdateCalendar = Calendar.getInstance()
-        birthdateCalendar.time = SimpleDateFormat("yyyy-MM-dd").parse(birthdateString)
+        birthdateCalendar.time = SimpleDateFormat("MM/dd/yyyy").parse(birthdateString)
 
         val currentDateCalendar = Calendar.getInstance()
 
