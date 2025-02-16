@@ -6,23 +6,50 @@
     android:padding="16dp"
     android:background="@android:color/white">
 
-    <CheckBox
-        android:id="@+id/first_trimester_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="First Trimester" />
+<!--    <CheckBox-->
+<!--        android:id="@+id/first_trimester_checkbox"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="First Trimester" />-->
 
-    <CheckBox
-        android:id="@+id/second_trimester_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Second Trimester" />
+<!--    <CheckBox-->
+<!--        android:id="@+id/second_trimester_checkbox"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Second Trimester" />-->
 
-    <CheckBox
-        android:id="@+id/third_trimester_checkbox"
+<!--    <CheckBox-->
+<!--        android:id="@+id/third_trimester_checkbox"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Third Trimester" />-->
+
+    <RadioGroup
+        android:id="@+id/pregnant_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <RadioButton
+        android:id="@+id/first_trimester_radiobutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Third Trimester" />
+        android:fontFamily="@font/roboto"
+        android:text="1st Trimester" />
+
+    <RadioButton
+        android:id="@+id/second_trimester_radiobutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="2nd Trimester" />
+
+    <RadioButton
+        android:id="@+id/third_trimester_radiobutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="3rd Trimester" />
+    </RadioGroup>
 
 
     <Button

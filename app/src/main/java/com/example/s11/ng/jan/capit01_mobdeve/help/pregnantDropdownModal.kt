@@ -10,7 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CheckBox
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import com.example.s11.ng.jan.capit01_mobdeve.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -20,7 +21,7 @@ class pregnantDropdownModal : BottomSheetDialogFragment() {
     private var selectionListener: PregnantSelectionListener? = null
 
     interface PregnantSelectionListener {
-        fun onPregnantSelection(selectedItems: List<String>)
+        fun onPregnantSelection(selectedItem: String)
     }
 
     fun setSelectionListener(listener: PregnantSelectionListener) {
@@ -45,42 +46,36 @@ class pregnantDropdownModal : BottomSheetDialogFragment() {
         sharedPreferences = requireActivity().getSharedPreferences("PregnantModalPrefs", Context.MODE_PRIVATE)
 
         val closeButton = view.findViewById<Button>(R.id.close_button)
-        val firstTrimester = view.findViewById<CheckBox>(R.id.first_trimester_checkbox)
-        val secondTrimester = view.findViewById<CheckBox>(R.id.second_trimester_checkbox)
-        val thirdTrimester = view.findViewById<CheckBox>(R.id.third_trimester_checkbox)
+        val radioGroup = view.findViewById<RadioGroup>(R.id.pregnant_radiogroup)
+        val firstTrimester = view.findViewById<RadioButton>(R.id.first_trimester_radiobutton)
+        val secondTrimester = view.findViewById<RadioButton>(R.id.second_trimester_radiobutton)
+        val thirdTrimester = view.findViewById<RadioButton>(R.id.third_trimester_radiobutton)
 
-        // Restore checkbox states
-        firstTrimester.isChecked = sharedPreferences.getBoolean("first_trimester", false)
-        secondTrimester.isChecked = sharedPreferences.getBoolean("second_trimester", false)
-        thirdTrimester.isChecked = sharedPreferences.getBoolean("third_trimester", false)
-
-        val checkboxes = listOf(firstTrimester, secondTrimester, thirdTrimester)
-
-        checkboxes.forEach { checkbox ->
-            checkbox.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    checkboxes.forEach { otherCheckbox ->
-                        if (otherCheckbox != checkbox) {
-                            otherCheckbox.isChecked = false // Uncheck other checkboxes
-                        }
-                    }
-                }
-            }
+        // Restore the selected radio button state
+        val savedSelection = sharedPreferences.getString("selected_trimester", "")
+        when (savedSelection) {
+            "First Trimester" -> firstTrimester.isChecked = true
+            "Second Trimester" -> secondTrimester.isChecked = true
+            "Third Trimester" -> thirdTrimester.isChecked = true
         }
 
         closeButton.setOnClickListener {
-            val selectedItems = mutableListOf<String>()
-            if (firstTrimester.isChecked) selectedItems.add("First Trimester")
-            if (secondTrimester.isChecked) selectedItems.add("Second Trimester")
-            if (thirdTrimester.isChecked) selectedItems.add("Third Trimester")
+            val selectedId = radioGroup.checkedRadioButtonId
+            val selectedTrimester = when (selectedId) {
+                R.id.first_trimester_radiobutton -> "First Trimester"
+                R.id.second_trimester_radiobutton -> "Second Trimester"
+                R.id.third_trimester_radiobutton -> "Third Trimester"
+                else -> ""
+            }
 
+            // Save selected trimester in SharedPreferences
             sharedPreferences.edit().apply {
-                putBoolean("First Trimester", firstTrimester.isChecked)
-                putBoolean("Second Trimester", secondTrimester.isChecked)
-                putBoolean("Third Trimester", thirdTrimester.isChecked)
+                putString("selected_trimester", selectedTrimester)
                 apply()
             }
-            selectionListener?.onPregnantSelection(selectedItems)
+
+            // Pass selected trimester to listener
+            selectionListener?.onPregnantSelection(selectedTrimester)
 
             dismiss()
         }

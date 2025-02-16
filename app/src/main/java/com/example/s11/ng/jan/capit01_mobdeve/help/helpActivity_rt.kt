@@ -11,7 +11,6 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageButton
@@ -46,8 +45,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import android.graphics.Color
-import androidx.core.content.ContentProviderCompat.requireContext
+import android.widget.RadioGroup
 
 data class SOS(
     @SerializedName("fullName") val fullName: String,
@@ -60,7 +58,7 @@ data class SOS(
     @SerializedName("isFound") val isFound: Boolean,
     @SerializedName("pwd") val pwd: List<String>,
     @SerializedName("sick") val sick: List<String>,
-    @SerializedName("pregnant") val pregnant: List<String>,
+    @SerializedName("pregnant") val pregnant: String,
     @SerializedName("currentSituation") val currentSituation: String
 )
 
@@ -74,7 +72,8 @@ class helpActivity_rt : AppCompatActivity() {
 
     private var pwdCheckedBoxes = mutableListOf<String>()
     private var sickCheckedBoxes = mutableListOf<String>()
-    private var pregnantCheckedBoxes = mutableListOf<String>()
+    //private var pregnantCheckedBoxes = mutableListOf<String>()
+    private var pregnantTrimester = ""
     private var currentSituation = ""
     private var otherSickText = ""
     private var isSickChecked = false
@@ -180,15 +179,25 @@ class helpActivity_rt : AppCompatActivity() {
             modalFragment.show(supportFragmentManager, "DropdownModal")
         }
 
-        pregnantButton.setOnClickListener{
+//        pregnantButton.setOnClickListener{
+//            val modalFragment = pregnantDropdownModal()
+//            modalFragment.setSelectionListener(object : pregnantDropdownModal.PregnantSelectionListener {
+//                override fun onPregnantSelection(selectedItems: List<String>) {
+//                    pregnantCheckedBoxes.clear()
+//                    pregnantCheckedBoxes.addAll(selectedItems)
+//                }
+//            })
+//            modalFragment.show(supportFragmentManager, "DropdownModal")
+//        }
+
+        pregnantButton.setOnClickListener {
             val modalFragment = pregnantDropdownModal()
             modalFragment.setSelectionListener(object : pregnantDropdownModal.PregnantSelectionListener {
-                override fun onPregnantSelection(selectedItems: List<String>) {
-                    pregnantCheckedBoxes.clear()
-                    pregnantCheckedBoxes.addAll(selectedItems)
+                override fun onPregnantSelection(selectedItem: String) {
+                    pregnantTrimester = selectedItem
                 }
             })
-            modalFragment.show(supportFragmentManager, "DropdownModal")
+            modalFragment.show(supportFragmentManager, "PregnantDropdownModal")
         }
 
         handleEditTextChange(R.id.situation_edittext) { currentSituation = it }
@@ -212,10 +221,14 @@ class helpActivity_rt : AppCompatActivity() {
         findViewById<EditText>(R.id.other_sick_edittext).text.clear()
     }
 
+//    private fun uncheckPregnantRadiobuttons() {
+//        findViewById<CheckBox>(R.id.first_trimester_checkbox).isChecked = false
+//        findViewById<CheckBox>(R.id.second_trimester_checkbox).isChecked = false
+//        findViewById<CheckBox>(R.id.third_trimester_checkbox).isChecked = false
+//    }
+
     private fun uncheckPregnantRadiobuttons() {
-        findViewById<CheckBox>(R.id.first_trimester_checkbox).isChecked = false
-        findViewById<CheckBox>(R.id.second_trimester_checkbox).isChecked = false
-        findViewById<CheckBox>(R.id.third_trimester_checkbox).isChecked = false
+        findViewById<RadioGroup>(R.id.pregnant_radiogroup).clearCheck()
     }
 
     private fun checkPermission(): Boolean {
@@ -359,7 +372,7 @@ class helpActivity_rt : AppCompatActivity() {
         val teamID = "None"
         val isFound = false
 
-        val sos = SOS(fullName, email, currentAddress, dateLastSent, age, sex, teamID, isFound, pwdCheckedBoxes, sickCheckedBoxes, pregnantCheckedBoxes, currentSituation)
+        val sos = SOS(fullName, email, currentAddress, dateLastSent, age, sex, teamID, isFound, pwdCheckedBoxes, sickCheckedBoxes, pregnantTrimester, currentSituation)
         val gson = Gson()
         val json = gson.toJson(sos)
 
