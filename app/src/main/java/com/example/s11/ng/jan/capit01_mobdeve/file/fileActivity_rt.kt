@@ -165,7 +165,7 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
 
             val missingApi = retrofit.create(MissingApi::class.java)
 
-            Toast.makeText(this, "Missing Person Details Sent", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Missing Person Details Sent", Toast.LENGTH_SHORT).show()
             editTexts.forEach { it.text.clear() }
 
             val call = missingApi.postMissing(requestBody)
@@ -182,7 +182,10 @@ class fileActivity_rt : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListene
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody!= null) {
-                            Log.d("Response", responseBody.toString())
+                            // Convert the response body to a string
+                            val responseString = responseBody.string()
+                            Toast.makeText(this@fileActivity_rt, responseString, Toast.LENGTH_SHORT).show()
+                            Log.d("Response", responseString)
                         } else {
                             Log.w("Response", "Response body is null")
                         }
