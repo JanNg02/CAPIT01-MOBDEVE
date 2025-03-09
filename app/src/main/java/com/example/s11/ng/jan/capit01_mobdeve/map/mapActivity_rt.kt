@@ -173,7 +173,7 @@ class mapActivity_rt : AppCompatActivity(), OnMapReadyCallback, OnDataFetchedLis
                     "?origin=${currentLocation.latitude},${currentLocation.longitude}" +
                     "&destination=${destination.latitude},${destination.longitude}" +
                     "&mode=driving" +
-                    "&key=AIzaSyDaka3Pso7shUImAerJ8SvrrmUSHsvmSXE" // Replace with your actual API key
+                    "&key=AIzaSyD5fvmRGPiJRzfXC4IkhGOb0mSZ-DG5ba8" // Replace with your actual API key
 
             val request = JsonObjectRequest(Request.Method.GET, url, null, { response ->
                 val routes = response.getJSONArray("routes")
