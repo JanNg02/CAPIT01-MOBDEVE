@@ -83,7 +83,7 @@
             android:layout_width="353sp"
             android:layout_height="546sp"
             android:layout_marginStart="20sp"
-            android:layout_marginTop="40sp"
+            android:layout_marginTop="22dp"
             android:layout_marginEnd="20sp"
             android:layout_marginBottom="100sp"
             android:background="@drawable/bg2"
@@ -92,7 +92,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView15">
+            app:layout_constraintTop_toBottomOf="@+id/textView11">
 
             <EditText
                 android:id="@+id/missingFullName"
@@ -101,15 +101,15 @@
                 android:layout_marginStart="65sp"
                 android:layout_marginTop="40sp"
                 android:layout_marginEnd="68sp"
+                android:background="@drawable/edit_text_bg"
+                android:ems="10"
+                android:fontFamily="@font/roboto"
+                android:hint="Name"
+                android:inputType="textPersonName"
                 android:paddingLeft="15sp"
                 android:paddingRight="15sp"
                 android:textColor="#BF000000"
                 android:textColorHint="#80FFFFFF"
-                android:fontFamily="@font/roboto"
-                android:background="@drawable/edit_text_bg"
-                android:ems="10"
-                android:hint="Name"
-                android:inputType="textPersonName"
                 android:textSize="24sp" />
 
             <EditText
@@ -119,15 +119,15 @@
                 android:layout_marginStart="55sp"
                 android:layout_marginTop="10sp"
                 android:layout_marginEnd="58sp"
+                android:background="@drawable/edit_text_bg"
+                android:ems="2"
+                android:fontFamily="@font/roboto"
+                android:hint="Age"
+                android:inputType="number"
                 android:paddingLeft="7sp"
                 android:paddingRight="1sp"
                 android:textColor="#BF000000"
                 android:textColorHint="#80FFFFFF"
-                android:fontFamily="@font/roboto"
-                android:background="@drawable/edit_text_bg"
-                android:ems="2"
-                android:hint="Age"
-                android:inputType="number"
                 android:textSize="24sp" />
 
             <RadioGroup
@@ -137,12 +137,12 @@
                 android:layout_marginStart="55sp"
                 android:layout_marginTop="13sp"
                 android:layout_marginEnd="58sp"
+                android:background="@drawable/edit_text_bg"
+                android:fontFamily="@font/roboto"
+                android:orientation="horizontal"
                 android:paddingLeft="15sp"
                 android:paddingRight="15sp"
                 android:textColor="#FFFFFF"
-                android:fontFamily="@font/roboto"
-                android:background="@drawable/edit_text_bg"
-                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/age">
@@ -202,9 +202,9 @@
                 android:fontFamily="@font/roboto"
                 android:hint="Last seen location"
                 android:inputType="textMultiLine"
-                android:singleLine="false"
                 android:paddingLeft="15sp"
                 android:paddingRight="15sp"
+                android:singleLine="false"
                 android:textColor="#BF000000"
                 android:textColorHint="#80FFFFFF"
                 android:textSize="20sp" />
@@ -254,26 +254,19 @@
                 android:textColor="#F2FFFFFF" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView15"
-            android:layout_width="215sp"
-            android:layout_height="52sp"
-            android:layout_marginStart="29sp"
-            android:layout_marginTop="25sp"
-            android:layout_marginEnd="180sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/rectangle" />
-
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36sp"
-            android:layout_marginTop="37sp"
-            android:layout_marginEnd="196sp"
-            android:fontFamily="@font/roboto_bold"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="188dp"
+            android:background="@drawable/rectangle"
+            android:fontFamily="@font/roboto"
+            android:paddingLeft="10sp"
+            android:paddingTop="10sp"
+            android:paddingRight="10sp"
+            android:paddingBottom="10sp"
             android:text="File Missing Person"
             android:textColor="#F2FFFFFF"
             android:textSize="20sp"
