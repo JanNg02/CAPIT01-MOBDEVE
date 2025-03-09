@@ -15,16 +15,14 @@
             android:id="@+id/linearLayout3"
             android:layout_width="386sp"
             android:layout_height="554sp"
-            android:layout_marginStart="3sp"
-            android:layout_marginTop="43sp"
-            android:layout_marginEnd="4sp"
-            android:layout_marginBottom="104dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="13dp"
             android:background="@drawable/bg2"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5">
+            app:layout_constraintTop_toBottomOf="@+id/PageTitle_missingDesc_TV">
 
             <View
                 android:id="@+id/loading_overlay_missingBO"
@@ -35,16 +33,18 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/getMissingPersons_RV"
-                android:paddingLeft="15sp"
-                android:paddingTop="15sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="15sp"
+                android:paddingTop="15sp" />
         </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="410sp"
             android:layout_height="60sp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="17dp"
             android:cropToPadding="true"
             android:padding="1sp"
             android:paddingLeft="1sp"
@@ -55,6 +55,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
             app:srcCompat="@drawable/navbarbg" />
 
         <ImageButton
@@ -109,35 +110,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="224sp"
-            android:layout_height="56sp"
-            android:layout_marginStart="16sp"
-            android:layout_marginTop="28sp"
-            android:layout_marginEnd="133sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/rectangle" />
-
         <TextView
             android:id="@+id/PageTitle_missingDesc_TV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="41sp"
-            android:layout_marginTop="44sp"
-            android:layout_marginEnd="161sp"
-            android:fontFamily="@font/roboto_bold"
-            android:paddingLeft="19sp"
-            android:paddingRight="15sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="199dp"
+            android:background="@drawable/rectangle"
+            android:fontFamily="@font/roboto"
+            android:paddingLeft="10sp"
+            android:paddingTop="10sp"
+            android:paddingRight="10sp"
             android:paddingBottom="10sp"
-            android:text="Missing Persons List"
+            android:text="Missing Person List"
             android:textColor="#F2FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.684"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

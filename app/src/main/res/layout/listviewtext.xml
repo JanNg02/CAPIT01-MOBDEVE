@@ -13,7 +13,7 @@
         android:paddingLeft="10sp"
         android:textColor="#BF000000"
         android:textSize="20sp"
-        android:drawableEnd="@drawable/baseline_call_24"
+        android:drawableStart="@drawable/baseline_call_24"
         android:drawablePadding="15sp"
         android:drawableTint="#EF5A5A"/>
 
